@@ -24,18 +24,18 @@ namespace DctAPI.Models
         public DbSet<TaiKhoanNganHangEntity> TaiKhoanNganHang { get; set; }
 
         public DbSet<LoaiCuaHangEntity> LoaiCuaHang { get; set; }
-        public DbSet<ChiTietDonHangEntity> ChiTietDonHang { get; set; }
-        public DbSet<CuaHangEntity> CuaHang { get; set; }
-        public DbSet<CuaHangSanPhamEntity> CuaHangSanPham { get; set; }
-        public DbSet<DanhGiaEntity> DanhGia { get; set; }
-        public DbSet<DonHangEntity> DonHang { get; set; }
         public DbSet<LoaiDanhGiaEntity> LoaiDanhGia { get; set; }
         public DbSet<LoaiSanPhamEntity> LoaiSanPham { get; set; }
+        public DbSet<CuaHangEntity> CuaHang { get; set; }
         public DbSet<NhaSanXuatEntity> NhaSanXuat { get; set; }
-        public DbSet<PhuongThucThanhToanEntity> PhuongThucThanhToan { get; set; }
         public DbSet<SanPhamEntity> SanPham { get; set; }
-        public DbSet<TrangThaiDonHangEntity> TrangThaiDonHang  { get; set; }
-        
+        public DbSet<CuaHangSanPhamEntity> CuaHangSanPham { get; set; }
+        public DbSet<PhuongThucThanhToanEntity> PhuongThucThanhToan { get; set; }
+        public DbSet<TrangThaiDonHangEntity> TrangThaiDonHang { get; set; }
+        public DbSet<DonHangEntity> DonHang { get; set; }
+        public DbSet<ChiTietDonHangEntity> ChiTietDonHang { get; set; }
+        public DbSet<DanhGiaEntity> DanhGia { get; set; }
+
 
     }
 }

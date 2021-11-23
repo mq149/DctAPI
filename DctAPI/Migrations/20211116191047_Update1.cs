@@ -8,6 +8,7 @@ namespace DctAPI.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropColumn(
                 name: "Name",
                 table: "LoaiCuaHang");
@@ -16,7 +17,21 @@ namespace DctAPI.Migrations
                 name: "Ten",
                 table: "LoaiCuaHang",
                 nullable: true);
-
+            */
+            
+            migrationBuilder.CreateTable(
+                name: "LoaiCuaHang",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Ten = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LoaiCuaHang", x => x.ID);
+                });
+            
             migrationBuilder.CreateTable(
                 name: "ChiTietDonHang",
                 columns: table => new
@@ -344,7 +359,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "TrangThaiDonHang");
-
+            /*
             migrationBuilder.DropColumn(
                 name: "Ten",
                 table: "LoaiCuaHang");
@@ -354,6 +369,9 @@ namespace DctAPI.Migrations
                 table: "LoaiCuaHang",
                 type: "text",
                 nullable: true);
+            */
+            migrationBuilder.DropTable(
+                name: "LoaiCuaHang");
         }
     }
 }
