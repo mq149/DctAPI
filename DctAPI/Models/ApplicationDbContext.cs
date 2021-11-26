@@ -35,7 +35,8 @@ namespace DctAPI.Models
         public DbSet<DonHangEntity> DonHang { get; set; }
         public DbSet<ChiTietDonHangEntity> ChiTietDonHang { get; set; }
         public DbSet<DanhGiaEntity> DanhGia { get; set; }
-
+        public DbSet<CauHoiTracNghiemEntity> CauHoiTracNghiem { get; set; }
+        public DbSet<LuaChonTracNghiemEntity> LuaChonTracNghiem { get; set; }
 
     }
 }
