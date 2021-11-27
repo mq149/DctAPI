@@ -3,15 +3,17 @@ using System;
 using DctAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211126042651_TracNghiemShipper")]
+    partial class TracNghiemShipper
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -748,47 +750,7 @@ namespace DctAPI.Migrations
                         .WithMany()
                         .HasForeignKey("DiaChiIdId");
                 });
-
-            modelBuilder.Entity("DctApi.Shared.Models.CauHoiTracNghiemEntity", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("integer")
-                    .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-                b.Property<string>("NoiDung")
-                    .HasColumnType("text")
-                    .IsRequired();
-                b.HasKey("Id");
-                b.ToTable("CauHoiTracNghiem");
-            });
-
-            modelBuilder.Entity("DctApi.Shared.Models.LuaChonTracNghiemEntity", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("integer")
-                    .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-                b.Property<string>("NoiDung")
-                    .HasColumnType("text")
-                    .IsRequired();
-                b.Property<bool>("Dung")
-                    .HasColumnType("boolean")
-                    .IsRequired();
-                b.Property<int>("CauHoiId")
-                    .HasColumnType("integer")
-                    .IsRequired();
-
-                b.HasKey("Id");
-                b.HasIndex("CauHoiId");
-                b.ToTable("LuaChonTracNghiemEntity");
-                b.HasOne("DctApi.Shared.Models.CauHoiTracNghiemEntity", "CauHoi")
-                       .WithMany()
-                       .HasForeignKey("CauHoiId")
-                       .OnDelete(DeleteBehavior.Cascade)
-                       .IsRequired();
-            });
 #pragma warning restore 612, 618
         }
-
     }
 }
