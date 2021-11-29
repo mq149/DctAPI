@@ -8,7 +8,7 @@ namespace DctApi.Shared.Models
     public class CuaHangEntity
     {
         [Key]
-        public int UserID { get; set; }
+        public int ID { get; set; }
         public Boolean TrangThaiKichHoat { get; set; }
         public string TenCuaHang { get; set; }
         public LoaiCuaHangEntity LoaiCH { get; set; }
