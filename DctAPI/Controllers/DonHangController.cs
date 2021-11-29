@@ -58,45 +58,48 @@ namespace DctAPI.Controllers
         }
 
         // POST api/<DonHangController>/{id}/XacNhan/{shipperId}
-        [HttpPost("{id}/XacNhan/{shipperId}")]
-        public async Task<ActionResult<DonHangEntity>> XacNhanDonHang(int id, int shipperId)
+        [HttpPost("{id}/ShipperXacNhan/{shipperId}")]
+        public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
         {
             var donHang = await donHangRepo.Find(id);
-            //var shipper = await shipperRepo.Find(id);
-            if (donHang == null 
-                || donHang.TTDH.ID != (int) TrangThaiDonHang.ChoXacNhan 
-                //|| shipper.Id != donHang.ShipperID
+            //var shipper = await shipperRepo.Find(shipperId);
+            if (donHang != null 
+                //&& shipper != null
                 )
             {
-                return BadRequest();
+                if (donHang.TTDH.ID != (int)TrangThaiDonHang.ChoXacNhan 
+                    //&& shipper.KichHoat
+                    )
+                {
+                    //var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
+                    //if (_donHang != null) {
+                    //    return Ok();
+                    //}
+                }
             }
-            var _donHang = await donHangRepo.CapNhatTTDH(donHang, TrangThaiDonHang.DangLayHang);
-            if (_donHang != null)
-            {
-                return Ok();
-            } 
             return BadRequest();
         }
 
         // POST api/<DonHangController>/{id}/Huy/{shipperId}
         [HttpPost("{id}/Huy/{shipperId}")]
-        public async Task<ActionResult<DonHangEntity>> HuyDonHang(int id, int shipperId)
+        public async Task<ActionResult<DonHangEntity>> ShipperHuyDonHang(int id, int shipperId)
         {
             var donHang = await donHangRepo.Find(id);
-            //var shipper = await shipperRepo.Find(id);
+            //var shipper = await shipperRepo.Find(shipperId);
             if (donHang != null 
-                //|| shipper.Id != donHang.ShipperID
+                //&& shipper != null
                 )
             {
-                return BadRequest();
-            }
-            if (donHang.TTDH.ID == (int)TrangThaiDonHang.DangLayHang 
-                || donHang.TTDH.ID == (int)TrangThaiDonHang.DangGiaoHang)
-            {
-                var _donHang = await donHangRepo.CapNhatTTDH(donHang, TrangThaiDonHang.DaHuy);
-                if (_donHang != null)
+                if ((donHang.TTDH.ID == (int)TrangThaiDonHang.DangLayHang
+                    || donHang.TTDH.ID == (int)TrangThaiDonHang.DangGiaoHang)
+                //&& shipper.KichHoat
+                )
                 {
-                    return Ok();
+                    //var _donHang = await donHangRepo.ShipperHuyDonHang(donHang, shipper);
+                    //if (_donHang != null)
+                    //{
+                    //    return Ok();
+                    //}
                 }
             }
             return BadRequest();
