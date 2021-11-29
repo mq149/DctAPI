@@ -42,5 +42,9 @@ namespace DctApi.Shared.Models
         [Required]
         public HinhAnhEntity BHXMatSau { get; set; }
         public decimal? DiemBaiKiemTra { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

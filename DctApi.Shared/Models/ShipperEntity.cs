@@ -16,5 +16,9 @@ namespace DctApi.Shared.Models
         public string BienSo { get; set; }
         public string DongXe { get; set; }
         public UserEntity UserEntity { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

@@ -12,5 +12,9 @@ namespace DctApi.Shared.Models
         public int CuaHangID { get; set; }
         public int SanPhamID { get; set; }
         public int SoLuong { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

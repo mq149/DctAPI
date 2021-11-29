@@ -11,5 +11,10 @@ namespace DctApi.Shared.Models
         public int Id { get; set; }
         [Required]
         public string NoiDung { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
+        public virtual ICollection<LuaChonTracNghiemEntity> DanhSachLuaChon { get; set; }
     }
 }

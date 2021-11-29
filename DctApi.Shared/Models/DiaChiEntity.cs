@@ -14,5 +14,9 @@ namespace DctApi.Shared.Models
         public string XaPhuong { get; set; }
         public string QuanHuyen { get; set; }
         public string TinhTP { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

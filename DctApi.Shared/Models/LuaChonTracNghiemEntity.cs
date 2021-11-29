@@ -14,6 +14,11 @@ namespace DctApi.Shared.Models
         [Required]
         public bool Dung { get; set; }
         [Required]
-        public CauHoiTracNghiemEntity CauHoi { get; set; }
+        public int CauHoiId { get; set; }
+        public virtual CauHoiTracNghiemEntity CauHoi { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

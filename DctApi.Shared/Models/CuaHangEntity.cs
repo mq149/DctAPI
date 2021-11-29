@@ -13,5 +13,9 @@ namespace DctApi.Shared.Models
         public string TenCuaHang { get; set; }
         public LoaiCuaHangEntity LoaiCH { get; set; }
         public UserEntity UserEntity { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }
