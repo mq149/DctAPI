@@ -3,15 +3,17 @@ using System;
 using DctAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211129031417_Update2")]
+    partial class Update2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,50 +28,13 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("NoiDung")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.HasKey("Id");
 
                     b.ToTable("CauHoiTracNghiem");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            NoiDung = "Sơ đồ nào sau đây phù hợp với thiết kế động?"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            NoiDung = "1+2=?"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            NoiDung = "Vai trò nào không có trong ĐI CHỢ THUÊ"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            NoiDung = "Trong sơ đồ class, quan hệ aggregration được thể hiện bằng"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            NoiDung = "Trong mô hình MVC, View đóng vai trò"
-                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.ChiTietDonHangEntity", b =>
@@ -78,11 +43,6 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<float>("DonGia")
                         .HasColumnType("real");
@@ -99,11 +59,6 @@ namespace DctAPI.Migrations
                     b.Property<int>("SoLuong")
                         .HasColumnType("integer");
 
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.HasKey("ID");
 
                     b.ToTable("ChiTietDonHang");
@@ -116,11 +71,6 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<int?>("LoaiCHID")
                         .HasColumnType("integer");
 
@@ -129,11 +79,6 @@ namespace DctAPI.Migrations
 
                     b.Property<bool>("TrangThaiKichHoat")
                         .HasColumnType("boolean");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
@@ -154,11 +99,6 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<int>("CuaHangID")
                         .HasColumnType("integer");
 
@@ -167,11 +107,6 @@ namespace DctAPI.Migrations
 
                     b.Property<int>("SoLuong")
                         .HasColumnType("integer");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -184,11 +119,6 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<int>("DonHangID")
                         .HasColumnType("integer");
@@ -204,11 +134,6 @@ namespace DctAPI.Migrations
 
                     b.Property<int>("SoDiem")
                         .HasColumnType("integer");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -226,11 +151,6 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("Duong")
                         .HasColumnType("text");
 
@@ -242,11 +162,6 @@ namespace DctAPI.Migrations
 
                     b.Property<string>("TinhTP")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<string>("XaPhuong")
                         .HasColumnType("text");
@@ -262,11 +177,6 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<int>("CuaHangID")
                         .HasColumnType("integer");
@@ -295,11 +205,6 @@ namespace DctAPI.Migrations
                     b.Property<float>("TongTien")
                         .HasColumnType("real");
 
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.HasKey("ID");
 
                     b.HasIndex("DiaChiGiaoId");
@@ -316,18 +221,8 @@ namespace DctAPI.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("MoTa")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<string>("Url")
                         .HasColumnType("text");
@@ -383,11 +278,6 @@ namespace DctAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<decimal?>("DiemBaiKiemTra")
                         .HasColumnType("numeric");
 
@@ -416,11 +306,6 @@ namespace DctAPI.Migrations
                     b.Property<string>("PhuongTienHinhDuoiId")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("Id");
 
@@ -460,16 +345,6 @@ namespace DctAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
 
@@ -487,18 +362,8 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("Ten")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -512,18 +377,8 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("Ten")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -537,18 +392,8 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("Ten")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -565,11 +410,6 @@ namespace DctAPI.Migrations
                     b.Property<int>("CauHoiId")
                         .HasColumnType("integer");
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<bool>("Dung")
                         .HasColumnType("boolean");
 
@@ -577,158 +417,11 @@ namespace DctAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CauHoiId");
 
                     b.ToTable("LuaChonTracNghiem");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CauHoiId = 1,
-                            Dung = false,
-                            NoiDung = "Class diagram"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CauHoiId = 1,
-                            Dung = true,
-                            NoiDung = "Sequence diagram"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CauHoiId = 1,
-                            Dung = false,
-                            NoiDung = "Use case diagram"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CauHoiId = 1,
-                            Dung = false,
-                            NoiDung = "Package diagram"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CauHoiId = 2,
-                            Dung = false,
-                            NoiDung = "1"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CauHoiId = 2,
-                            Dung = false,
-                            NoiDung = "2"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CauHoiId = 2,
-                            Dung = true,
-                            NoiDung = "3"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CauHoiId = 2,
-                            Dung = false,
-                            NoiDung = "4"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CauHoiId = 3,
-                            Dung = false,
-                            NoiDung = "Shipper"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CauHoiId = 3,
-                            Dung = false,
-                            NoiDung = "Khách hàng"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CauHoiId = 3,
-                            Dung = true,
-                            NoiDung = "Nhân viên kho"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CauHoiId = 3,
-                            Dung = false,
-                            NoiDung = "Cửa hàng"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CauHoiId = 4,
-                            Dung = false,
-                            NoiDung = "Mũi tên"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CauHoiId = 4,
-                            Dung = false,
-                            NoiDung = "Đường nối"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CauHoiId = 4,
-                            Dung = false,
-                            NoiDung = "Hình thoi đen"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CauHoiId = 4,
-                            Dung = true,
-                            NoiDung = "Hình thoi trắng"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CauHoiId = 5,
-                            Dung = true,
-                            NoiDung = "Gửi request đến và nhận response từ Controller"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CauHoiId = 5,
-                            Dung = false,
-                            NoiDung = "Cập nhật giao diện"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CauHoiId = 5,
-                            Dung = false,
-                            NoiDung = "Kiểm tra logic dữ liệu"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CauHoiId = 5,
-                            Dung = false,
-                            NoiDung = "Lưu trữ dữ liệu vào database"
-                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.NhaSanXuatEntity", b =>
@@ -738,21 +431,11 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<int?>("DiaChiId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Ten")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -768,18 +451,8 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("Ten")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -792,11 +465,6 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<float>("GiaSP")
                         .HasColumnType("real");
@@ -818,11 +486,6 @@ namespace DctAPI.Migrations
 
                     b.Property<string>("Ten")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -850,21 +513,11 @@ namespace DctAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("DongXe")
                         .HasColumnType("text");
 
                     b.Property<bool>("KichHoat")
                         .HasColumnType("boolean");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
@@ -883,11 +536,6 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<bool>("LienKet")
                         .HasColumnType("boolean");
 
@@ -902,11 +550,6 @@ namespace DctAPI.Migrations
 
                     b.Property<string>("TenNganHang")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
@@ -925,18 +568,8 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<string>("Ten")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.HasKey("ID");
 
@@ -950,13 +583,8 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("AvatarIdId")
+                    b.Property<string>("AvataIdId")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
 
                     b.Property<int?>("DiaChiIdId")
                         .HasColumnType("integer");
@@ -986,14 +614,9 @@ namespace DctAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UpdatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("AvatarIdId");
+                    b.HasIndex("AvataIdId");
 
                     b.HasIndex("DiaChiIdId");
 
@@ -1124,7 +747,7 @@ namespace DctAPI.Migrations
             modelBuilder.Entity("DctApi.Shared.Models.LuaChonTracNghiemEntity", b =>
                 {
                     b.HasOne("DctApi.Shared.Models.CauHoiTracNghiemEntity", "CauHoi")
-                        .WithMany("DanhSachLuaChon")
+                        .WithMany()
                         .HasForeignKey("CauHoiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1168,9 +791,9 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.UserEntity", b =>
                 {
-                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "AvatarId")
+                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "AvataId")
                         .WithMany()
-                        .HasForeignKey("AvatarIdId");
+                        .HasForeignKey("AvataIdId");
 
                     b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChiId")
                         .WithMany()

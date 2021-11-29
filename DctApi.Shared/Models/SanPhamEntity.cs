@@ -16,6 +16,10 @@ namespace DctApi.Shared.Models
         public HinhAnhEntity HinhSanPham { get; set; }
         public LoaiSanPhamEntity LoaiSP { get; set; }
         public NhaSanXuatEntity NSX { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
 
     }
 }

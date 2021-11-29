@@ -16,5 +16,9 @@ namespace DctApi.Shared.Models
         public string NoiDung { get; set; }
         public DateTime NgayDanhGia { get; set; }
         public int SoDiem { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

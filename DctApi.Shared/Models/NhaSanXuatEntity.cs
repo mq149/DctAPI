@@ -12,5 +12,9 @@ namespace DctApi.Shared.Models
         public string Ten { get; set; }
 
         public DiaChiEntity DiaChi { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

@@ -23,6 +23,10 @@ namespace DctApi.Shared.Models
         [Required]
         public DateTime NgayMuaHang { get; set; }
         public DateTime NgayGiao { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
 
     }
 }

@@ -15,5 +15,9 @@ namespace DctApi.Shared.Models
         public string MaNganHang { get; set; }
         public Boolean LienKet { get; set; }
         public UserEntity UserEntity { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

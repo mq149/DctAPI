@@ -15,5 +15,9 @@ namespace DctApi.Shared.Models
         public float DonGia { get; set; }
         public int SoLuong { get; set; }
         public float KhoiLuong { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }

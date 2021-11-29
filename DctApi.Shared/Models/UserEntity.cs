@@ -22,7 +22,11 @@ namespace DctApi.Shared.Models
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
-        public HinhAnhEntity AvataId { get; set; }
+        public HinhAnhEntity AvatarId { get; set; }
         public DiaChiEntity DiaChiId { get; set; }
+        [Timestamp]
+        public byte[] CreatedAt { get; set; }
+        [Timestamp]
+        public byte[] UpdatedAt { get; set; }
     }
 }
