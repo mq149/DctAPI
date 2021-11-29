@@ -19,24 +19,37 @@ namespace DctAPI.Repositories.Implements
             this.context = context;
         }
 
-        public async Task<DonHangEntity> CapNhatTTDH(DonHangEntity donHang, TrangThaiDonHang trangThai)
+        public async Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper)
         {
-            var result = await context.DonHang.FirstOrDefaultAsync(dh => dh.ID == donHang.ID);
-            var ttdh = await context.TrangThaiDonHang.FirstOrDefaultAsync(tt => tt.ID == (int)trangThai);
-            if (result != null)
+            var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DangLayHang);
+            donHang.ShipperID = shipper.UserId;
+            donHang.TTDH = ttdh;
+            context.Entry(donHang).State = EntityState.Modified;
+            try
             {
-                result.TTDH = ttdh;
-                try
-                {
-                    await context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return null;
-                }
-                return result;
+                await context.SaveChangesAsync();
+            } 
+            catch (DbUpdateConcurrencyException)
+            {
+                return null;
             }
-            return null;
+            return donHang;
+        }
+
+        public async Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang)
+        {
+            var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DaHuy);
+            donHang.TTDH = ttdh;
+            context.Entry(donHang).State = EntityState.Modified;
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return null;
+            }
+            return donHang;
         }
     }
 }
