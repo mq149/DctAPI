@@ -72,6 +72,15 @@ namespace DctAPI.Models
                     new LuaChonTracNghiemEntity {Id = 19, NoiDung = "Kiểm tra logic dữ liệu", Dung = false, CauHoiId = 5 },
                     new LuaChonTracNghiemEntity {Id = 20, NoiDung = "Lưu trữ dữ liệu vào database", Dung = false, CauHoiId = 5 }
                 );
+            modelBuilder.Entity<TrangThaiDonHangEntity>()
+                .HasData(
+                    new TrangThaiDonHangEntity { ID = 1, Ten = "Chờ xác nhận"},
+                    new TrangThaiDonHangEntity { ID = 2, Ten = "Cửa hàng đã xác nhận" },
+                    new TrangThaiDonHangEntity { ID = 3, Ten = "Đang lấy hàng" },
+                    new TrangThaiDonHangEntity { ID = 4, Ten = "Đang giao hàng" },
+                    new TrangThaiDonHangEntity { ID = 5, Ten = "Đã giao hàng" },
+                    new TrangThaiDonHangEntity { ID = 6, Ten = "Đã huỷ" }
+                );
 
         }
     }
