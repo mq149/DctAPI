@@ -74,7 +74,12 @@ namespace DctAPI.Models
                 );
             modelBuilder.Entity<TrangThaiDonHangEntity>()
                 .HasData(
-                    DctApi.Shared.Enums.TrangThaiDonHang.ConvertToEntities()
+                    new TrangThaiDonHangEntity { ID = 1, Ten = "Chờ xác nhận"},
+                    new TrangThaiDonHangEntity { ID = 2, Ten = "Cửa hàng đã xác nhận" },
+                    new TrangThaiDonHangEntity { ID = 3, Ten = "Đang lấy hàng" },
+                    new TrangThaiDonHangEntity { ID = 4, Ten = "Đang giao hàng" },
+                    new TrangThaiDonHangEntity { ID = 5, Ten = "Đã giao hàng" },
+                    new TrangThaiDonHangEntity { ID = 6, Ten = "Đã huỷ" }
                 );
 
         }

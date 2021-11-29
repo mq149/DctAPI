@@ -4,26 +4,13 @@ using System.Text;
 
 namespace DctApi.Shared.Enums
 {
-    public static class TrangThaiDonHang
+    public enum TrangThaiDonHang
     {
-        public const string ChoXacNhan = "Chờ xác nhận";
-        public const string CuaHangDaXacNhan = "Cửa hàng đã xác nhận";
-        public const string DangLayHang = "Đang lấy hàng";
-        public const string DangGiaoHang = "Đang giao hàng";
-        public const string DaGiaoHang = "Đã giao hàng";
-        public const string DaHuy = "Đã huỷ";
-
-        public static Models.TrangThaiDonHangEntity[] ConvertToEntities()
-        {
-            Models.TrangThaiDonHangEntity[] ttdhEntities = {
-                new Models.TrangThaiDonHangEntity { ID = 1, Ten = ChoXacNhan },
-                new Models.TrangThaiDonHangEntity { ID = 2, Ten = CuaHangDaXacNhan },
-                new Models.TrangThaiDonHangEntity { ID = 3, Ten = DangLayHang },
-                new Models.TrangThaiDonHangEntity { ID = 4, Ten = DangGiaoHang },
-                new Models.TrangThaiDonHangEntity { ID = 5, Ten = DaGiaoHang },
-                new Models.TrangThaiDonHangEntity { ID = 6, Ten = DaHuy }
-            };
-            return ttdhEntities;
-        }
+        ChoXacNhan = 1,
+        CuaHangDaXacNhan = 2,
+        DangLayHang = 3,
+        DangGiaoHang = 4,
+        DaGiaoHang = 5,
+        DaHuy = 6
     }
 }
