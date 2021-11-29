@@ -17,7 +17,8 @@ namespace DctAPI.Models
 
         public DbSet<UserEntity> User { get; set; }
         public DbSet<KhachHangEntity> KhachHang { get; set; }
-        public DbSet<ShipperEntity> Shippers { get; set; }
+        public DbSet<ShipperEntity> Shipper { get; set; }
+        public DbSet<RoleEntity> Role { get; set; }
         public DbSet<HinhAnhEntity> HinhAnh { get; set; }
         public DbSet<DiaChiEntity> DiaChi { get; set; }
         public DbSet<HoSoShipperEntity> HoSoShipper { get; set; }
@@ -81,7 +82,13 @@ namespace DctAPI.Models
                     new TrangThaiDonHangEntity { ID = 5, Ten = "Đã giao hàng" },
                     new TrangThaiDonHangEntity { ID = 6, Ten = "Đã huỷ" }
                 );
-
+            modelBuilder.Entity<RoleEntity>()
+               .HasData(
+                   new RoleEntity { ID = 1, Ten = "Admin" },
+                   new RoleEntity { ID = 2, Ten = "Cửa Hàng" },
+                   new RoleEntity { ID = 3, Ten = "Shipper" },
+                   new RoleEntity { ID = 4, Ten = "Khách Hàng" }
+               );
         }
     }
 }

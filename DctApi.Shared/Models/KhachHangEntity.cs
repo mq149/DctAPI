@@ -8,7 +8,7 @@ namespace DctApi.Shared.Models
     public class KhachHangEntity
     {
         [Key]
-        public int UserId { get; set; }
+        public int ID { get; set; }
         [Required]
         public string CMND { get; set; }
 

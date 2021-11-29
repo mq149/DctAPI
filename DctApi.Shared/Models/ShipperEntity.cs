@@ -8,7 +8,7 @@ namespace DctApi.Shared.Models
     public class ShipperEntity
     {
         [Key]
-        public int UserId { get; set; }
+        public int ID { get; set; }
         public Boolean KichHoat { get; set; }
         [Required]
         public string CMND { get; set; }
