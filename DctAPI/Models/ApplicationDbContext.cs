@@ -89,6 +89,14 @@ namespace DctAPI.Models
                    new RoleEntity { ID = 3, Ten = "Shipper" },
                    new RoleEntity { ID = 4, Ten = "Khách Hàng" }
                );
+
+            modelBuilder.Entity<KhoaDaoTaoEntity>()
+                .HasData(
+                    new KhoaDaoTaoEntity { ID = 1,
+                        NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
+                        HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
+                        URL = "www.google.com"}
+                );
         }
     }
 }

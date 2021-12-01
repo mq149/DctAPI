@@ -10,6 +10,6 @@ namespace DctAPI.Repositories.Interfaces
     public interface IDonHangRepository : IRepositoryBase<DonHangEntity>
     {
         public Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper);
-        public Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang, ShipperEntity shipper);
+        public Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang);
     }
 }
