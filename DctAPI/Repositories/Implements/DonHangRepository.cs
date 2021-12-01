@@ -22,7 +22,7 @@ namespace DctAPI.Repositories.Implements
         public async Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper)
         {
             var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DangLayHang);
-            donHang.ShipperID = shipper.UserId;
+            donHang.ShipperID = shipper.UserEntity.Id;
             donHang.TTDH = ttdh;
             context.Entry(donHang).State = EntityState.Modified;
             try
