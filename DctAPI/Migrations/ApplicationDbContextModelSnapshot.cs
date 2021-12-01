@@ -508,7 +508,7 @@ namespace DctAPI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("KhoaDaoTaoEntity");
+                    b.ToTable("KhoaDaoTao");
 
                     b.HasData(
                         new

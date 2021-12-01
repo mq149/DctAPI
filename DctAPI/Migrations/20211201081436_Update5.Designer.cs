@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211201073109_Update5")]
+    [Migration("20211201081436_Update5")]
     partial class Update5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -510,7 +510,7 @@ namespace DctAPI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("KhoaDaoTaoEntity");
+                    b.ToTable("KhoaDaoTao");
 
                     b.HasData(
                         new

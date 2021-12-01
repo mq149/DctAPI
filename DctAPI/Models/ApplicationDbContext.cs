@@ -38,6 +38,7 @@ namespace DctAPI.Models
         public DbSet<DanhGiaEntity> DanhGia { get; set; }
         public DbSet<CauHoiTracNghiemEntity> CauHoiTracNghiem { get; set; }
         public DbSet<LuaChonTracNghiemEntity> LuaChonTracNghiem { get; set; }
+        public DbSet<KhoaDaoTaoEntity> KhoaDaoTao { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
