@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace DctAPI.Repositories.Interfaces
 {
-    public interface IUserRepository
+    public interface IShipperRepository : IUserRepository
     {
-        Task<UserEntity> Find(string SDT);
-        Task<UserEntity> Create(UserEntity user);
     }
 }
