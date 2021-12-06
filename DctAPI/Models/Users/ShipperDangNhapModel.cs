@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DctAPI.Models.Users
 {
-    public class AuthenticateModel
+    public class ShipperDangNhapModel
     {
         [Required]
         public string SDT { get; set; }
