@@ -18,18 +18,20 @@ namespace DctAPI.Controllers
     [ApiController]
     public class DonHangController : ControllerBase
     {
-        private IDonHangRepository donHangRepo;
+        private readonly IDonHangRepository donHangRepo;
+        private readonly IShipperRepository shipperRepo;
 
-        public DonHangController(IDonHangRepository donHangRepo)
+        public DonHangController(IDonHangRepository donHangRepo, IShipperRepository shipperRepo)
         {
             this.donHangRepo = donHangRepo;
+            this.shipperRepo = shipperRepo;
         }
 
         // GET: api/<DonHangController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<DonHangEntity> Get()
         {
-            return new string[] { "value1", "value2" };
+            return donHangRepo.GetAll();
         }
 
         // GET api/<DonHangController>/5
@@ -62,44 +64,44 @@ namespace DctAPI.Controllers
         public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
         {
             var donHang = await donHangRepo.Find(id);
-            //var shipper = await shipperRepo.Find(shipperId);
-            if (donHang != null 
-                //&& shipper != null
-                )
+            var shipper = await shipperRepo.Find(shipperId);
+            if (donHang != null && shipper != null)
             {
-                if (donHang.TTDH.ID != (int)TrangThaiDonHang.ChoXacNhan 
-                    //&& shipper.KichHoat
-                    )
+                if (
+                    //donHang.TTDH.ID != (int)TrangThaiDonHang.ChoXacNhan 
+                    //&& 
+                    shipper.KichHoat 
+                    && donHang.ShipperID <= 0)
                 {
-                    //var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
-                    //if (_donHang != null) {
-                    //    return Ok();
-                    //}
+                    var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
+                    if (_donHang != null)
+                    {
+                        return Ok();
+                    }
                 }
             }
             return BadRequest();
         }
 
         // POST api/<DonHangController>/{id}/Huy/{shipperId}
-        [HttpPost("{id}/Huy/{shipperId}")]
+        [HttpPost("{id}/ShipperHuy/{shipperId}")]
         public async Task<ActionResult<DonHangEntity>> ShipperHuyDonHang(int id, int shipperId)
         {
             var donHang = await donHangRepo.Find(id);
-            //var shipper = await shipperRepo.Find(shipperId);
-            if (donHang != null 
-                //&& shipper != null
-                )
+            var shipper = await shipperRepo.Find(shipperId);
+            if (donHang != null && shipper != null)
             {
-                if ((donHang.TTDH.ID == (int)TrangThaiDonHang.DangLayHang
-                    || donHang.TTDH.ID == (int)TrangThaiDonHang.DangGiaoHang)
-                //&& shipper.KichHoat
-                )
+                if (
+                    //(donHang.TTDH.ID == (int)TrangThaiDonHang.DangLayHang
+                    //|| donHang.TTDH.ID == (int)TrangThaiDonHang.DangGiaoHang)
+                    //&& 
+                    shipper.ID == donHang.ShipperID)
                 {
-                    //var _donHang = await donHangRepo.ShipperHuyDonHang(donHang, shipper);
-                    //if (_donHang != null)
-                    //{
-                    //    return Ok();
-                    //}
+                    var _donHang = await donHangRepo.ShipperHuyDonHang(donHang);
+                    if (_donHang != null)
+                    {
+                        return Ok();
+                    }
                 }
             }
             return BadRequest();
