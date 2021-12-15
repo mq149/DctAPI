@@ -313,8 +313,10 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.HinhAnhEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<byte[]>("CreatedAt")
                         .IsConcurrencyToken()
@@ -344,37 +346,31 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("BHXMatSauId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("BHXMatSauId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("BHXMatTruocId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("BHXMatTruocId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("BLXHang")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("BLXMatSauId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("BLXMatSauId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("BLXMatTruocId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("BLXMatTruocId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("BLXSo")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CMNDMatSauId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("CMNDMatSauId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("CMNDMatTruocId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("CMNDMatTruocId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CMNDNgayCap")
                         .HasColumnType("timestamp without time zone");
@@ -391,31 +387,26 @@ namespace DctAPI.Migrations
                     b.Property<decimal?>("DiemBaiKiemTra")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("GiayDKXMatSauId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("GiayDKXMatSauId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("GiayDKXMatTruocId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("GiayDKXMatTruocId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("GiayKiemTraXeId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("GiayKiemTraXeId")
+                        .HasColumnType("integer");
 
-                    b.Property<int>("NamSxXe")
+                    b.Property<int>("NamSXXe")
                         .HasColumnType("integer");
 
                     b.Property<string>("NgheNghiep")
                         .HasColumnType("text");
 
-                    b.Property<string>("PhuongTienHinhDauId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("PhuongTienHinhDauId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("PhuongTienHinhDuoiId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("PhuongTienHinhDuoiId")
+                        .HasColumnType("integer");
 
                     b.Property<byte[]>("UpdatedAt")
                         .IsConcurrencyToken()
@@ -879,8 +870,8 @@ namespace DctAPI.Migrations
                     b.Property<float>("GiaSP")
                         .HasColumnType("real");
 
-                    b.Property<string>("HinhSanPhamId")
-                        .HasColumnType("text");
+                    b.Property<int?>("HinhSanPhamId")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("LoaiSPID")
                         .HasColumnType("integer");
@@ -1060,15 +1051,15 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("AvatarIdId")
-                        .HasColumnType("text");
+                    b.Property<int?>("AvatarId")
+                        .HasColumnType("integer");
 
                     b.Property<byte[]>("CreatedAt")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int?>("DiaChiIdId")
+                    b.Property<int?>("DiaChiId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
@@ -1102,9 +1093,9 @@ namespace DctAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AvatarIdId");
+                    b.HasIndex("AvatarId");
 
-                    b.HasIndex("DiaChiIdId");
+                    b.HasIndex("DiaChiId");
 
                     b.HasIndex("RoleID");
 
@@ -1279,13 +1270,13 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.UserEntity", b =>
                 {
-                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "AvatarId")
+                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "Avatar")
                         .WithMany()
-                        .HasForeignKey("AvatarIdId");
+                        .HasForeignKey("AvatarId");
 
-                    b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChiId")
+                    b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChi")
                         .WithMany()
-                        .HasForeignKey("DiaChiIdId");
+                        .HasForeignKey("DiaChiId");
 
                     b.HasOne("DctApi.Shared.Models.RoleEntity", "Role")
                         .WithMany()
