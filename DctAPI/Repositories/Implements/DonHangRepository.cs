@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DctAPI.Repositories.Implements
 {
-    public class DonHangRepository : RepositoryBase<DonHangEntity>, IDonHangRepository
+    public class DonHangRepository : RepositoryBase<KhachhangEntity>, IDonHangRepository
     {
         private readonly ApplicationDbContext context;
 
@@ -19,7 +19,7 @@ namespace DctAPI.Repositories.Implements
             this.context = context;
         }
 
-        public async Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper)
+        public async Task<KhachhangEntity> ShipperXacNhanDonHang(KhachhangEntity donHang, ShipperEntity shipper)
         {
             var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DangLayHang);
             donHang.ShipperID = shipper.UserEntity.Id;
@@ -36,7 +36,7 @@ namespace DctAPI.Repositories.Implements
             return donHang;
         }
 
-        public async Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang)
+        public async Task<KhachhangEntity> ShipperHuyDonHang(KhachhangEntity donHang)
         {
             var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DaHuy);
             donHang.TTDH = ttdh;

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DctAPI.Repositories.Interfaces
 {
-    public interface IDonHangRepository : IRepositoryBase<DonHangEntity>
+    public interface IDonHangRepository : IRepositoryBase<KhachhangEntity>
     {
-        public Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper);
-        public Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang);
+        public Task<KhachhangEntity> ShipperXacNhanDonHang(KhachhangEntity donHang, ShipperEntity shipper);
+        public Task<KhachhangEntity> ShipperHuyDonHang(KhachhangEntity donHang);
     }
 }

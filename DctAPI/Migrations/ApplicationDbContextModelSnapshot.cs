@@ -593,6 +593,13 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("LoaiSanPham");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Nuoc muoi sinh ly"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.LuaChonTracNghiemEntity", b =>

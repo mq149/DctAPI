@@ -8,7 +8,7 @@ namespace DctApi.Shared.Models
     public class HinhAnhEntity
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string MoTa { get; set; }
         public string Url { get; set; }
         [Timestamp]

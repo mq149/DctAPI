@@ -33,7 +33,7 @@ namespace DctAPI.Models
         public DbSet<CuaHangSanPhamEntity> CuaHangSanPham { get; set; }
         public DbSet<PhuongThucThanhToanEntity> PhuongThucThanhToan { get; set; }
         public DbSet<TrangThaiDonHangEntity> TrangThaiDonHang { get; set; }
-        public DbSet<DonHangEntity> DonHang { get; set; }
+        public DbSet<KhachhangEntity> DonHang { get; set; }
         public DbSet<ChiTietDonHangEntity> ChiTietDonHang { get; set; }
         public DbSet<DanhGiaEntity> DanhGia { get; set; }
         public DbSet<CauHoiTracNghiemEntity> CauHoiTracNghiem { get; set; }
@@ -98,6 +98,33 @@ namespace DctAPI.Models
                         HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
                         URL = "www.google.com"}
                 );
+            modelBuilder.Entity<LoaiSanPhamEntity>()
+            .HasData(
+                new SanPhamEntity
+                {
+                    ID = 1,
+                    Ten = "Nuoc muoi sinh ly",
+                  
+
+
+                }
+            ); ;
+            modelBuilder.Entity<HinhAnhEntity>()
+      .HasData(
+          new HinhAnhEntity
+          {
+              Id = 1,
+              MoTa = "Nuoc muoi sinh ly",
+              Url ="Binh",
+          }
+      ); ;
+
+
+
+         
+
+
+
         }
     }
 }

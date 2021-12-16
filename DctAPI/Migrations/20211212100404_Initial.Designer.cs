@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211129042431_Update3")]
-    partial class Update3
+    [Migration("20211212100404_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,7 +113,7 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.CuaHangEntity", b =>
                 {
-                    b.Property<int>("UserID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -140,7 +140,7 @@ namespace DctAPI.Migrations
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
 
-                    b.HasKey("UserID");
+                    b.HasKey("ID");
 
                     b.HasIndex("LoaiCHID");
 
@@ -453,7 +453,7 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.KhachHangEntity", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -475,11 +475,51 @@ namespace DctAPI.Migrations
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
 
-                    b.HasKey("UserId");
+                    b.HasKey("ID");
 
                     b.HasIndex("UserEntityId");
 
                     b.ToTable("KhachHang");
+                });
+
+            modelBuilder.Entity("DctApi.Shared.Models.KhoaDaoTaoEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<byte[]>("CreatedAt")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("HuongDan")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("text");
+
+                    b.Property<string>("URL")
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("UpdatedAt")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("KhoaDaoTao");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
+                            NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
+                            URL = "www.google.com"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.LoaiCuaHangEntity", b =>
@@ -555,6 +595,13 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("LoaiSanPham");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Nuoc muoi sinh ly"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.LuaChonTracNghiemEntity", b =>
@@ -788,6 +835,44 @@ namespace DctAPI.Migrations
                     b.ToTable("PhuongThucThanhToan");
                 });
 
+            modelBuilder.Entity("DctApi.Shared.Models.RoleEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Ten")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Admin"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Ten = "Cửa Hàng"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ten = "Shipper"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Ten = "Khách Hàng"
+                        });
+                });
+
             modelBuilder.Entity("DctApi.Shared.Models.SanPhamEntity", b =>
                 {
                     b.Property<int>("ID")
@@ -839,7 +924,7 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.ShipperEntity", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -871,11 +956,11 @@ namespace DctAPI.Migrations
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
 
-                    b.HasKey("UserId");
+                    b.HasKey("ID");
 
                     b.HasIndex("UserEntityId");
 
-                    b.ToTable("Shippers");
+                    b.ToTable("Shipper");
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.TaiKhoanNganHangEntity", b =>
@@ -943,6 +1028,38 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("TrangThaiDonHang");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Chờ xác nhận"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Ten = "Cửa hàng đã xác nhận"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ten = "Đang lấy hàng"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Ten = "Đang giao hàng"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Ten = "Đã giao hàng"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Ten = "Đã huỷ"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.UserEntity", b =>
@@ -964,7 +1081,6 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("GioiTinh")
@@ -981,7 +1097,7 @@ namespace DctAPI.Migrations
                     b.Property<DateTime?>("NgaySinh")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("Role")
+                    b.Property<int>("RoleID")
                         .HasColumnType("integer");
 
                     b.Property<string>("SDT")
@@ -998,6 +1114,8 @@ namespace DctAPI.Migrations
                     b.HasIndex("AvatarIdId");
 
                     b.HasIndex("DiaChiIdId");
+
+                    b.HasIndex("RoleID");
 
                     b.ToTable("User");
                 });
@@ -1177,6 +1295,12 @@ namespace DctAPI.Migrations
                     b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChiId")
                         .WithMany()
                         .HasForeignKey("DiaChiIdId");
+
+                    b.HasOne("DctApi.Shared.Models.RoleEntity", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
