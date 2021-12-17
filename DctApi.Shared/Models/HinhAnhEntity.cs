@@ -10,9 +10,8 @@ namespace DctApi.Shared.Models
     {
         [Key]
         public int Id { get; set; }
-        public string MoTa { get; set; }
-        [NotMapped]
-        public IFormFile Anh { get; set; }
+        [Required]
+        public string Ten { get; set; }
         public string Url { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }

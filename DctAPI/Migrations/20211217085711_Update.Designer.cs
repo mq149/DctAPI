@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211215025856_Update")]
+    [Migration("20211217085711_Update")]
     partial class Update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -288,7 +288,7 @@ namespace DctAPI.Migrations
                     b.Property<int>("PTTTID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ShipperID")
+                    b.Property<int?>("ShipperID")
                         .HasColumnType("integer");
 
                     b.Property<int?>("TTDHID")
@@ -325,7 +325,8 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<string>("MoTa")
+                    b.Property<string>("Ten")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<byte[]>("UpdatedAt")

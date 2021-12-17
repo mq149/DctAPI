@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DctAPI.Models;
+using DctAPI.Repositories.Implements;
+using DctAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +41,9 @@ namespace DctAPI
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
 
+            services.AddScoped<IDonHangRepository, DonHangRepository>();
+            services.AddScoped<IShipperRepository, ShipperRepository>();
+
             //Json serializer
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
@@ -48,7 +53,7 @@ namespace DctAPI
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" });
             });
-
+            services.AddHttpContextAccessor();
             //Add swagger
             ConfigureSwagger(services);
         }

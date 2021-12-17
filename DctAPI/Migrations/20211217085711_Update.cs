@@ -84,7 +84,7 @@ namespace DctAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    MoTa = table.Column<string>(nullable: true),
+                    Ten = table.Column<string>(nullable: false),
                     Url = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
@@ -391,7 +391,7 @@ namespace DctAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     KhachHangID = table.Column<int>(nullable: false),
                     CuaHangID = table.Column<int>(nullable: false),
-                    ShipperID = table.Column<int>(nullable: false),
+                    ShipperID = table.Column<int>(nullable: true),
                     DiaChiGiaoId = table.Column<int>(nullable: false),
                     TTDHID = table.Column<int>(nullable: true),
                     PTTTID = table.Column<int>(nullable: false),
