@@ -9,6 +9,7 @@ namespace DctAPI.Repositories.Interfaces
 {
     public interface IDonHangRepository : IRepositoryBase<DonHangEntity>
     {
+        public List<DonHangEntity> GetChoXacNhan();
         public Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper);
         public Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang);
     }

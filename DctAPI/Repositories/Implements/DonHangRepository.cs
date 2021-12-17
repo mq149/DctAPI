@@ -19,6 +19,12 @@ namespace DctAPI.Repositories.Implements
             this.context = context;
         }
 
+        public List<DonHangEntity> GetChoXacNhan()
+        {
+            var dsDonHangDangChoXacNhan = context.DonHang.Where(dh => dh.ShipperID == null);
+            return dsDonHangDangChoXacNhan.ToList();
+        }
+
         public async Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper)
         {
             var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DangLayHang);

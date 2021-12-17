@@ -34,6 +34,13 @@ namespace DctAPI.Controllers
             return donHangRepo.GetAll();
         }
 
+        // GET: api/<DonHangController>
+        [HttpGet("ChoXacNhan")]
+        public IEnumerable<DonHangEntity> GetChoXacNhan()
+        {
+            return donHangRepo.GetChoXacNhan();
+        }
+
         // GET api/<DonHangController>/5
         [HttpGet("{id}")]
         public string Get(int id)
