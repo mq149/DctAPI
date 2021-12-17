@@ -68,10 +68,10 @@ namespace DctAPI.Controllers
             if (donHang != null && shipper != null)
             {
                 if (
-                    //donHang.TTDH.ID != (int)TrangThaiDonHang.ChoXacNhan 
-                    //&& 
+                    //donHang.TTDH.ID != (int)TrangThaiDonHang.ChoXacNhan
+                    //&&
                     shipper.KichHoat 
-                    && donHang.ShipperID <= 0)
+                    && donHang.ShipperID == null)
                 {
                     var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
                     if (_donHang != null)
@@ -94,7 +94,7 @@ namespace DctAPI.Controllers
                 if (
                     //(donHang.TTDH.ID == (int)TrangThaiDonHang.DangLayHang
                     //|| donHang.TTDH.ID == (int)TrangThaiDonHang.DangGiaoHang)
-                    //&& 
+                    //&&
                     shipper.ID == donHang.ShipperID)
                 {
                     var _donHang = await donHangRepo.ShipperHuyDonHang(donHang);

@@ -13,7 +13,7 @@ namespace DctApi.Shared.Models
         public int KhachHangID { get; set; }
         [Required]
         public int CuaHangID { get; set; }
-        public int ShipperID { get; set; }
+        public int? ShipperID { get; set; }
         [Required]
         public DiaChiEntity DiaChiGiao { get; set; }
         public TrangThaiDonHangEntity TTDH { get; set; }
