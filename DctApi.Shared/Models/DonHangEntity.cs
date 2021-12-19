@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DctApi.Shared.Models
 {
-    public class KhachhangEntity
+    public class DonHangEntity
     {
         [Key]
         public int ID { get; set; }
@@ -13,13 +13,16 @@ namespace DctApi.Shared.Models
         public int KhachHangID { get; set; }
         [Required]
         public int CuaHangID { get; set; }
-        public int ShipperID { get; set; }
+        public int? ShipperID { get; set; }
         [Required]
+        public int? DiaChiGiaoId { get; set; }
+        public int? TTDHId { get; set; }
+        public int?  PTTTId { get; set; }
         public DiaChiEntity DiaChiGiao { get; set; }
         public TrangThaiDonHangEntity TTDH { get; set; }
         [Required]
         public PhuongThucThanhToanEntity PTTT { get; set; }
-        public List<SanPhamEntity> listSp { get; set; }
+       
         public float TongTien { get; set; }
         [Required]
         public DateTime NgayMuaHang { get; set; }

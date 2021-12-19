@@ -32,15 +32,11 @@ namespace DctAPI.Controllers
         }
 
         // GET api/<dathangController>/5
-        [HttpGet("{id}")]
-        public IEnumerable<KhachhangEntity> Get(int id)
-        {
-            return donHangRepo.GetAll();
-        }
+      
 
         // POST api/<dathangController>
         [HttpPost]
-        public void Post([FromBody] KhachhangEntity dh)
+        public void Post([FromBody] DonHangEntity dh)
         {
           
         }

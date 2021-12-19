@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DctAPI.Repositories.Interfaces
 {
-    interface IDatHangRepository : IRepositoryBase<KhachhangEntity>
+    interface IDatHangRepository : IRepositoryBase<DonHangEntity>
     {
     }
 }

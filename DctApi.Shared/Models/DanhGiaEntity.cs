@@ -10,7 +10,7 @@ namespace DctApi.Shared.Models
         [Key]
         public int ID { get; set; }
         [Required]
-        public KhachhangEntity DonHang { get; set; }
+        public DonHangEntity DonHang { get; set; }
         [Required]
         public LoaiDanhGiaEntity LoaiDG { get; set; }
         public string NoiDung { get; set; }

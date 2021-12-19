@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 
 namespace DctAPI.Models
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
@@ -33,7 +34,7 @@ namespace DctAPI.Models
         public DbSet<CuaHangSanPhamEntity> CuaHangSanPham { get; set; }
         public DbSet<PhuongThucThanhToanEntity> PhuongThucThanhToan { get; set; }
         public DbSet<TrangThaiDonHangEntity> TrangThaiDonHang { get; set; }
-        public DbSet<KhachhangEntity> DonHang { get; set; }
+        public DbSet<DonHangEntity> DonHang { get; set; }
         public DbSet<ChiTietDonHangEntity> ChiTietDonHang { get; set; }
         public DbSet<DanhGiaEntity> DanhGia { get; set; }
         public DbSet<CauHoiTracNghiemEntity> CauHoiTracNghiem { get; set; }
@@ -53,30 +54,30 @@ namespace DctAPI.Models
                 );
             modelBuilder.Entity<LuaChonTracNghiemEntity>()
                 .HasData(
-                    new LuaChonTracNghiemEntity {Id = 1, NoiDung = "Class diagram", Dung = false, CauHoiId = 1},
-                    new LuaChonTracNghiemEntity {Id = 2, NoiDung = "Sequence diagram", Dung = true, CauHoiId = 1 },
-                    new LuaChonTracNghiemEntity {Id = 3, NoiDung = "Use case diagram", Dung = false, CauHoiId = 1 },
-                    new LuaChonTracNghiemEntity {Id = 4, NoiDung = "Package diagram", Dung = false, CauHoiId = 1 },
-                    new LuaChonTracNghiemEntity {Id = 5, NoiDung = "1", Dung = false, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity {Id = 6, NoiDung = "2", Dung = false, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity {Id = 7, NoiDung = "3", Dung = true, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity {Id = 8, NoiDung = "4", Dung = false, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity {Id = 9, NoiDung = "Shipper", Dung = false, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity {Id = 10, NoiDung = "Khách hàng", Dung = false, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity {Id = 11, NoiDung = "Nhân viên kho", Dung = true, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity {Id = 12, NoiDung = "Cửa hàng", Dung = false, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity {Id = 13, NoiDung = "Mũi tên", Dung = false, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity {Id = 14, NoiDung = "Đường nối", Dung = false, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity {Id = 15, NoiDung = "Hình thoi đen", Dung = false, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity {Id = 16, NoiDung = "Hình thoi trắng", Dung = true, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity {Id = 17, NoiDung = "Gửi request đến và nhận response từ Controller", Dung = true, CauHoiId = 5 },
-                    new LuaChonTracNghiemEntity {Id = 18, NoiDung = "Cập nhật giao diện", Dung = false, CauHoiId = 5 },
-                    new LuaChonTracNghiemEntity {Id = 19, NoiDung = "Kiểm tra logic dữ liệu", Dung = false, CauHoiId = 5 },
-                    new LuaChonTracNghiemEntity {Id = 20, NoiDung = "Lưu trữ dữ liệu vào database", Dung = false, CauHoiId = 5 }
+                    new LuaChonTracNghiemEntity { Id = 1, NoiDung = "Class diagram", Dung = false, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity { Id = 2, NoiDung = "Sequence diagram", Dung = true, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity { Id = 3, NoiDung = "Use case diagram", Dung = false, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity { Id = 4, NoiDung = "Package diagram", Dung = false, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity { Id = 5, NoiDung = "1", Dung = false, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity { Id = 6, NoiDung = "2", Dung = false, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity { Id = 7, NoiDung = "3", Dung = true, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity { Id = 8, NoiDung = "4", Dung = false, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity { Id = 9, NoiDung = "Shipper", Dung = false, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity { Id = 10, NoiDung = "Khách hàng", Dung = false, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity { Id = 11, NoiDung = "Nhân viên kho", Dung = true, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity { Id = 12, NoiDung = "Cửa hàng", Dung = false, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity { Id = 13, NoiDung = "Mũi tên", Dung = false, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity { Id = 14, NoiDung = "Đường nối", Dung = false, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity { Id = 15, NoiDung = "Hình thoi đen", Dung = false, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity { Id = 16, NoiDung = "Hình thoi trắng", Dung = true, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity { Id = 17, NoiDung = "Gửi request đến và nhận response từ Controller", Dung = true, CauHoiId = 5 },
+                    new LuaChonTracNghiemEntity { Id = 18, NoiDung = "Cập nhật giao diện", Dung = false, CauHoiId = 5 },
+                    new LuaChonTracNghiemEntity { Id = 19, NoiDung = "Kiểm tra logic dữ liệu", Dung = false, CauHoiId = 5 },
+                    new LuaChonTracNghiemEntity { Id = 20, NoiDung = "Lưu trữ dữ liệu vào database", Dung = false, CauHoiId = 5 }
                 );
             modelBuilder.Entity<TrangThaiDonHangEntity>()
                 .HasData(
-                    new TrangThaiDonHangEntity { ID = 1, Ten = "Chờ xác nhận"},
+                    new TrangThaiDonHangEntity { ID = 1, Ten = "Chờ xác nhận" },
                     new TrangThaiDonHangEntity { ID = 2, Ten = "Cửa hàng đã xác nhận" },
                     new TrangThaiDonHangEntity { ID = 3, Ten = "Đang lấy hàng" },
                     new TrangThaiDonHangEntity { ID = 4, Ten = "Đang giao hàng" },
@@ -93,35 +94,262 @@ namespace DctAPI.Models
 
             modelBuilder.Entity<KhoaDaoTaoEntity>()
                 .HasData(
-                    new KhoaDaoTaoEntity { ID = 1,
+                    new KhoaDaoTaoEntity
+                    {
+                        ID = 1,
                         NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
                         HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
-                        URL = "www.google.com"}
+                        URL = "www.google.com"
+                    }
                 );
-            modelBuilder.Entity<LoaiSanPhamEntity>()
-            .HasData(
-                new SanPhamEntity
-                {
-                    ID = 1,
-                    Ten = "Nuoc muoi sinh ly",
-                  
 
-
-                }
-            ); ;
             modelBuilder.Entity<HinhAnhEntity>()
       .HasData(
           new HinhAnhEntity
           {
               Id = 1,
               MoTa = "Nuoc muoi sinh ly",
-              Url ="Binh",
+              Url = "Binh",
           }
       ); ;
+            modelBuilder.Entity<LoaiSanPhamEntity>()
+   .HasData(
+
+       new LoaiSanPhamEntity
+       {
+           ID = 1,
+           Ten = "Đồ khô",
+       },
+        new LoaiSanPhamEntity
+        {
+            ID = 2,
+            Ten = "Nước Giải Khát",
+        },
+         new LoaiSanPhamEntity
+         {
+             ID = 3,
+             Ten = "Thực phẩm chức năng",
+         },
+          new LoaiSanPhamEntity
+          {
+              ID = 4,
+              Ten = "Hải sản",
+          }
+
+   );
 
 
 
-         
+
+
+
+        modelBuilder.Entity<DiaChiEntity>()
+       .HasData(
+           new DiaChiEntity
+           {
+               Id = 1,
+               SoNhaTo = "12",
+               Duong = "K3",
+               XaPhuong = "Vĩnh Sơn",
+               QuanHuyen = "Vĩnh Thạnh",
+               TinhTP = "Bình Định"
+
+           },
+            new DiaChiEntity
+            {
+                Id = 2,
+                SoNhaTo = "12",
+                Duong = "K3",
+                XaPhuong = "Vĩnh Sơn",
+                QuanHuyen = "Vĩnh Thạnh",
+                TinhTP = "Bình Định"
+
+            },
+              new DiaChiEntity
+              {
+                  Id = 3,
+                  SoNhaTo = "12",
+                  Duong = "K3",
+                  XaPhuong = "Vĩnh Sơn",
+                  QuanHuyen = "Vĩnh Thạnh",
+                  TinhTP = "Bình Định"
+
+              },
+                new DiaChiEntity
+                {
+                    Id = 4,
+                    SoNhaTo = "12",
+                    Duong = "K3",
+                    XaPhuong = "Vĩnh Sơn",
+                    QuanHuyen = "Vĩnh Thạnh",
+                    TinhTP = "Bình Định"
+
+                }
+
+       );
+
+       modelBuilder.Entity<NhaSanXuatEntity>()
+      .HasData(
+          new NhaSanXuatEntity
+          {
+              ID = 1,
+              Ten = "Long Van",
+              DiaChiId = 1
+
+          },
+           new NhaSanXuatEntity
+           {
+               ID = 2,
+               Ten = "Long Van",
+               DiaChiId = 1
+
+           },
+            new NhaSanXuatEntity
+            {
+                ID = 3,
+                Ten = "Long Van",
+                DiaChiId = 1
+
+            },
+             new NhaSanXuatEntity
+             {
+                 ID = 4,
+                 Ten = "Long Van",
+                 DiaChiId = 1
+
+             },
+             new NhaSanXuatEntity
+             {
+                 ID = 5,
+                 Ten = "Long Van",
+                 DiaChiId = 1
+
+             }
+      );
+
+
+            modelBuilder.Entity<SanPhamEntity>()
+                        .HasData(
+                            new SanPhamEntity
+                            {
+                                ID = 1,
+                                Ten = "Cá Thu",
+                                GiaSP = 123,
+                                NgaySanXuat = new DateTime(2015, 12, 25),
+                                MoTa = "rất ngon và rẻ",
+                                HinhSanPhamId = 1,
+                                LoaiSPId = 1,
+                                NSXId = 1
+
+                            },
+                              new SanPhamEntity
+                              {
+                                  ID = 2,
+                                  Ten = "Cá Thu",
+                                  GiaSP = 123,
+                                  NgaySanXuat = new DateTime(2015, 12, 25),
+                                  MoTa = "rất ngon và rẻ",
+                                  HinhSanPhamId = 1,
+                                  LoaiSPId = 1,
+                                  NSXId = 1
+
+                              }
+                              ,
+                                new SanPhamEntity
+                                {
+                                    ID = 3,
+                                    Ten = "Cá Thu",
+                                    GiaSP = 123,
+                                    NgaySanXuat = new DateTime(2015, 12, 25),
+                                    MoTa = "rất ngon và rẻ",
+                                    HinhSanPhamId = 1,
+                                    LoaiSPId = 1,
+                                    NSXId = 1
+
+                                },
+                                  new SanPhamEntity
+                                  {
+                                      ID = 4,
+                                      Ten = "Cá Thu",
+                                      GiaSP = 123,
+                                      NgaySanXuat = new DateTime(2015, 12, 25),
+                                      MoTa = "rất ngon và rẻ",
+                                      HinhSanPhamId = 1,
+                                      LoaiSPId = 1,
+                                      NSXId = 1
+
+                                  }
+
+                        ); ;
+            modelBuilder.Entity<PhuongThucThanhToanEntity>()
+                .HasData( 
+                new PhuongThucThanhToanEntity {ID = 1, Ten ="online"
+               }, new PhuongThucThanhToanEntity
+               {
+                   ID = 2,
+                   Ten = "Tiền Mặt"
+               }
+                );
+
+            modelBuilder.Entity<DonHangEntity>()
+        .HasData(
+        new DonHangEntity
+        {
+            ID = 1,
+            KhachHangID = 1,
+            CuaHangID = 1,
+            ShipperID = 1,
+            DiaChiGiaoId = 1,
+            TTDHId = 1,
+            PTTTId = 1
+
+
+        },
+          new DonHangEntity
+          {
+              ID = 2,
+              KhachHangID = 1,
+              CuaHangID = 1,
+              ShipperID = 1,
+              DiaChiGiaoId = 1,
+              TTDHId = 1,
+              PTTTId = 1,
+              TongTien = 23424,
+              NgayGiao = new DateTime(2021, 12, 12),
+              NgayMuaHang = new DateTime(2021, 11, 1)
+
+
+          }
+        );
+            modelBuilder.Entity<ChiTietDonHangEntity>()
+                       .HasData(
+                       new ChiTietDonHangEntity
+                       {
+                           ID = 1,
+                           DonHangID = 2,
+                           SanPhamID = 1,
+                           DonGia = 1223,
+                           SoLuong = 1212,
+                           KhoiLuong = 1213
+
+                       },
+                         new ChiTietDonHangEntity
+                         {
+                             ID = 2,
+                             DonHangID = 2,
+                             SanPhamID = 1,
+                             DonGia = 1223,
+                             SoLuong = 1212,
+                             KhoiLuong = 1213
+
+                         }
+                       );
+            ;
+
+
+
+
+
 
 
 

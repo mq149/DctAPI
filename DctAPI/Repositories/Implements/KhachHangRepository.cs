@@ -16,10 +16,6 @@ namespace DctAPI.Repositories.Implements
         {
             this.context = context;
         }
-        public async KhachhangEntity DocKhachHang(int id)
-        {
-            return await context.KhachHang.FindAsync(id);
-        }
 
         Task<KhachHangEntity> IKhachHangRepository.DocDonKhachHang(KhachHangEntity kh)
         {

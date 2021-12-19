@@ -23,26 +23,23 @@ namespace DctAPI.Controllers
         //private ISanPhamRepository sanPhamRepo;
         //private IChiTietDonHangRepository chiTietDonHangRepo;
 
-        public DonHangController(IDonHangRepository donHangRepo1,IKhachHangRepository khachHangRepo1)
+        public DonHangController(IDonHangRepository donHangRepo1)
         {
             this.donHangRepo = donHangRepo;
-            this.khachHangRepo = khachHangRepo1;
+          
            
         }
 
         // GET: api/<DonHangController>
         [HttpGet]
-        public IEnumerable<KhachhangEntity> Get()
+        public IEnumerable<DonHangEntity> Get()
         {
             return donHangRepo.GetAll();
         }
 
         // GET api/<DonHangController>/5
         [HttpGet("{id}")]
-        public IEnumerable<KhachhangEntity> Get(int id)
-        {
-            return khachHangRepo.GetAll();
-        }
+
 
         // POST api/<DonHangController>
         [HttpPost]
@@ -64,7 +61,7 @@ namespace DctAPI.Controllers
 
         // POST api/<DonHangController>/{id}/XacNhan/{shipperId}
         [HttpPost("{id}/ShipperXacNhan/{shipperId}")]
-        public async Task<ActionResult<KhachhangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
+        public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
         {
             var donHang = await donHangRepo.Find(id);
             //var shipper = await shipperRepo.Find(shipperId);
@@ -87,7 +84,7 @@ namespace DctAPI.Controllers
 
         // POST api/<DonHangController>/{id}/Huy/{shipperId}
         [HttpPost("{id}/Huy/{shipperId}")]
-        public async Task<ActionResult<KhachhangEntity>> ShipperHuyDonHang(int id, int shipperId)
+        public async Task<ActionResult<DonHangEntity>> ShipperHuyDonHang(int id, int shipperId)
         {
             var donHang = await donHangRepo.Find(id);
             //var shipper = await shipperRepo.Find(shipperId);
