@@ -12,6 +12,7 @@ namespace DctApi.Shared.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        public int RoleId { get; set; }
         public RoleEntity Role { get; set; }
         [Required(ErrorMessage = Config.ErrorMessage.sdtRequired),
             RegularExpression(Config.Regex.sdt, ErrorMessage = Config.ErrorMessage.sdtRegex)]

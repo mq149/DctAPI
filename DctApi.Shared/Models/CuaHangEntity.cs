@@ -11,7 +11,9 @@ namespace DctApi.Shared.Models
         public int ID { get; set; }
         public Boolean TrangThaiKichHoat { get; set; }
         public string TenCuaHang { get; set; }
+        public int LoaiCHID { get; set; }
         public LoaiCuaHangEntity LoaiCH { get; set; }
+        public int UserID { get; set; }
         public UserEntity UserEntity { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
