@@ -14,9 +14,12 @@ namespace DctApi.Shared.Models
         [Required]
         public int CuaHangID { get; set; }
         public int? ShipperID { get; set; }
+        public int DiaChiGiaoId { get; set; }
         [Required]
         public DiaChiEntity DiaChiGiao { get; set; }
+        public int TTDHId { get; set; }
         public TrangThaiDonHangEntity TTDH { get; set; }
+        public int PTTTId { get; set; }
         [Required]
         public PhuongThucThanhToanEntity PTTT { get; set; }
         public float TongTien { get; set; }

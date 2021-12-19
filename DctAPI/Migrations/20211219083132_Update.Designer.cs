@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211217085711_Update")]
+    [Migration("20211219083132_Update")]
     partial class Update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,26 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("ChiTietDonHang");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            DonGia = 37000f,
+                            DonHangID = 1,
+                            KhoiLuong = 1f,
+                            SanPhamID = 1,
+                            SoLuong = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            DonGia = 25000f,
+                            DonHangID = 1,
+                            KhoiLuong = 1f,
+                            SanPhamID = 2,
+                            SoLuong = 2
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.CuaHangEntity", b =>
@@ -123,7 +143,7 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int?>("LoaiCHID")
+                    b.Property<int>("LoaiCHID")
                         .HasColumnType("integer");
 
                     b.Property<string>("TenCuaHang")
@@ -140,6 +160,9 @@ namespace DctAPI.Migrations
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("integer");
+
                     b.HasKey("ID");
 
                     b.HasIndex("LoaiCHID");
@@ -147,6 +170,16 @@ namespace DctAPI.Migrations
                     b.HasIndex("UserEntityId");
 
                     b.ToTable("CuaHang");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            LoaiCHID = 1,
+                            TenCuaHang = "Bách Hóa X",
+                            TrangThaiKichHoat = true,
+                            UserID = 2
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.CuaHangSanPhamEntity", b =>
@@ -219,6 +252,26 @@ namespace DctAPI.Migrations
                     b.HasIndex("LoaiDGID");
 
                     b.ToTable("DanhGia");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            DonHangID = 1,
+                            LoaiDGID = 1,
+                            NgayDanhGia = new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiDung = "Tốt",
+                            SoDiem = 5
+                        },
+                        new
+                        {
+                            ID = 2,
+                            DonHangID = 1,
+                            LoaiDGID = 2,
+                            NgayDanhGia = new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiDung = "Tạm được",
+                            SoDiem = 4
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.DiaChiEntity", b =>
@@ -256,6 +309,44 @@ namespace DctAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DiaChi");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Duong = "Hoàng Diệu",
+                            QuanHuyen = "Quận 4",
+                            SoNhaTo = "29",
+                            TinhTP = "TP Hồ Chí Minh",
+                            XaPhuong = "Phường 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Duong = "Ba Tháng Hai",
+                            QuanHuyen = "Quận 10",
+                            SoNhaTo = "69",
+                            TinhTP = "TP Hồ Chí Minh",
+                            XaPhuong = "Phường 10"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Duong = "Lý Thường Kiệt",
+                            QuanHuyen = "Quận 10",
+                            SoNhaTo = "19",
+                            TinhTP = "TP Hồ Chí Minh",
+                            XaPhuong = "Phường 3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Duong = "K3",
+                            QuanHuyen = "Vĩnh Thạnh",
+                            SoNhaTo = "12",
+                            TinhTP = "Bình Định",
+                            XaPhuong = "Vĩnh Sơn"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.DonHangEntity", b =>
@@ -285,13 +376,13 @@ namespace DctAPI.Migrations
                     b.Property<DateTime>("NgayMuaHang")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("PTTTID")
+                    b.Property<int>("PTTTId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("ShipperID")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("TTDHID")
+                    b.Property<int>("TTDHId")
                         .HasColumnType("integer");
 
                     b.Property<float>("TongTien")
@@ -306,11 +397,39 @@ namespace DctAPI.Migrations
 
                     b.HasIndex("DiaChiGiaoId");
 
-                    b.HasIndex("PTTTID");
+                    b.HasIndex("PTTTId");
 
-                    b.HasIndex("TTDHID");
+                    b.HasIndex("TTDHId");
 
                     b.ToTable("DonHang");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CuaHangID = 1,
+                            DiaChiGiaoId = 1,
+                            KhachHangID = 1,
+                            NgayGiao = new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayMuaHang = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PTTTId = 1,
+                            ShipperID = 1,
+                            TTDHId = 1,
+                            TongTien = 87000f
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CuaHangID = 1,
+                            DiaChiGiaoId = 2,
+                            KhachHangID = 1,
+                            NgayGiao = new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayMuaHang = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PTTTId = 1,
+                            ShipperID = 1,
+                            TTDHId = 2,
+                            TongTien = 920000f
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.HinhAnhEntity", b =>
@@ -467,11 +586,22 @@ namespace DctAPI.Migrations
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("integer");
+
                     b.HasKey("ID");
 
                     b.HasIndex("UserEntityId");
 
                     b.ToTable("KhachHang");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CMND = "18219821",
+                            UserID = 4
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.KhoaDaoTaoEntity", b =>
@@ -537,6 +667,28 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("LoaiCuaHang");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Bán sỉ"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Ten = "Bán lẻ"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ten = "Bán quà lưu niệm"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Ten = "Bán online"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.LoaiDanhGiaEntity", b =>
@@ -562,6 +714,18 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("LoaiDanhGia");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Shipper"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Ten = "Cửa hàng"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.LoaiSanPhamEntity", b =>
@@ -587,6 +751,33 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("LoaiSanPham");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Thức ăn"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Ten = "Nước Giải Khát"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ten = "Thực phẩm chức năng"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Ten = "Hải sản"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Ten = "Đồ dùng"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.LuaChonTracNghiemEntity", b =>
@@ -777,7 +968,7 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int?>("DiaChiId")
+                    b.Property<int>("DiaChiId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Ten")
@@ -793,6 +984,26 @@ namespace DctAPI.Migrations
                     b.HasIndex("DiaChiId");
 
                     b.ToTable("NhaSanXuat");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            DiaChiId = 1,
+                            Ten = "Công ty TNHH X"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            DiaChiId = 2,
+                            Ten = "Công ty Y"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            DiaChiId = 3,
+                            Ten = "Công ty Z"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.PhuongThucThanhToanEntity", b =>
@@ -818,6 +1029,23 @@ namespace DctAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("PhuongThucThanhToan");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Ten = "Tiền mặt"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Ten = "Thẻ ATM"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ten = "Ví điện tử"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.RoleEntity", b =>
@@ -873,16 +1101,19 @@ namespace DctAPI.Migrations
                     b.Property<float>("GiaSP")
                         .HasColumnType("real");
 
-                    b.Property<int?>("HinhSanPhamId")
+                    b.Property<int>("HinhAnhID")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("LoaiSPID")
+                    b.Property<int?>("HinhSanPhamIDId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LoaiSPID")
                         .HasColumnType("integer");
 
                     b.Property<string>("MoTa")
                         .HasColumnType("text");
 
-                    b.Property<int?>("NSXID")
+                    b.Property<int>("NSXID")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("NgaySanXuat")
@@ -898,13 +1129,48 @@ namespace DctAPI.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("HinhSanPhamId");
+                    b.HasIndex("HinhSanPhamIDId");
 
                     b.HasIndex("LoaiSPID");
 
                     b.HasIndex("NSXID");
 
                     b.ToTable("SanPham");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            GiaSP = 120000f,
+                            HinhAnhID = 1,
+                            LoaiSPID = 4,
+                            MoTa = "Rất ngon và rẻ",
+                            NSXID = 1,
+                            NgaySanXuat = new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ten = "Cá Thu"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            GiaSP = 12000f,
+                            HinhAnhID = 1,
+                            LoaiSPID = 1,
+                            MoTa = "Không ngon đâu",
+                            NSXID = 1,
+                            NgaySanXuat = new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ten = "Cà Rốt"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            GiaSP = 120000f,
+                            HinhAnhID = 1,
+                            LoaiSPID = 3,
+                            MoTa = "C",
+                            NSXID = 1,
+                            NgaySanXuat = new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ten = "Vitamin C"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.ShipperEntity", b =>
@@ -919,7 +1185,6 @@ namespace DctAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CMND")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<byte[]>("CreatedAt")
@@ -941,11 +1206,25 @@ namespace DctAPI.Migrations
                     b.Property<int?>("UserEntityId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("integer");
+
                     b.HasKey("ID");
 
                     b.HasIndex("UserEntityId");
 
                     b.ToTable("Shipper");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            BienSo = "85D2-12111",
+                            CMND = "18277821",
+                            DongXe = "Wave",
+                            KichHoat = true,
+                            UserID = 3
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.TaiKhoanNganHangEntity", b =>
@@ -1082,7 +1361,7 @@ namespace DctAPI.Migrations
                     b.Property<DateTime?>("NgaySinh")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("RoleID")
+                    b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
                     b.Property<string>("SDT")
@@ -1100,16 +1379,64 @@ namespace DctAPI.Migrations
 
                     b.HasIndex("DiaChiId");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "x@gmail.com",
+                            GioiTinh = "Nam",
+                            HoTen = "Nguyễn Văn X",
+                            MatKhau = "123",
+                            NgaySinh = new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RoleId = 1,
+                            SDT = "0123"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "y@gmail.com",
+                            GioiTinh = "Nam",
+                            HoTen = "Nguyễn Văn Y",
+                            MatKhau = "123",
+                            NgaySinh = new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RoleId = 2,
+                            SDT = "0123"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "z@gmail.com",
+                            GioiTinh = "Nam",
+                            HoTen = "Nguyễn Văn Z",
+                            MatKhau = "123",
+                            NgaySinh = new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RoleId = 3,
+                            SDT = "0123"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Email = "t@gmail.com",
+                            GioiTinh = "Nữ",
+                            HoTen = "Nguyễn Văn T",
+                            MatKhau = "123",
+                            NgaySinh = new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RoleId = 4,
+                            SDT = "0123"
+                        });
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.CuaHangEntity", b =>
                 {
                     b.HasOne("DctApi.Shared.Models.LoaiCuaHangEntity", "LoaiCH")
                         .WithMany()
-                        .HasForeignKey("LoaiCHID");
+                        .HasForeignKey("LoaiCHID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DctApi.Shared.Models.UserEntity", "UserEntity")
                         .WithMany()
@@ -1141,13 +1468,15 @@ namespace DctAPI.Migrations
 
                     b.HasOne("DctApi.Shared.Models.PhuongThucThanhToanEntity", "PTTT")
                         .WithMany()
-                        .HasForeignKey("PTTTID")
+                        .HasForeignKey("PTTTId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DctApi.Shared.Models.TrangThaiDonHangEntity", "TTDH")
                         .WithMany()
-                        .HasForeignKey("TTDHID");
+                        .HasForeignKey("TTDHId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.HoSoShipperEntity", b =>
@@ -1239,22 +1568,28 @@ namespace DctAPI.Migrations
                 {
                     b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChi")
                         .WithMany()
-                        .HasForeignKey("DiaChiId");
+                        .HasForeignKey("DiaChiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.SanPhamEntity", b =>
                 {
-                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "HinhSanPham")
+                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "HinhSanPhamID")
                         .WithMany()
-                        .HasForeignKey("HinhSanPhamId");
+                        .HasForeignKey("HinhSanPhamIDId");
 
                     b.HasOne("DctApi.Shared.Models.LoaiSanPhamEntity", "LoaiSP")
                         .WithMany()
-                        .HasForeignKey("LoaiSPID");
+                        .HasForeignKey("LoaiSPID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DctApi.Shared.Models.NhaSanXuatEntity", "NSX")
                         .WithMany()
-                        .HasForeignKey("NSXID");
+                        .HasForeignKey("NSXID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.ShipperEntity", b =>
@@ -1283,7 +1618,7 @@ namespace DctAPI.Migrations
 
                     b.HasOne("DctApi.Shared.Models.RoleEntity", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleID")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
