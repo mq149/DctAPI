@@ -11,6 +11,7 @@ namespace DctApi.Shared.Models
         public int ID { get; set; }
         public Boolean KichHoat { get; set; }
         [Required]
+        public int UserID { get; set; }
         public string CMND { get; set; }
         [Required]
         public string BienSo { get; set; }

@@ -9,6 +9,8 @@ namespace DctApi.Shared.Models
     {
         [Key]
         public int ID { get; set; }
+        public int UserID { get; set; }
+        public int LoaiCHID { get; set; }
         public Boolean TrangThaiKichHoat { get; set; }
         public string TenCuaHang { get; set; }
         public LoaiCuaHangEntity LoaiCH { get; set; }
