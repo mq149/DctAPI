@@ -721,7 +721,7 @@ namespace DctAPI.Migrations
                             ID = 1,
                             HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
                             NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
-                            URL = "www.google.com"
+                            URL = "https://www.youtube.com/embed/LcRG816Syvc"
                         });
                 });
 
