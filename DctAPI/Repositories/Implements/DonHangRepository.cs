@@ -19,10 +19,35 @@ namespace DctAPI.Repositories.Implements
             this.context = context;
         }
 
+        public List<DonHangEntity> GetChoXacNhan()
+        {
+            return context.DonHang
+                .Where(dh => dh.ShipperId == null)
+                .Include(dh => dh.CuaHang)
+                .Include(dh => dh.KhachHang)
+                .Include(dh => dh.DiaChiGiao)
+                .Include(dh => dh.PTTT)
+                .Include(dh => dh.TTDH)
+                .ToList();
+        }
+
+
+        public async Task<DonHangEntity> GetDonHang(int id)
+        {
+            return await context.DonHang
+                .Where(dh => dh.Id == id)
+                .Include(dh => dh.CuaHang)
+                .Include(dh => dh.KhachHang)
+                .Include(dh => dh.DiaChiGiao)
+                .Include(dh => dh.PTTT)
+                .Include(dh => dh.TTDH)
+                .FirstAsync();
+        }
+
         public async Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper)
         {
             var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DangLayHang);
-            donHang.ShipperID = shipper.ID;
+            donHang.ShipperId = shipper.Id;
             donHang.TTDH = ttdh;
             context.Entry(donHang).State = EntityState.Modified;
             try

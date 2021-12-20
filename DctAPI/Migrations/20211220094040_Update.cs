@@ -24,25 +24,6 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChiTietDonHang",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DonHangID = table.Column<int>(nullable: false),
-                    SanPhamID = table.Column<int>(nullable: false),
-                    DonGia = table.Column<float>(nullable: false),
-                    SoLuong = table.Column<int>(nullable: false),
-                    KhoiLuong = table.Column<float>(nullable: false),
-                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChiTietDonHang", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CuaHangSanPham",
                 columns: table => new
                 {
@@ -115,7 +96,7 @@ namespace DctAPI.Migrations
                 name: "LoaiCuaHang",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Ten = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
@@ -123,7 +104,7 @@ namespace DctAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LoaiCuaHang", x => x.ID);
+                    table.PrimaryKey("PK_LoaiCuaHang", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,7 +141,7 @@ namespace DctAPI.Migrations
                 name: "PhuongThucThanhToan",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Ten = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
@@ -168,27 +149,27 @@ namespace DctAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PhuongThucThanhToan", x => x.ID);
+                    table.PrimaryKey("PK_PhuongThucThanhToan", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Ten = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.ID);
+                    table.PrimaryKey("PK_Role", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "TrangThaiDonHang",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Ten = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
@@ -196,7 +177,7 @@ namespace DctAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrangThaiDonHang", x => x.ID);
+                    table.PrimaryKey("PK_TrangThaiDonHang", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -356,7 +337,7 @@ namespace DctAPI.Migrations
                     GioiTinh = table.Column<string>(nullable: true),
                     NgaySinh = table.Column<DateTime>(nullable: true),
                     AvatarId = table.Column<int>(nullable: true),
-                    DiaChiId = table.Column<int>(nullable: true),
+                    DiaChiId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
@@ -374,53 +355,12 @@ namespace DctAPI.Migrations
                         column: x => x.DiaChiId,
                         principalTable: "DiaChi",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_User_Role_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Role",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DonHang",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    KhachHangID = table.Column<int>(nullable: false),
-                    CuaHangID = table.Column<int>(nullable: false),
-                    ShipperID = table.Column<int>(nullable: true),
-                    DiaChiGiaoId = table.Column<int>(nullable: false),
-                    TTDHId = table.Column<int>(nullable: false),
-                    PTTTId = table.Column<int>(nullable: false),
-                    TongTien = table.Column<float>(nullable: false),
-                    NgayMuaHang = table.Column<DateTime>(nullable: false),
-                    NgayGiao = table.Column<DateTime>(nullable: false),
-                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DonHang", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_DonHang_DiaChi_DiaChiGiaoId",
-                        column: x => x.DiaChiGiaoId,
-                        principalTable: "DiaChi",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DonHang_PhuongThucThanhToan_PTTTId",
-                        column: x => x.PTTTId,
-                        principalTable: "PhuongThucThanhToan",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DonHang_TrangThaiDonHang_TTDHId",
-                        column: x => x.TTDHId,
-                        principalTable: "TrangThaiDonHang",
-                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -468,80 +408,78 @@ namespace DctAPI.Migrations
                 name: "CuaHang",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserID = table.Column<int>(nullable: false),
-                    LoaiCHID = table.Column<int>(nullable: false),
                     TrangThaiKichHoat = table.Column<bool>(nullable: false),
                     TenCuaHang = table.Column<string>(nullable: true),
-                    UserEntityId = table.Column<int>(nullable: true),
+                    LoaiCHID = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CuaHang", x => x.ID);
+                    table.PrimaryKey("PK_CuaHang", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CuaHang_LoaiCuaHang_LoaiCHID",
                         column: x => x.LoaiCHID,
                         principalTable: "LoaiCuaHang",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CuaHang_User_UserEntityId",
-                        column: x => x.UserEntityId,
+                        name: "FK_CuaHang_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "KhachHang",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CMND = table.Column<string>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
-                    UserEntityId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KhachHang", x => x.ID);
+                    table.PrimaryKey("PK_KhachHang", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_KhachHang_User_UserEntityId",
-                        column: x => x.UserEntityId,
+                        name: "FK_KhachHang_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Shipper",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     KichHoat = table.Column<bool>(nullable: false),
                     UserID = table.Column<int>(nullable: false),
                     CMND = table.Column<string>(nullable: true),
                     BienSo = table.Column<string>(nullable: false),
                     DongXe = table.Column<string>(nullable: true),
-                    UserEntityId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shipper", x => x.ID);
+                    table.PrimaryKey("PK_Shipper", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shipper_User_UserEntityId",
-                        column: x => x.UserEntityId,
+                        name: "FK_Shipper_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -571,13 +509,103 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DonHang",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    KhachHangId = table.Column<int>(nullable: false),
+                    CuaHangId = table.Column<int>(nullable: false),
+                    ShipperId = table.Column<int>(nullable: true),
+                    DiaChiGiaoId = table.Column<int>(nullable: false),
+                    TTDHId = table.Column<int>(nullable: false),
+                    PTTTId = table.Column<int>(nullable: false),
+                    TongTien = table.Column<float>(nullable: false),
+                    NgayMuaHang = table.Column<DateTime>(nullable: false),
+                    NgayGiao = table.Column<DateTime>(nullable: false),
+                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DonHang", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DonHang_CuaHang_CuaHangId",
+                        column: x => x.CuaHangId,
+                        principalTable: "CuaHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DonHang_DiaChi_DiaChiGiaoId",
+                        column: x => x.DiaChiGiaoId,
+                        principalTable: "DiaChi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DonHang_KhachHang_KhachHangId",
+                        column: x => x.KhachHangId,
+                        principalTable: "KhachHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DonHang_PhuongThucThanhToan_PTTTId",
+                        column: x => x.PTTTId,
+                        principalTable: "PhuongThucThanhToan",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DonHang_Shipper_ShipperId",
+                        column: x => x.ShipperId,
+                        principalTable: "Shipper",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DonHang_TrangThaiDonHang_TTDHId",
+                        column: x => x.TTDHId,
+                        principalTable: "TrangThaiDonHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChiTietDonHang",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DonHangId = table.Column<int>(nullable: false),
+                    SanPhamId = table.Column<int>(nullable: false),
+                    DonGia = table.Column<float>(nullable: false),
+                    SoLuong = table.Column<int>(nullable: false),
+                    KhoiLuong = table.Column<float>(nullable: false),
+                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChiTietDonHang", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChiTietDonHang_DonHang_DonHangId",
+                        column: x => x.DonHangId,
+                        principalTable: "DonHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChiTietDonHang_SanPham_SanPhamId",
+                        column: x => x.SanPhamId,
+                        principalTable: "SanPham",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DanhGia",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DonHangID = table.Column<int>(nullable: false),
-                    LoaiDGID = table.Column<int>(nullable: false),
+                    DonHangId = table.Column<int>(nullable: false),
+                    LoaiDGId = table.Column<int>(nullable: false),
                     NoiDung = table.Column<string>(nullable: true),
                     NgayDanhGia = table.Column<DateTime>(nullable: false),
                     SoDiem = table.Column<int>(nullable: false),
@@ -588,14 +616,14 @@ namespace DctAPI.Migrations
                 {
                     table.PrimaryKey("PK_DanhGia", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_DanhGia_DonHang_DonHangID",
-                        column: x => x.DonHangID,
+                        name: "FK_DanhGia_DonHang_DonHangId",
+                        column: x => x.DonHangId,
                         principalTable: "DonHang",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DanhGia_LoaiDanhGia_LoaiDGID",
-                        column: x => x.LoaiDGID,
+                        name: "FK_DanhGia_LoaiDanhGia_LoaiDGId",
+                        column: x => x.LoaiDGId,
                         principalTable: "LoaiDanhGia",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -614,29 +642,17 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ChiTietDonHang",
-                columns: new[] { "ID", "DonGia", "DonHangID", "KhoiLuong", "SanPhamID", "SoLuong" },
-                values: new object[,]
-                {
-                    { 1, 37000f, 1, 1f, 1, 1 },
-                    { 2, 25000f, 1, 1f, 2, 2 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "DiaChi",
                 columns: new[] { "Id", "Duong", "QuanHuyen", "SoNhaTo", "TinhTP", "XaPhuong" },
                 values: new object[,]
                 {
-                    { 4, "K3", "Vĩnh Thạnh", "12", "Bình Định", "Vĩnh Sơn" },
-                    { 3, "Lý Thường Kiệt", "Quận 10", "19", "TP Hồ Chí Minh", "Phường 3" },
+                    { 1, "Hoàng Diệu", "Quận 4", "29", "TP Hồ Chí Minh", "Phường 1" },
                     { 2, "Ba Tháng Hai", "Quận 10", "69", "TP Hồ Chí Minh", "Phường 10" },
-                    { 1, "Hoàng Diệu", "Quận 4", "29", "TP Hồ Chí Minh", "Phường 1" }
+                    { 3, "Lý Thường Kiệt", "Quận 10", "19", "TP Hồ Chí Minh", "Phường 3" },
+                    { 4, "K3", "Vĩnh Thạnh", "12", "Bình Định", "Vĩnh Sơn" },
+                    { 5, "Nguyễn Văn Cừ", "Quận 5", "227", "TP. HCM", "Phường 4" },
+                    { 6, "Cống Quỳnh", "Quận 1", "189C", "TP. HCM", "Nguyễn Cư Trinh" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "KhachHang",
-                columns: new[] { "ID", "CMND", "UserEntityId", "UserID" },
-                values: new object[] { 1, "18219821", null, 4 });
 
             migrationBuilder.InsertData(
                 table: "KhoaDaoTao",
@@ -645,7 +661,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "LoaiCuaHang",
-                columns: new[] { "ID", "Ten" },
+                columns: new[] { "Id", "Ten" },
                 values: new object[,]
                 {
                     { 1, "Bán sỉ" },
@@ -677,7 +693,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "PhuongThucThanhToan",
-                columns: new[] { "ID", "Ten" },
+                columns: new[] { "Id", "Ten" },
                 values: new object[,]
                 {
                     { 1, "Tiền mặt" },
@@ -687,7 +703,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Role",
-                columns: new[] { "ID", "Ten" },
+                columns: new[] { "Id", "Ten" },
                 values: new object[,]
                 {
                     { 1, "Admin" },
@@ -697,13 +713,8 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Shipper",
-                columns: new[] { "ID", "BienSo", "CMND", "DongXe", "KichHoat", "UserEntityId", "UserID" },
-                values: new object[] { 1, "85D2-12111", "18277821", "Wave", true, null, 3 });
-
-            migrationBuilder.InsertData(
                 table: "TrangThaiDonHang",
-                columns: new[] { "ID", "Ten" },
+                columns: new[] { "Id", "Ten" },
                 values: new object[,]
                 {
                     { 4, "Đang giao hàng" },
@@ -715,24 +726,11 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "CuaHang",
-                columns: new[] { "ID", "LoaiCHID", "TenCuaHang", "TrangThaiKichHoat", "UserEntityId", "UserID" },
-                values: new object[] { 1, 1, "Bách Hóa X", true, null, 2 });
-
-            migrationBuilder.InsertData(
-                table: "DonHang",
-                columns: new[] { "ID", "CuaHangID", "DiaChiGiaoId", "KhachHangID", "NgayGiao", "NgayMuaHang", "PTTTId", "ShipperID", "TTDHId", "TongTien" },
-                values: new object[,]
-                {
-                    { 2, 1, 2, 1, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 2, 920000f },
-                    { 1, 1, 1, 1, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 1, 87000f }
-                });
-
-            migrationBuilder.InsertData(
                 table: "LuaChonTracNghiem",
                 columns: new[] { "Id", "CauHoiId", "Dung", "NoiDung" },
                 values: new object[,]
                 {
+                    { 1, 1, false, "Class diagram" },
                     { 20, 5, false, "Lưu trữ dữ liệu vào database" },
                     { 19, 5, false, "Kiểm tra logic dữ liệu" },
                     { 18, 5, false, "Cập nhật giao diện" },
@@ -741,18 +739,17 @@ namespace DctAPI.Migrations
                     { 14, 4, false, "Đường nối" },
                     { 13, 4, false, "Mũi tên" },
                     { 12, 3, false, "Cửa hàng" },
-                    { 15, 4, false, "Hình thoi đen" },
-                    { 10, 3, false, "Khách hàng" },
-                    { 2, 1, true, "Sequence diagram" },
                     { 11, 3, true, "Nhân viên kho" },
+                    { 15, 4, false, "Hình thoi đen" },
+                    { 9, 3, false, "Shipper" },
+                    { 10, 3, false, "Khách hàng" },
                     { 3, 1, false, "Use case diagram" },
                     { 4, 1, false, "Package diagram" },
-                    { 1, 1, false, "Class diagram" },
-                    { 6, 2, false, "2" },
+                    { 5, 2, false, "1" },
+                    { 2, 1, true, "Sequence diagram" },
                     { 7, 2, true, "3" },
                     { 8, 2, false, "4" },
-                    { 9, 3, false, "Shipper" },
-                    { 5, 2, false, "1" }
+                    { 6, 2, false, "2" }
                 });
 
             migrationBuilder.InsertData(
@@ -760,9 +757,9 @@ namespace DctAPI.Migrations
                 columns: new[] { "ID", "DiaChiId", "Ten" },
                 values: new object[,]
                 {
+                    { 1, 1, "Công ty TNHH X" },
                     { 2, 2, "Công ty Y" },
-                    { 3, 3, "Công ty Z" },
-                    { 1, 1, "Công ty TNHH X" }
+                    { 3, 3, "Công ty Z" }
                 });
 
             migrationBuilder.InsertData(
@@ -770,19 +767,30 @@ namespace DctAPI.Migrations
                 columns: new[] { "Id", "AvatarId", "DiaChiId", "Email", "GioiTinh", "HoTen", "MatKhau", "NgaySinh", "RoleId", "SDT" },
                 values: new object[,]
                 {
-                    { 1, null, null, "x@gmail.com", "Nam", "Nguyễn Văn X", "123", new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "0123" },
-                    { 2, null, null, "y@gmail.com", "Nam", "Nguyễn Văn Y", "123", new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "0123" },
-                    { 3, null, null, "z@gmail.com", "Nam", "Nguyễn Văn Z", "123", new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "0123" },
-                    { 4, null, null, "t@gmail.com", "Nữ", "Nguyễn Văn T", "123", new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "0123" }
+                    { 3, null, 5, "khachhangA@email.com", null, "Khách hàng A", "123456", null, 4, "0123123123" },
+                    { 1, null, 1, "x@gmail.com", "Nam", "Nguyễn Văn X", "123", new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "0123" },
+                    { 2, null, 1, "y@gmail.com", "Nam", "Nguyễn Văn Y", "123", new DateTime(1999, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "0123" },
+                    { 4, null, 6, "cuahangcoop@email.com", null, "Cua Hang Co-op Mart", "123456", null, 2, "0123456789" },
+                    { 5, null, 1, "shipper687@email.com", null, "Bùi Minh Quân", "123456", null, 3, "0124759324" },
+                    { 6, null, 3, "khachhangB@email.com", null, "Khách hàng B", "123456", null, 4, "0482745323" }
                 });
 
             migrationBuilder.InsertData(
-                table: "DanhGia",
-                columns: new[] { "ID", "DonHangID", "LoaiDGID", "NgayDanhGia", "NoiDung", "SoDiem" },
+                table: "CuaHang",
+                columns: new[] { "Id", "LoaiCHID", "TenCuaHang", "TrangThaiKichHoat", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tốt", 5 },
-                    { 2, 1, 2, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tạm được", 4 }
+                    { 1, 1, "Bách Hóa X", true, 2 },
+                    { 2, 1, "Co-op Mart Cống Quỳnh", true, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "KhachHang",
+                columns: new[] { "Id", "CMND", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "18219821", 3 },
+                    { 2, "5361152421", 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -795,25 +803,81 @@ namespace DctAPI.Migrations
                     { 3, 120000f, 1, null, 3, "C", 1, new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vitamin C" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Shipper",
+                columns: new[] { "Id", "BienSo", "CMND", "DongXe", "KichHoat", "UserID", "UserId" },
+                values: new object[,]
+                {
+                    { 2, "00A0-0000", "000111222", "Honda Wave", true, 0, 5 },
+                    { 1, "85D2-12111", "18277821", "Wave", true, 0, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DonHang",
+                columns: new[] { "Id", "CuaHangId", "DiaChiGiaoId", "KhachHangId", "NgayGiao", "NgayMuaHang", "PTTTId", "ShipperId", "TTDHId", "TongTien" },
+                values: new object[,]
+                {
+                    { 2, 1, 2, 1, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 2, 920000f },
+                    { 1, 1, 1, 1, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 5, 87000f },
+                    { 3, 2, 2, 2, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 2, 43000f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ChiTietDonHang",
+                columns: new[] { "Id", "DonGia", "DonHangId", "KhoiLuong", "SanPhamId", "SoLuong" },
+                values: new object[,]
+                {
+                    { 3, 500000f, 2, 1f, 1, 5 },
+                    { 4, 210000f, 2, 1f, 2, 1 },
+                    { 5, 210000f, 2, 1f, 3, 2 },
+                    { 1, 37000f, 1, 1f, 1, 1 },
+                    { 2, 25000f, 1, 1f, 2, 2 },
+                    { 6, 43000f, 3, 1f, 1, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DanhGia",
+                columns: new[] { "ID", "DonHangId", "LoaiDGId", "NgayDanhGia", "NoiDung", "SoDiem" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tốt", 5 },
+                    { 2, 1, 2, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tạm được", 4 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietDonHang_DonHangId",
+                table: "ChiTietDonHang",
+                column: "DonHangId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietDonHang_SanPhamId",
+                table: "ChiTietDonHang",
+                column: "SanPhamId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_CuaHang_LoaiCHID",
                 table: "CuaHang",
                 column: "LoaiCHID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CuaHang_UserEntityId",
+                name: "IX_CuaHang_UserId",
                 table: "CuaHang",
-                column: "UserEntityId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DanhGia_DonHangID",
+                name: "IX_DanhGia_DonHangId",
                 table: "DanhGia",
-                column: "DonHangID");
+                column: "DonHangId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DanhGia_LoaiDGID",
+                name: "IX_DanhGia_LoaiDGId",
                 table: "DanhGia",
-                column: "LoaiDGID");
+                column: "LoaiDGId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonHang_CuaHangId",
+                table: "DonHang",
+                column: "CuaHangId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonHang_DiaChiGiaoId",
@@ -821,9 +885,19 @@ namespace DctAPI.Migrations
                 column: "DiaChiGiaoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DonHang_KhachHangId",
+                table: "DonHang",
+                column: "KhachHangId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DonHang_PTTTId",
                 table: "DonHang",
                 column: "PTTTId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonHang_ShipperId",
+                table: "DonHang",
+                column: "ShipperId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonHang_TTDHId",
@@ -886,9 +960,9 @@ namespace DctAPI.Migrations
                 column: "PhuongTienHinhDuoiId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KhachHang_UserEntityId",
+                name: "IX_KhachHang_UserId",
                 table: "KhachHang",
-                column: "UserEntityId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LuaChonTracNghiem_CauHoiId",
@@ -916,9 +990,9 @@ namespace DctAPI.Migrations
                 column: "NSXID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shipper_UserEntityId",
+                name: "IX_Shipper_UserId",
                 table: "Shipper",
-                column: "UserEntityId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TaiKhoanNganHang_UserEntityId",
@@ -947,9 +1021,6 @@ namespace DctAPI.Migrations
                 name: "ChiTietDonHang");
 
             migrationBuilder.DropTable(
-                name: "CuaHang");
-
-            migrationBuilder.DropTable(
                 name: "CuaHangSanPham");
 
             migrationBuilder.DropTable(
@@ -959,25 +1030,16 @@ namespace DctAPI.Migrations
                 name: "HoSoShipper");
 
             migrationBuilder.DropTable(
-                name: "KhachHang");
-
-            migrationBuilder.DropTable(
                 name: "KhoaDaoTao");
 
             migrationBuilder.DropTable(
                 name: "LuaChonTracNghiem");
 
             migrationBuilder.DropTable(
-                name: "SanPham");
-
-            migrationBuilder.DropTable(
-                name: "Shipper");
-
-            migrationBuilder.DropTable(
                 name: "TaiKhoanNganHang");
 
             migrationBuilder.DropTable(
-                name: "LoaiCuaHang");
+                name: "SanPham");
 
             migrationBuilder.DropTable(
                 name: "DonHang");
@@ -995,13 +1057,25 @@ namespace DctAPI.Migrations
                 name: "NhaSanXuat");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "CuaHang");
+
+            migrationBuilder.DropTable(
+                name: "KhachHang");
 
             migrationBuilder.DropTable(
                 name: "PhuongThucThanhToan");
 
             migrationBuilder.DropTable(
+                name: "Shipper");
+
+            migrationBuilder.DropTable(
                 name: "TrangThaiDonHang");
+
+            migrationBuilder.DropTable(
+                name: "LoaiCuaHang");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "HinhAnh");

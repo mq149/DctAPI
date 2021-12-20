@@ -34,6 +34,13 @@ namespace DctAPI.Controllers
             return donHangRepo.GetAll();
         }
 
+        // GET: api/<DonHangController>
+        [HttpGet("ChoXacNhan")]
+        public IEnumerable<DonHangEntity> GetChoXacNhan()
+        {
+            return donHangRepo.GetChoXacNhan();
+        }
+
         // GET api/<DonHangController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -63,15 +70,13 @@ namespace DctAPI.Controllers
         [HttpPost("{id}/ShipperXacNhan/{shipperId}")]
         public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
         {
-            var donHang = await donHangRepo.Find(id);
+            var donHang = await donHangRepo.GetDonHang(id);
             var shipper = await shipperRepo.Find(shipperId);
             if (donHang != null && shipper != null)
             {
-                if (
-                    //donHang.TTDH.ID != (int)TrangThaiDonHang.ChoXacNhan
-                    //&&
-                    shipper.KichHoat 
-                    && donHang.ShipperID == null)
+                if (donHang.TTDHId != (int)TrangThaiDonHang.ChoXacNhan 
+                    && shipper.KichHoat 
+                    && donHang.ShipperId == null)
                 {
                     var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
                     if (_donHang != null)
@@ -91,11 +96,9 @@ namespace DctAPI.Controllers
             var shipper = await shipperRepo.Find(shipperId);
             if (donHang != null && shipper != null)
             {
-                if (
-                    //(donHang.TTDH.ID == (int)TrangThaiDonHang.DangLayHang
-                    //|| donHang.TTDH.ID == (int)TrangThaiDonHang.DangGiaoHang)
-                    //&&
-                    shipper.ID == donHang.ShipperID)
+                if ((donHang.TTDHId == (int)TrangThaiDonHang.DangLayHang
+                    || donHang.TTDHId == (int)TrangThaiDonHang.DangGiaoHang)
+                    && shipper.Id == donHang.ShipperId)
                 {
                     var _donHang = await donHangRepo.ShipperHuyDonHang(donHang);
                     if (_donHang != null)
