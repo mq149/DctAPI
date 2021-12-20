@@ -3,6 +3,7 @@ using DctApi.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DctApi.Shared.Models
@@ -12,6 +13,8 @@ namespace DctApi.Shared.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [ForeignKey("Role")]
+        public int RoleId { get; set; }
         public RoleEntity Role { get; set; }
         [Required(ErrorMessage = Config.ErrorMessage.sdtRequired),
             RegularExpression(Config.Regex.sdt, ErrorMessage = Config.ErrorMessage.sdtRegex)]
@@ -26,6 +29,8 @@ namespace DctApi.Shared.Models
         public string GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
         public HinhAnhEntity Avatar { get; set; }
+        [ForeignKey("DiaChi")]
+        public int DiaChiId { get; set; }
         public DiaChiEntity DiaChi { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }

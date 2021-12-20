@@ -8,7 +8,7 @@ namespace DctApi.Shared.Models
     public class PhuongThucThanhToanEntity
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Ten { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }

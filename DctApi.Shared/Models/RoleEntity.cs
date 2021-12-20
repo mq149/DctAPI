@@ -8,7 +8,7 @@ namespace DctApi.Shared.Models
     public class RoleEntity
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Ten { get; set; }
     }
