@@ -31,6 +31,12 @@ namespace DctAPI.Models
         public DbSet<NhaSanXuatEntity> NhaSanXuat { get; set; }
         public DbSet<SanPhamEntity> SanPham { get; set; }
         public DbSet<CuaHangSanPhamEntity> CuaHangSanPham { get; set; }
+
+        internal object Set<T>(object sanPham)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<PhuongThucThanhToanEntity> PhuongThucThanhToan { get; set; }
         public DbSet<TrangThaiDonHangEntity> TrangThaiDonHang { get; set; }
         public DbSet<DonHangEntity> DonHang { get; set; }

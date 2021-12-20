@@ -51,5 +51,20 @@ namespace DctAPI.Repositories.Implements
             }
             return donHang;
         }
+        public async Task<DonHangEntity> PostDonHang(DonHangEntity dh)
+        {
+           
+
+            context.Set<DonHangEntity>().Add(dh);
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return null;
+            }
+            return dh;
+        }
     }
 }

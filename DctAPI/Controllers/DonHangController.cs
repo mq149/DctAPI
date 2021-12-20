@@ -43,8 +43,14 @@ namespace DctAPI.Controllers
 
         // POST api/<DonHangController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<DonHangEntity>> PostDonHang([FromBody] DonHangEntity dh)
+            
         {
+          
+           var  result = await donHangRepo.PostDonHang(dh);
+            return result;
+
+
         }
 
         // PUT api/<DonHangController>/5

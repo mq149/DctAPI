@@ -27,9 +27,10 @@ namespace DctAPI.Repositories.Implements
             return await context.Set<T>().FindAsync(id);
         }
 
-        public void Create(T entity)
+        public  void Create(T entity)
         {
-            context.Set<T>().Add(entity);
+             context.Set<T>().Add(entity);
+         
         }
 
         public void Update(T entity)

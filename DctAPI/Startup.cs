@@ -43,6 +43,7 @@ namespace DctAPI
 
             services.AddScoped<IDonHangRepository, DonHangRepository>();
             services.AddScoped<IShipperRepository, ShipperRepository>();
+            services.AddScoped<ISanPhamRepository, SanPhamRepository>();
 
             //Json serializer
             services.AddControllersWithViews()

@@ -11,5 +11,6 @@ namespace DctAPI.Repositories.Interfaces
     {
         public Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper);
         public Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang);
+        public Task<DonHangEntity> PostDonHang(DonHangEntity dh);
     }
 }

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211219083132_Update")]
-    partial class Update
+    [Migration("20211219142905_initialized")]
+    partial class initialized
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
