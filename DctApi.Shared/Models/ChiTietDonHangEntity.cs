@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DctApi.Shared.Models
@@ -8,10 +9,14 @@ namespace DctApi.Shared.Models
     public class ChiTietDonHangEntity
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
-        public int DonHangID { get; set; }
-        public int SanPhamID { get; set; }
+        [ForeignKey("DonHang")]
+        public int DonHangId { get; set; }
+        public DonHangEntity DonHang { get; set; }
+        [Required]
+        public int SanPhamId { get; set; }
+        public SanPhamEntity SanPham { get; set; }
         public float DonGia { get; set; }
         public int SoLuong { get; set; }
         public float KhoiLuong { get; set; }

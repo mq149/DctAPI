@@ -12,6 +12,8 @@ namespace DctApi.Shared.Models
         public int Id { get; set; }
         public Boolean TrangThaiKichHoat { get; set; }
         public string TenCuaHang { get; set; }
+        [ForeignKey("LoaiCH")]
+        public int LoaiCHID { get; set; }
         public LoaiCuaHangEntity LoaiCH { get; set; }
         [Required]
         [ForeignKey("User")]

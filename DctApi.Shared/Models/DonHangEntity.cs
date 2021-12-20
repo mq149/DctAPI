@@ -35,6 +35,7 @@ namespace DctApi.Shared.Models
         [Required]
         public DateTime NgayMuaHang { get; set; }
         public DateTime NgayGiao { get; set; }
+        public List<ChiTietDonHangEntity> ChiTietDonHang { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
         [Timestamp]
