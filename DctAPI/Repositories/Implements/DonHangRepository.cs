@@ -24,6 +24,7 @@ namespace DctAPI.Repositories.Implements
             return context.DonHang
                 .Where(dh => dh.ShipperId == null)
                 .Include(dh => dh.CuaHang)
+                    .ThenInclude(ch => ch.User.DiaChi)
                 .Include(dh => dh.KhachHang)
                 .Include(dh => dh.DiaChiGiao)
                 .Include(dh => dh.PTTT)
@@ -46,9 +47,8 @@ namespace DctAPI.Repositories.Implements
 
         public async Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper)
         {
-            var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DangLayHang);
             donHang.ShipperId = shipper.Id;
-            donHang.TTDH = ttdh;
+            donHang.TTDHId = (int)TrangThaiDonHang.DangLayHang;
             context.Entry(donHang).State = EntityState.Modified;
             try
             {
@@ -63,8 +63,7 @@ namespace DctAPI.Repositories.Implements
 
         public async Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang)
         {
-            var ttdh = await context.TrangThaiDonHang.FindAsync((int)TrangThaiDonHang.DaHuy);
-            donHang.TTDH = ttdh;
+            donHang.TTDHId = (int)TrangThaiDonHang.DaHuy;
             context.Entry(donHang).State = EntityState.Modified;
             try
             {

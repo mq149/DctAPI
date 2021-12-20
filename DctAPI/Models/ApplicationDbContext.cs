@@ -96,7 +96,8 @@ namespace DctAPI.Models
                     new KhoaDaoTaoEntity { ID = 1,
                         NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
                         HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
-                        URL = "www.google.com"}
+                        URL = "https://www.youtube.com/embed/LcRG816Syvc"
+                    }
                 );
 
             modelBuilder.Entity<LoaiSanPhamEntity>()

@@ -74,7 +74,7 @@ namespace DctAPI.Controllers
             var shipper = await shipperRepo.Find(shipperId);
             if (donHang != null && shipper != null)
             {
-                if (donHang.TTDHId != (int)TrangThaiDonHang.ChoXacNhan 
+                if (donHang.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan 
                     && shipper.KichHoat 
                     && donHang.ShipperId == null)
                 {
