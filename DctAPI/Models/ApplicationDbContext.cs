@@ -82,19 +82,19 @@ namespace DctAPI.Models
                 );
             modelBuilder.Entity<TrangThaiDonHangEntity>()
                 .HasData(
-                    new TrangThaiDonHangEntity { ID = 1, Ten = "Chờ xác nhận"},
-                    new TrangThaiDonHangEntity { ID = 2, Ten = "Cửa hàng đã xác nhận" },
-                    new TrangThaiDonHangEntity { ID = 3, Ten = "Đang lấy hàng" },
-                    new TrangThaiDonHangEntity { ID = 4, Ten = "Đang giao hàng" },
-                    new TrangThaiDonHangEntity { ID = 5, Ten = "Đã giao hàng" },
-                    new TrangThaiDonHangEntity { ID = 6, Ten = "Đã huỷ" }
+                    new TrangThaiDonHangEntity { Id = 1, Ten = "Chờ xác nhận"},
+                    new TrangThaiDonHangEntity { Id = 2, Ten = "Cửa hàng đã xác nhận" },
+                    new TrangThaiDonHangEntity { Id = 3, Ten = "Đang lấy hàng" },
+                    new TrangThaiDonHangEntity { Id = 4, Ten = "Đang giao hàng" },
+                    new TrangThaiDonHangEntity { Id = 5, Ten = "Đã giao hàng" },
+                    new TrangThaiDonHangEntity { Id = 6, Ten = "Đã huỷ" }
                 );
             modelBuilder.Entity<RoleEntity>()
                .HasData(
-                   new RoleEntity { ID = 1, Ten = "Admin" },
-                   new RoleEntity { ID = 2, Ten = "Cửa Hàng" },
-                   new RoleEntity { ID = 3, Ten = "Shipper" },
-                   new RoleEntity { ID = 4, Ten = "Khách Hàng" }
+                   new RoleEntity { Id = 1, Ten = "Admin" },
+                   new RoleEntity { Id = 2, Ten = "Cửa Hàng" },
+                   new RoleEntity { Id = 3, Ten = "Shipper" },
+                   new RoleEntity { Id = 4, Ten = "Khách Hàng" }
                );
 
             modelBuilder.Entity<KhoaDaoTaoEntity>()
@@ -102,8 +102,10 @@ namespace DctAPI.Models
                     new KhoaDaoTaoEntity { ID = 1,
                         NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
                         HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
-                        URL = "www.google.com"}
+                        URL = "https://www.youtube.com/embed/LcRG816Syvc"
+                    }
                 );
+
             modelBuilder.Entity<LoaiSanPhamEntity>()
                .HasData(
 
@@ -113,7 +115,6 @@ namespace DctAPI.Models
                     new LoaiSanPhamEntity { ID = 4, Ten = "Hải sản" },
                     new LoaiSanPhamEntity { ID = 5, Ten = "Đồ dùng" }
                );
-
             modelBuilder.Entity<DiaChiEntity>()
                .HasData(
                    new DiaChiEntity
@@ -151,14 +152,32 @@ namespace DctAPI.Models
                        XaPhuong = "Vĩnh Sơn",
                        QuanHuyen = "Vĩnh Thạnh",
                        TinhTP = "Bình Định"
+                   },
+                   new DiaChiEntity
+                   {
+                       Id = 5,
+                       SoNhaTo = "227",
+                       Duong = "Nguyễn Văn Cừ",
+                       XaPhuong = "Phường 4",
+                       QuanHuyen = "Quận 5",
+                       TinhTP = "TP. HCM"
+                   },
+                   new DiaChiEntity
+                   {
+                       Id = 6,
+                       SoNhaTo = "189C",
+                       Duong = "Cống Quỳnh",
+                       XaPhuong = "Nguyễn Cư Trinh",
+                       QuanHuyen = "Quận 1",
+                       TinhTP = "TP. HCM"
                    }
                );
-
+            
             modelBuilder.Entity<PhuongThucThanhToanEntity>()
                .HasData(
-                   new PhuongThucThanhToanEntity { ID = 1, Ten = "Tiền mặt" },
-                   new PhuongThucThanhToanEntity { ID = 2, Ten = "Thẻ ATM" },
-                   new PhuongThucThanhToanEntity { ID = 3, Ten = "Ví điện tử" }
+                   new PhuongThucThanhToanEntity { Id = 1, Ten = "Tiền mặt" },
+                   new PhuongThucThanhToanEntity { Id = 2, Ten = "Thẻ ATM" },
+                   new PhuongThucThanhToanEntity { Id = 3, Ten = "Ví điện tử" }
                );
 
             modelBuilder.Entity<NhaSanXuatEntity>()
@@ -216,8 +235,8 @@ namespace DctAPI.Models
                         MatKhau = "123",
                         HoTen = "Nguyễn Văn X",
                         GioiTinh = "Nam",
+                        DiaChiId = 1,
                         NgaySinh = new DateTime(1999, 1, 1),
-
                     },
                     new UserEntity
                     {
@@ -228,44 +247,67 @@ namespace DctAPI.Models
                         MatKhau = "123",
                         HoTen = "Nguyễn Văn Y",
                         GioiTinh = "Nam",
+                        DiaChiId = 1,
                         NgaySinh = new DateTime(1999, 1, 1),
-
                     },
                     new UserEntity
                     {
                         Id = 3,
-                        RoleId = 3,
-                        SDT = "0123",
-                        Email = "z@gmail.com",
-                        MatKhau = "123",
-                        HoTen = "Nguyễn Văn Z",
-                        GioiTinh = "Nam",
-                        NgaySinh = new DateTime(1999, 1, 1),
-
+                        RoleId = 4,
+                        HoTen = "Khách hàng A",
+                        DiaChiId = 5,
+                        SDT = "0123123123",
+                        Email = "khachhangA@email.com",
+                        MatKhau = "123456"
                     },
                     new UserEntity
                     {
                         Id = 4,
+                        RoleId = 2,
+                        HoTen = "Cua Hang Co-op Mart",
+                        DiaChiId = 6,
+                        SDT = "0123456789",
+                        Email = "cuahangcoop@email.com",
+                        MatKhau = "123456"
+                    },
+                    new UserEntity
+                    {
+                        Id = 5,
+                        RoleId = 3,
+                        HoTen = "Bùi Minh Quân",
+                        DiaChiId = 1,
+                        SDT = "0124759324",
+                        Email = "shipper687@email.com",
+                        MatKhau = "123456"
+                    },
+                    new UserEntity
+                    {
+                        Id = 6,
                         RoleId = 4,
-                        SDT = "0123",
-                        Email = "t@gmail.com",
-                        MatKhau = "123",
-                        HoTen = "Nguyễn Văn T",
-                        GioiTinh = "Nữ",
-                        NgaySinh = new DateTime(1999, 1, 1),
-
-                    });
-            modelBuilder.Entity<KhachHangEntity>()
-               .HasData(
-                   new KhachHangEntity { ID = 1, CMND = "18219821", UserID = 4 });
-
-            modelBuilder.Entity<ShipperEntity>()
-                .HasData(
-                   new ShipperEntity { ID = 1, KichHoat = true, CMND = "18277821", UserID = 3, BienSo = "85D2-12111", DongXe = "Wave" });
-
+                        HoTen = "Khách hàng B",
+                        DiaChiId = 3,
+                        SDT = "0482745323",
+                        Email = "khachhangB@email.com",
+                        MatKhau = "123456"
+                    }
+                );
             modelBuilder.Entity<CuaHangEntity>()
                 .HasData(
-                    new CuaHangEntity { ID = 1, TrangThaiKichHoat = true, TenCuaHang = "Bách Hóa X", LoaiCHID = 1, UserID = 2 });
+                    new CuaHangEntity { Id = 1, UserId = 2, LoaiCHID = 1, TenCuaHang = "Bách Hóa X",TrangThaiKichHoat = true },
+                    new CuaHangEntity { Id = 2, UserId = 4, LoaiCHID = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true } 
+                );
+
+            modelBuilder.Entity<ShipperEntity>()
+                .HasData( 
+                    new ShipperEntity { Id = 1, UserId = 3, KichHoat = true, CMND = "18277821",BienSo = "85D2-12111", DongXe = "Wave" },
+                    new ShipperEntity { Id = 2, UserId = 5, KichHoat = true, CMND = "000111222", BienSo = "00A0-0000", DongXe = "Honda Wave"}
+                );
+
+            modelBuilder.Entity<KhachHangEntity>()
+                .HasData(
+                    new KhachHangEntity { Id = 1, UserId = 3, CMND = "18219821"},
+                    new KhachHangEntity { Id = 2, UserId = 6, CMND = "5361152421" }
+                );
 
             modelBuilder.Entity<LoaiDanhGiaEntity>()
                 .HasData(
@@ -274,21 +316,21 @@ namespace DctAPI.Models
 
             modelBuilder.Entity<LoaiCuaHangEntity>()
                 .HasData(
-                    new LoaiCuaHangEntity { ID = 1, Ten = "Bán sỉ" },
-                    new LoaiCuaHangEntity { ID = 2, Ten = "Bán lẻ" },
-                    new LoaiCuaHangEntity { ID = 3, Ten = "Bán quà lưu niệm" },
-                    new LoaiCuaHangEntity { ID = 4, Ten = "Bán online" });
+                    new LoaiCuaHangEntity { Id = 1, Ten = "Bán sỉ" },
+                    new LoaiCuaHangEntity { Id = 2, Ten = "Bán lẻ" },
+                    new LoaiCuaHangEntity { Id = 3, Ten = "Bán quà lưu niệm" },
+                    new LoaiCuaHangEntity { Id = 4, Ten = "Bán online" });
 
             modelBuilder.Entity<DonHangEntity>()
                 .HasData(
                   new DonHangEntity
                   {
-                      ID = 1,
-                      KhachHangID = 1,
-                      CuaHangID = 1,
-                      ShipperID = 1,
+                      Id = 1,
+                      KhachHangId = 1,
+                      CuaHangId = 1,
+                      ShipperId = 1,
                       DiaChiGiaoId = 1,
-                      TTDHId = 1,
+                      TTDHId = 5,
                       PTTTId = 1,
                       TongTien = 87000,
                       NgayGiao = new DateTime(2021, 12, 12),
@@ -296,14 +338,27 @@ namespace DctAPI.Models
                   },
                   new DonHangEntity
                   {
-                      ID = 2,
-                      KhachHangID = 1,
-                      CuaHangID = 1,
-                      ShipperID = 1,
+                      Id = 2,
+                      KhachHangId = 1,
+                      CuaHangId = 1,
+                      ShipperId = null,
                       DiaChiGiaoId = 2,
                       TTDHId = 2,
                       PTTTId = 1,
                       TongTien = 920000,
+                      NgayGiao = new DateTime(2021, 12, 12),
+                      NgayMuaHang = new DateTime(2021, 11, 1)
+                  },
+                  new DonHangEntity
+                  {
+                      Id = 3,
+                      KhachHangId = 2,
+                      CuaHangId = 2,
+                      ShipperId = null,
+                      DiaChiGiaoId = 2,
+                      TTDHId = 2,
+                      PTTTId = 2,
+                      TongTien = 43000,
                       NgayGiao = new DateTime(2021, 12, 12),
                       NgayMuaHang = new DateTime(2021, 11, 1)
                   }
@@ -312,28 +367,65 @@ namespace DctAPI.Models
                 .HasData(
                    new ChiTietDonHangEntity
                    {
-                       ID = 1,
-                       DonHangID = 1,
-                       SanPhamID = 1,
+                       Id = 1,
+                       DonHangId = 1,
+                       SanPhamId = 1,
                        DonGia = 37000,
                        SoLuong = 1,
                        KhoiLuong = 1
                    },
                    new ChiTietDonHangEntity
                    {
-                       ID = 2,
-                       DonHangID = 1,
-                       SanPhamID = 2,
+                       Id = 2,
+                       DonHangId = 1,
+                       SanPhamId = 2,
                        DonGia = 25000,
                        SoLuong = 2,
                        KhoiLuong = 1
-                   });
+                   },
+                   new ChiTietDonHangEntity
+                   {
+                       Id = 3,
+                       DonHangId = 2,
+                       SanPhamId = 1,
+                       DonGia = 500000,
+                       SoLuong = 5,
+                       KhoiLuong = 1
+                   },
+                   new ChiTietDonHangEntity
+                   {
+                       Id = 4,
+                       DonHangId = 2,
+                       SanPhamId = 2,
+                       DonGia = 210000,
+                       SoLuong = 1,
+                       KhoiLuong = 1
+                   },
+                   new ChiTietDonHangEntity
+                   {
+                       Id = 5,
+                       DonHangId = 2,
+                       SanPhamId = 3,
+                       DonGia = 210000,
+                       SoLuong = 2,
+                       KhoiLuong = 1
+                   },
+                   new ChiTietDonHangEntity
+                   {
+                       Id = 6,
+                       DonHangId = 3,
+                       SanPhamId = 1,
+                       DonGia = 43000,
+                       SoLuong = 1,
+                       KhoiLuong = 1
+                   }
+               );
 
             modelBuilder.Entity<DanhGiaEntity>()
                 .HasData(
-                    new DanhGiaEntity { ID = 1, DonHangID = 1, LoaiDGID = 1, NoiDung = "Tốt", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 5 },
-                    new DanhGiaEntity { ID = 2, DonHangID = 1, LoaiDGID = 2, NoiDung = "Tạm được", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 4 }
+                    new DanhGiaEntity { ID = 1, DonHangId = 1, LoaiDGId = 1, NoiDung = "Tốt", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 5 },
+                    new DanhGiaEntity { ID = 2, DonHangId = 1, LoaiDGId = 2, NoiDung = "Tạm được", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 4 }
                     );
         }
-    }
+}
 }
