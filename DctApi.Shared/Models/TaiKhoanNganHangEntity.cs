@@ -13,7 +13,8 @@ namespace DctApi.Shared.Models
         public string SoTK { get; set; }
         public string TenNganHang { get; set; }
         public string MaNganHang { get; set; }
-        public Boolean LienKet { get; set; }
+        public Boolean? LienKet { get; set; }
+        public int UserId { get; set; }
         public UserEntity UserEntity { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
