@@ -237,9 +237,11 @@ namespace DctAPI.Models
                        GiaSP = 120000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "Rất ngon và rẻ",
-                       HinhSanPhamID = 1,
-                       LoaiSPID = 4,
-                       NSXID = 1
+
+                       HinhAnhId = 1,
+                       LoaiSPId = 4,
+                       NSXId = 1
+
                    },
                    new SanPhamEntity
                    {
@@ -248,9 +250,10 @@ namespace DctAPI.Models
                        GiaSP = 12000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "Không ngon đâu",
-                       HinhSanPhamID = 1,
-                       LoaiSPID = 1,
-                       NSXID = 1
+
+                       HinhAnhId = 1,
+                       LoaiSPId = 1,
+
                    },
                    new SanPhamEntity
                    {
@@ -259,9 +262,11 @@ namespace DctAPI.Models
                        GiaSP = 120000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "C",
-                       HinhSanPhamID = 1,
-                       LoaiSPID = 3,
-                       NSXID = 1
+
+                       HinhAnhId = 1,
+                       LoaiSPId = 3,
+                       NSXId = 1
+
                    }
                     );
 
@@ -334,8 +339,8 @@ namespace DctAPI.Models
                 );
             modelBuilder.Entity<CuaHangEntity>()
                 .HasData(
-                    new CuaHangEntity { Id = 1, UserId = 2, LoaiCHID = 1, TenCuaHang = "Bách Hóa X",TrangThaiKichHoat = true },
-                    new CuaHangEntity { Id = 2, UserId = 4, LoaiCHID = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true } 
+                    new CuaHangEntity { Id = 1, UserId = 2, LoaiCHId = 1, TenCuaHang = "Bách Hóa X",TrangThaiKichHoat = true },
+                    new CuaHangEntity { Id = 2, UserId = 4, LoaiCHId = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true } 
                 );
 
             modelBuilder.Entity<ShipperEntity>()

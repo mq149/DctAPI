@@ -9,8 +9,11 @@ namespace DctApi.Shared.Models
     {
         [Key]
         public int Id { get; set; }
-        public int CuaHangID { get; set; }
-        public int SanPhamID { get; set; }
+
+
+        public int CuaHangId { get; set; }
+        public int SanPhamId { get; set; }
+
         public int SoLuong { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
