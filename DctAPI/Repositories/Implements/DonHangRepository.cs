@@ -2,6 +2,7 @@
 using DctApi.Shared.Models;
 using DctAPI.Models;
 using DctAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,42 @@ namespace DctAPI.Repositories.Implements
                 return null;
             }
             return donHang;
+        }
+        //public async Task<DonHangEntity> GetDonHang(int user, int id)
+        public DonHangEntity GetDonHang(int user, int id)
+        {
+            return  context.DonHang
+                .Where(dh => dh.KhachHangId == user && dh.Id == id)
+                .Include(x => x.CuaHang).ThenInclude(k => k.User)
+                .Include(x => x.Shipper).ThenInclude(k=>k.User)
+                .Include(x => x.DiaChiGiao)
+                .Include(x => x.PTTT)
+                .Include(x => x.TTDH)
+                .Include(x=>x.ChiTietDonHang)
+                .FirstOrDefault();
+           // var donhang = (from dh in context.DonHang where dh.KhachHangId == user && dh.Id == id select dh).FirstOrDefault<DonHangEntity>();
+           // return donhang;
+            //return donhang;
+        }
+        //        public List<DonHangEntity> GetAllDonHangByUser(int user)
+
+        public List<DonHangEntity> GetAllDonHangByUser(int user)
+        {
+            return context.DonHang
+                .Where(dh => dh.KhachHangId == user)
+                .Include(x => x.Shipper).ThenInclude(k => k.User)
+                .Include(x => x.CuaHang).ThenInclude(k => k.User)
+                .Include(x=>x.DiaChiGiao)
+                .Include(x=> x.PTTT)
+                .Include(x=>x.TTDH)
+                .Include(x => x.ChiTietDonHang)
+                .OrderBy(dh => dh.NgayMuaHang)
+                .ToList();
+                //.ToListAsync();
+        }
+        public List<DonHangEntity> GetAllDonHang()
+        {
+            return context.DonHang.ToList();
         }
     }
 }

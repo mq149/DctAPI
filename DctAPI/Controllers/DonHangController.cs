@@ -31,7 +31,8 @@ namespace DctAPI.Controllers
         [HttpGet]
         public IEnumerable<DonHangEntity> Get()
         {
-            return donHangRepo.GetAll();
+            return donHangRepo.GetAllDonHang();
+            //return donHangRepo.GetAll();
         }
 
         // GET: api/<DonHangController>
@@ -74,8 +75,8 @@ namespace DctAPI.Controllers
             var shipper = await shipperRepo.Find(shipperId);
             if (donHang != null && shipper != null)
             {
-                if (donHang.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan 
-                    && shipper.KichHoat 
+                if (donHang.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan
+                    && shipper.KichHoat
                     && donHang.ShipperId == null)
                 {
                     var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
@@ -108,6 +109,37 @@ namespace DctAPI.Controllers
                 }
             }
             return BadRequest();
+        }
+
+        //GET DonHangByUser
+        [HttpGet("DonHangByUser")]
+        public List<DonHangEntity> GetAllDonHang(int user)
+        {
+            var donhangs = donHangRepo.GetAllDonHangByUser(user);
+            return donhangs;
+        }
+
+        [HttpGet("DonHangDangXuLy")]
+        public List<DonHangEntity> GetDonHangDangXuLy(int user)
+        {
+            var donhangs = donHangRepo.GetAllDonHangByUser(user);
+            List<DonHangEntity> dangxuly = new List<DonHangEntity>();
+            foreach(var processing in donhangs)
+            {
+                if(processing.TTDHId !=(int)TrangThaiDonHang.DaGiaoHang && processing.TTDHId != (int)TrangThaiDonHang.DaHuy)
+                {
+                    dangxuly.Add(processing);
+                }    
+            }    
+            return dangxuly;
+        }
+
+        //GET DonHangByUserById
+        [HttpGet("DonHangByUserById")]
+        public DonHangEntity GetDonHang(int user, int id)
+        {
+            var donhang = donHangRepo.GetDonHang(user, id);
+            return donhang;
         }
     }
 }

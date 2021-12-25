@@ -27,17 +27,17 @@ namespace DctAPI.Migrations
                 name: "CuaHangSanPham",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CuaHangID = table.Column<int>(nullable: false),
-                    SanPhamID = table.Column<int>(nullable: false),
+                    CuaHangId = table.Column<int>(nullable: false),
+                    SanPhamId = table.Column<int>(nullable: false),
                     SoLuong = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CuaHangSanPham", x => x.ID);
+                    table.PrimaryKey("PK_CuaHangSanPham", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,7 +111,7 @@ namespace DctAPI.Migrations
                 name: "LoaiDanhGia",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Ten = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
@@ -119,7 +119,7 @@ namespace DctAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LoaiDanhGia", x => x.ID);
+                    table.PrimaryKey("PK_LoaiDanhGia", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,7 +207,7 @@ namespace DctAPI.Migrations
                 name: "NhaSanXuat",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Ten = table.Column<string>(nullable: true),
                     DiaChiId = table.Column<int>(nullable: false),
@@ -216,7 +216,7 @@ namespace DctAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NhaSanXuat", x => x.ID);
+                    table.PrimaryKey("PK_NhaSanXuat", x => x.Id);
                     table.ForeignKey(
                         name: "FK_NhaSanXuat_DiaChi_DiaChiId",
                         column: x => x.DiaChiId,
@@ -368,39 +368,39 @@ namespace DctAPI.Migrations
                 name: "SanPham",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Ten = table.Column<string>(nullable: true),
                     GiaSP = table.Column<float>(nullable: false),
-                    NgaySanXuat = table.Column<DateTime>(nullable: false),
+                    NgaySanXuat = table.Column<DateTime>(nullable: true),
                     MoTa = table.Column<string>(nullable: true),
-                    HinhAnhID = table.Column<int>(nullable: false),
-                    HinhSanPhamIDId = table.Column<int>(nullable: true),
-                    LoaiSPID = table.Column<int>(nullable: false),
-                    NSXID = table.Column<int>(nullable: false),
+                    HinhAnhId = table.Column<int>(nullable: false),
+                    HinhSanPhamIdId = table.Column<int>(nullable: true),
+                    LoaiSPId = table.Column<int>(nullable: false),
+                    NSXId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SanPham", x => x.ID);
+                    table.PrimaryKey("PK_SanPham", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SanPham_HinhAnh_HinhSanPhamIDId",
-                        column: x => x.HinhSanPhamIDId,
+                        name: "FK_SanPham_HinhAnh_HinhSanPhamIdId",
+                        column: x => x.HinhSanPhamIdId,
                         principalTable: "HinhAnh",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SanPham_LoaiSanPham_LoaiSPID",
-                        column: x => x.LoaiSPID,
+                        name: "FK_SanPham_LoaiSanPham_LoaiSPId",
+                        column: x => x.LoaiSPId,
                         principalTable: "LoaiSanPham",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SanPham_NhaSanXuat_NSXID",
-                        column: x => x.NSXID,
+                        name: "FK_SanPham_NhaSanXuat_NSXId",
+                        column: x => x.NSXId,
                         principalTable: "NhaSanXuat",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -412,7 +412,7 @@ namespace DctAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TrangThaiKichHoat = table.Column<bool>(nullable: false),
                     TenCuaHang = table.Column<string>(nullable: true),
-                    LoaiCHID = table.Column<int>(nullable: false),
+                    LoaiCHId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
@@ -421,8 +421,8 @@ namespace DctAPI.Migrations
                 {
                     table.PrimaryKey("PK_CuaHang", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CuaHang_LoaiCuaHang_LoaiCHID",
-                        column: x => x.LoaiCHID,
+                        name: "FK_CuaHang_LoaiCuaHang_LoaiCHId",
+                        column: x => x.LoaiCHId,
                         principalTable: "LoaiCuaHang",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -463,8 +463,7 @@ namespace DctAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     KichHoat = table.Column<bool>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
-                    CMND = table.Column<string>(nullable: true),
+                    CMND = table.Column<string>(nullable: false),
                     BienSo = table.Column<string>(nullable: false),
                     DongXe = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
@@ -492,7 +491,8 @@ namespace DctAPI.Migrations
                     SoTK = table.Column<string>(nullable: true),
                     TenNganHang = table.Column<string>(nullable: true),
                     MaNganHang = table.Column<string>(nullable: true),
-                    LienKet = table.Column<bool>(nullable: false),
+                    LienKet = table.Column<bool>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     UserEntityId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
@@ -594,7 +594,7 @@ namespace DctAPI.Migrations
                         name: "FK_ChiTietDonHang_SanPham_SanPhamId",
                         column: x => x.SanPhamId,
                         principalTable: "SanPham",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -602,7 +602,7 @@ namespace DctAPI.Migrations
                 name: "DanhGia",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DonHangId = table.Column<int>(nullable: false),
                     LoaiDGId = table.Column<int>(nullable: false),
@@ -614,7 +614,7 @@ namespace DctAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DanhGia", x => x.ID);
+                    table.PrimaryKey("PK_DanhGia", x => x.Id);
                     table.ForeignKey(
                         name: "FK_DanhGia_DonHang_DonHangId",
                         column: x => x.DonHangId,
@@ -625,7 +625,7 @@ namespace DctAPI.Migrations
                         name: "FK_DanhGia_LoaiDanhGia_LoaiDGId",
                         column: x => x.LoaiDGId,
                         principalTable: "LoaiDanhGia",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -657,7 +657,7 @@ namespace DctAPI.Migrations
             migrationBuilder.InsertData(
                 table: "KhoaDaoTao",
                 columns: new[] { "ID", "HuongDan", "NoiDung", "URL" },
-                values: new object[] { 1, "Vui lòng xem video hướng dẫn để làm bài kiểm tra.", "Khoá đào tạo shipper Đi Chợ Thuê", "www.google.com" });
+                values: new object[] { 1, "Vui lòng xem video hướng dẫn để làm bài kiểm tra.", "Khoá đào tạo shipper Đi Chợ Thuê", "https://www.youtube.com/embed/LcRG816Syvc" });
 
             migrationBuilder.InsertData(
                 table: "LoaiCuaHang",
@@ -672,7 +672,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "LoaiDanhGia",
-                columns: new[] { "ID", "Ten" },
+                columns: new[] { "Id", "Ten" },
                 values: new object[,]
                 {
                     { 2, "Cửa hàng" },
@@ -754,7 +754,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "NhaSanXuat",
-                columns: new[] { "ID", "DiaChiId", "Ten" },
+                columns: new[] { "Id", "DiaChiId", "Ten" },
                 values: new object[,]
                 {
                     { 1, 1, "Công ty TNHH X" },
@@ -777,7 +777,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "CuaHang",
-                columns: new[] { "Id", "LoaiCHID", "TenCuaHang", "TrangThaiKichHoat", "UserId" },
+                columns: new[] { "Id", "LoaiCHId", "TenCuaHang", "TrangThaiKichHoat", "UserId" },
                 values: new object[,]
                 {
                     { 1, 1, "Bách Hóa X", true, 2 },
@@ -795,7 +795,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "SanPham",
-                columns: new[] { "ID", "GiaSP", "HinhAnhID", "HinhSanPhamIDId", "LoaiSPID", "MoTa", "NSXID", "NgaySanXuat", "Ten" },
+                columns: new[] { "Id", "GiaSP", "HinhAnhId", "HinhSanPhamIdId", "LoaiSPId", "MoTa", "NSXId", "NgaySanXuat", "Ten" },
                 values: new object[,]
                 {
                     { 1, 120000f, 1, null, 4, "Rất ngon và rẻ", 1, new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cá Thu" },
@@ -805,11 +805,11 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Shipper",
-                columns: new[] { "Id", "BienSo", "CMND", "DongXe", "KichHoat", "UserID", "UserId" },
+                columns: new[] { "Id", "BienSo", "CMND", "DongXe", "KichHoat", "UserId" },
                 values: new object[,]
                 {
-                    { 2, "00A0-0000", "000111222", "Honda Wave", true, 0, 5 },
-                    { 1, "85D2-12111", "18277821", "Wave", true, 0, 3 }
+                    { 2, "00A0-0000", "000111222", "Honda Wave", true, 5 },
+                    { 1, "85D2-12111", "18277821", "Wave", true, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -837,7 +837,7 @@ namespace DctAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "DanhGia",
-                columns: new[] { "ID", "DonHangId", "LoaiDGId", "NgayDanhGia", "NoiDung", "SoDiem" },
+                columns: new[] { "Id", "DonHangId", "LoaiDGId", "NgayDanhGia", "NoiDung", "SoDiem" },
                 values: new object[,]
                 {
                     { 1, 1, 1, new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tốt", 5 },
@@ -855,9 +855,9 @@ namespace DctAPI.Migrations
                 column: "SanPhamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CuaHang_LoaiCHID",
+                name: "IX_CuaHang_LoaiCHId",
                 table: "CuaHang",
-                column: "LoaiCHID");
+                column: "LoaiCHId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CuaHang_UserId",
@@ -975,19 +975,19 @@ namespace DctAPI.Migrations
                 column: "DiaChiId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SanPham_HinhSanPhamIDId",
+                name: "IX_SanPham_HinhSanPhamIdId",
                 table: "SanPham",
-                column: "HinhSanPhamIDId");
+                column: "HinhSanPhamIdId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SanPham_LoaiSPID",
+                name: "IX_SanPham_LoaiSPId",
                 table: "SanPham",
-                column: "LoaiSPID");
+                column: "LoaiSPId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SanPham_NSXID",
+                name: "IX_SanPham_NSXId",
                 table: "SanPham",
-                column: "NSXID");
+                column: "NSXId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shipper_UserId",
