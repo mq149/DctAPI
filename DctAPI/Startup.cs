@@ -44,6 +44,13 @@ namespace DctAPI
             services.AddScoped<IDonHangRepository, DonHangRepository>();
             services.AddScoped<IShipperRepository, ShipperRepository>();
             services.AddScoped<ISanPhamRepository, SanPhamRepository>();
+            services.AddScoped<IChiTietDonHangRepository, ChiTietDonHangRepository>();
+            services.AddScoped<IDiaChiRepository, DiaChiRepository>();
+            services.AddScoped<IPhuongThucThanhToanRepository, PhuongThucThanhToanRepository>();
+            services.AddScoped<ITrangThaiDonHangRepository, TrangThaiDonHangRepository>();
+            services.AddScoped<ICuaHangRepository, CuaHangRepository>();
+            services.AddScoped<IKhachHangRepository, KhachHangRepository>();
+
 
             //Json serializer
             services.AddControllersWithViews()

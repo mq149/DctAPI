@@ -99,21 +99,62 @@ namespace DctAPI.Models
 
             modelBuilder.Entity<KhoaDaoTaoEntity>()
                 .HasData(
-                    new KhoaDaoTaoEntity { ID = 1,
+                    new KhoaDaoTaoEntity { Id = 1,
                         NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
                         HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
                         URL = "https://www.youtube.com/embed/LcRG816Syvc"
                     }
                 );
+            modelBuilder.Entity<HinhAnhEntity>()
+                 .HasData(
+                     new HinhAnhEntity
+                     {
+                         Id = 1,
+                         Ten = "shorts",
+                         Url = "https://i.ibb.co/4ZN1Rqd/shorts.png"
+                     },
+                       new HinhAnhEntity
+                       {
+                           Id = 2,
+                           Ten = "trousers",
+                           Url = "https://i.ibb.co/JpWst3h/trousers.png"
+                       },
+                         new HinhAnhEntity
+                         {
+                             Id = 3,
+                             Ten = "shirt",
+                             Url = "https://i.ibb.co/KDm7xG1/shirt.png"
+                         },
+                           new HinhAnhEntity
+                           {
+                               Id = 4,
+                               Ten = "tie",
+                               Url = "https://i.ibb.co/YpxxV8L/tie.png"
+                           },
+                             new HinhAnhEntity
+                             {
+                                 Id = 5,
+                                 Ten = "sweater",
+                                 Url = "https://i.ibb.co/hY1ft7r/sweater1.png"
+                             },
+                               new HinhAnhEntity
+                               {
+                                   Id = 6,
+                                   Ten = "shoes",
+                                   Url = "https://i.ibb.co/djqfkpN/shoes.png"
+                               }
+
+                 );
+
 
             modelBuilder.Entity<LoaiSanPhamEntity>()
                .HasData(
 
-                    new LoaiSanPhamEntity { ID = 1, Ten = "Thức ăn", },
-                    new LoaiSanPhamEntity { ID = 2, Ten = "Nước Giải Khát" },
-                    new LoaiSanPhamEntity { ID = 3, Ten = "Thực phẩm chức năng" },
-                    new LoaiSanPhamEntity { ID = 4, Ten = "Hải sản" },
-                    new LoaiSanPhamEntity { ID = 5, Ten = "Đồ dùng" }
+                    new LoaiSanPhamEntity {Id=1,  Ten = "Thức ăn", },
+                    new LoaiSanPhamEntity { Id = 2, Ten = "Nước Giải Khát" },
+                    new LoaiSanPhamEntity { Id = 3, Ten = "Thực phẩm chức năng" },
+                    new LoaiSanPhamEntity { Id = 4, Ten = "Hải sản" },
+                    new LoaiSanPhamEntity { Id = 5, Ten = "Đồ dùng" }
                );
             modelBuilder.Entity<DiaChiEntity>()
                .HasData(
@@ -182,43 +223,43 @@ namespace DctAPI.Models
 
             modelBuilder.Entity<NhaSanXuatEntity>()
               .HasData(
-                   new NhaSanXuatEntity { ID = 1, Ten = "Công ty TNHH X", DiaChiId = 1 },
-                   new NhaSanXuatEntity { ID = 2, Ten = "Công ty Y", DiaChiId = 2 },
-                   new NhaSanXuatEntity { ID = 3, Ten = "Công ty Z", DiaChiId = 3 }
+                   new NhaSanXuatEntity { Id = 1, Ten = "Công ty TNHH X", DiaChiId = 1 },
+                   new NhaSanXuatEntity { Id = 2, Ten = "Công ty Y", DiaChiId = 2 },
+                   new NhaSanXuatEntity { Id = 3, Ten = "Công ty Z", DiaChiId = 3 }
                   );
 
             modelBuilder.Entity<SanPhamEntity>()
               .HasData(
                    new SanPhamEntity
                    {
-                       ID = 1,
+                       Id = 1,
                        Ten = "Cá Thu",
                        GiaSP = 120000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "Rất ngon và rẻ",
-                       HinhAnhID = 1,
+                       HinhSanPhamID = 1,
                        LoaiSPID = 4,
                        NSXID = 1
                    },
                    new SanPhamEntity
                    {
-                       ID = 2,
+                       Id = 2,
                        Ten = "Cà Rốt",
                        GiaSP = 12000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "Không ngon đâu",
-                       HinhAnhID = 1,
+                       HinhSanPhamID = 1,
                        LoaiSPID = 1,
                        NSXID = 1
                    },
                    new SanPhamEntity
                    {
-                       ID = 3,
+                       Id = 3,
                        Ten = "Vitamin C",
                        GiaSP = 120000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "C",
-                       HinhAnhID = 1,
+                       HinhSanPhamID = 1,
                        LoaiSPID = 3,
                        NSXID = 1
                    }
@@ -311,8 +352,8 @@ namespace DctAPI.Models
 
             modelBuilder.Entity<LoaiDanhGiaEntity>()
                 .HasData(
-                    new LoaiDanhGiaEntity { ID = 1, Ten = "Shipper" },
-                    new LoaiDanhGiaEntity { ID = 2, Ten = "Cửa hàng" });
+                    new LoaiDanhGiaEntity { Id = 1, Ten = "Shipper" },
+                    new LoaiDanhGiaEntity { Id = 2, Ten = "Cửa hàng" });
 
             modelBuilder.Entity<LoaiCuaHangEntity>()
                 .HasData(
@@ -423,9 +464,10 @@ namespace DctAPI.Models
 
             modelBuilder.Entity<DanhGiaEntity>()
                 .HasData(
-                    new DanhGiaEntity { ID = 1, DonHangId = 1, LoaiDGId = 1, NoiDung = "Tốt", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 5 },
-                    new DanhGiaEntity { ID = 2, DonHangId = 1, LoaiDGId = 2, NoiDung = "Tạm được", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 4 }
+                    new DanhGiaEntity { Id = 1, DonHangId = 1, LoaiDGId = 1, NoiDung = "Tốt", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 5 },
+                    new DanhGiaEntity { Id = 2, DonHangId = 1, LoaiDGId = 2, NoiDung = "Tạm được", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 4 }
                     );
+          
         }
-}
+    }
 }

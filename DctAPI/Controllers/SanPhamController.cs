@@ -26,9 +26,15 @@ namespace DctAPI.Controllers
         {
             return  SanPhamRepo.GetAll();
         }
-        public List<SanPhamEntity> GetAllSanPham()
+        [HttpGet("TatCaSanPham")]
+        public IEnumerable<SanPhamEntity> GetAllSanPham()
         {
-            return (List<SanPhamEntity>)SanPhamRepo.GetAllSanPham();
+            return SanPhamRepo.GetAllSanPham();
+        }
+        [HttpGet("SanPham/{ID}")]
+        public IEnumerable<SanPhamEntity> GetSanPhamID(int ID)
+        {
+            return SanPhamRepo.GetSanPhamID(ID);
         }
         // GET api/<SanPhamController>/5
         [HttpGet("{id}")]

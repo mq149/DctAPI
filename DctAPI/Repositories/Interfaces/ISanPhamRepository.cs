@@ -9,6 +9,8 @@ namespace DctAPI.Repositories.Interfaces
     public interface ISanPhamRepository: IRepositoryBase<SanPhamEntity>
     {
         public Task<SanPhamEntity> PostSanPham(SanPhamEntity sp);
-        public List<SanPhamEntity> GetAllSanPham();
+        public IEnumerable<SanPhamEntity> GetAllSanPham();
+        public IEnumerable<SanPhamEntity> GetSanPhamID(int id);
+        
     }
 }

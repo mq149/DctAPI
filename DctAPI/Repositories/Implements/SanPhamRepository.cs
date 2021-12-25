@@ -33,13 +33,24 @@ namespace DctAPI.Repositories.Implements
             }
             return sp;
         }
-        public List<SanPhamEntity> GetAllSanPham()
+        public IEnumerable<SanPhamEntity> GetAllSanPham()
         {
-            return (List<SanPhamEntity>)context.SanPham
-               .Include(sp => sp.HinhSanPhamID)
+            return context.SanPham
+              
+               .Include(sp => sp.HinhSanPham)
                .Include(sp => sp.LoaiSP)
                .Include(sp => sp.NSX)
                .ToList();
         }
+        public IEnumerable<SanPhamEntity> GetSanPhamID(int id)
+        {
+            return context.SanPham
+            .Where(sp => sp.Id == id)
+              .Include(sp => sp.HinhSanPham)
+              .Include(sp => sp.LoaiSP)
+              .Include(sp => sp.NSX)
+              .ToList();
+        }
+        
     }
     }

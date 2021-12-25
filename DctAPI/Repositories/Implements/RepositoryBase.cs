@@ -29,7 +29,7 @@ namespace DctAPI.Repositories.Implements
 
         public  void Create(T entity)
         {
-             context.Set<T>().Add(entity);
+       context.Set<T>().AddAsync(entity);
          
         }
 

@@ -9,7 +9,7 @@ namespace DctApi.Shared.Models
     public class DanhGiaEntity
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
         [ForeignKey("DonHang")]
         public int DonHangId { get; set; }
