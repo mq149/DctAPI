@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DctApi.Shared.Models;
 using DctAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using DctAPI.Repositories.Implements;
+using DctAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,6 +45,21 @@ namespace DctAPI
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
+
+            services.AddScoped<IDonHangRepository, DonHangRepository>();
+            services.AddScoped<IShipperRepository, ShipperRepository>();
+            services.AddScoped<ISanPhamRepository, SanPhamRepository>();
+
+            services.AddScoped<IChiTietDonHangRepository, ChiTietDonHangRepository>();
+            services.AddScoped<IDiaChiRepository, DiaChiRepository>();
+            services.AddScoped<IPhuongThucThanhToanRepository, PhuongThucThanhToanRepository>();
+            services.AddScoped<ITrangThaiDonHangRepository, TrangThaiDonHangRepository>();
+            services.AddScoped<ICuaHangRepository, CuaHangRepository>();
+            services.AddScoped<IKhachHangRepository, KhachHangRepository>();
+
+
+            services.AddScoped<IDanhGiaRepository, DanhGiaRepository>();
+
 
             //Json serializer
             services.AddControllersWithViews()

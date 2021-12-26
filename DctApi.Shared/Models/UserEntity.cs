@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DctApi.Shared.Models
@@ -18,9 +19,10 @@ namespace DctApi.Shared.Models
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
-        public HinhAnhEntity AvatarId { get; set; }
-        public DiaChiEntity DiaChiId { get; set; }
-
+        public HinhAnhEntity Avatar { get; set; }
+        [ForeignKey("DiaChi")]
+        public int DiaChiId { get; set; }
+        public DiaChiEntity DiaChi { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
         [Timestamp]

@@ -8,9 +8,9 @@ namespace DctApi.Shared.Models
     public class NhaSanXuatEntity
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Ten { get; set; }
-
+        public int DiaChiId { get; set; }
         public DiaChiEntity DiaChi { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
