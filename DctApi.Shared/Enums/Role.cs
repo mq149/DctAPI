@@ -13,8 +13,8 @@ namespace DctApi.Shared.Enums {
 
     public class RoleName {
         public const string Admin = "Admin";
-        public const string Store = "Store";
+        public const string Store = "CuaHang";
         public const string Shipper= "Shipper";
-        public const string Customer = "Customer";
+        public const string Customer = "KhachHang";
     }
 }

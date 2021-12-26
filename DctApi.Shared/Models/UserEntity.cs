@@ -16,10 +16,12 @@ namespace DctApi.Shared.Models
         [Required(ErrorMessage = Config.ErrorMessage.sdtRequired),
             RegularExpression(Config.Regex.sdt, ErrorMessage = Config.ErrorMessage.sdtRegex)]
         public string SDT { get; set; }
+
+        public override string Email { get; set ; }
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
-        public HinhAnhEntity Avatar { get; set; }
+        public HinhAnhEntity AvatarId { get; set; }
         [ForeignKey("DiaChi")]
         public int DiaChiId { get; set; }
         public DiaChiEntity DiaChi { get; set; }

@@ -110,7 +110,7 @@ namespace DctAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,UserManager<UserEntity> _userManage,RoleManager<RoleEntity> _roleManage)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,UserManager<UserEntity> _userManage,RoleManager<RoleEntity> _roleManage,ApplicationDbContext _context)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -129,7 +129,7 @@ namespace DctAPI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            SeedData.Seed(_userManage,_roleManage);
+            SeedData.Seed(_context,_userManage,_roleManage);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
