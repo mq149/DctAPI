@@ -8,7 +8,7 @@ namespace DctApi.Shared.Models
     public class KhoaDaoTaoEntity
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string NoiDung { get; set; }
         public string HuongDan { get; set; }
         public string URL { get; set; }

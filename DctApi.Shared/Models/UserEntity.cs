@@ -1,5 +1,5 @@
 ﻿using DctApi.Shared.Common;
-using DctApi.Shared.Enums;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,27 +8,20 @@ using System.Text;
 
 namespace DctApi.Shared.Models
 {
-    public class UserEntity
+    public class UserEntity : IdentityUser<int>
     {
         [Key]
-        public int Id { get; set; }
-        [Required]
-        [ForeignKey("Role")]
-        public int RoleId { get; set; }
-        public RoleEntity Role { get; set; }
+        public override int Id { get; set; }
+
         [Required(ErrorMessage = Config.ErrorMessage.sdtRequired),
             RegularExpression(Config.Regex.sdt, ErrorMessage = Config.ErrorMessage.sdtRegex)]
         public string SDT { get; set; }
-        [RegularExpression(Config.Regex.email,
-            ErrorMessage = Config.ErrorMessage.emailRegex)]
-        public string Email { get; set; }
-        [Required]
-        public string MatKhau { get; set; }
-        [Required]
+
+        public override string Email { get; set ; }
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
-        public HinhAnhEntity Avatar { get; set; }
+        public HinhAnhEntity AvatarId { get; set; }
         [ForeignKey("DiaChi")]
         public int DiaChiId { get; set; }
         public DiaChiEntity DiaChi { get; set; }
