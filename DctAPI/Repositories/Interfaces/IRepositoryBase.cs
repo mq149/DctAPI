@@ -9,9 +9,10 @@ namespace DctAPI.Repositories.Interfaces
     {
         IEnumerable<T> GetAll();
         Task<T> Find(int id);
-       
-        void Update(T entity);
-        void Delete(T entity);
-        void Create(T entity);
+
+        public void Create(T entity);
+        public void Update(T entity);
+        public void Delete(T entity);
+
     }
 }

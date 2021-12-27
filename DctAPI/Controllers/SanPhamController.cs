@@ -14,27 +14,28 @@ namespace DctAPI.Controllers
     [ApiController]
     public class SanPhamController : ControllerBase
     {
-        private readonly ISanPhamRepository SanPhamRepo;
+
+        private readonly ISanPhamRepository sanPhamRepo;
         public SanPhamController(ISanPhamRepository SanPhamRepo)
         {
-            this.SanPhamRepo = SanPhamRepo;
+            this.sanPhamRepo = SanPhamRepo;
           
         }
         // GET: api/<SanPhamController>
         [HttpGet]
         public IEnumerable<SanPhamEntity> Get()
         {
-            return  SanPhamRepo.GetAll();
+            return  sanPhamRepo.GetAll();
         }
         [HttpGet("TatCaSanPham")]
         public IEnumerable<SanPhamEntity> GetAllSanPham()
         {
-            return SanPhamRepo.GetAllSanPham();
+            return sanPhamRepo.GetAllSanPham();
         }
         [HttpGet("SanPham/{ID}")]
         public IEnumerable<SanPhamEntity> GetSanPhamID(int ID)
         {
-            return SanPhamRepo.GetSanPhamID(ID);
+            return sanPhamRepo.GetSanPhamID(ID);
         }
         // GET api/<SanPhamController>/5
         [HttpGet("{id}")]
@@ -53,9 +54,62 @@ namespace DctAPI.Controllers
         
 
         // DELETE api/<SanPhamController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+    
+   
+
+     
+        // GET: api/<SanPhamController>
+  
+        // GET api/<SanPhamController>/5
+        [HttpGet("TenSanPham")]
+        public List<SanPhamEntity> GetSanPhamByName(string name)
         {
+            return sanPhamRepo.GetSanPhamByName(name);
+        }
+        [HttpGet("IDSanPham")]
+        public SanPhamEntity GetSanPhamById(int id)
+        {
+            return sanPhamRepo.GetSanPhamById(id);
+        }
+
+        // POST api/<SanPhamController>
+        [HttpPost("ThemSanPham")]
+        public async Task<ActionResult<SanPhamEntity>> Create([FromBody] SanPhamEntity sp)
+        {
+            var sanpham=await sanPhamRepo.CreateSanPham(sp);
+            //khoi can kiem tra id do da tu tang
+            if(sanpham!=null)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        // PUT api/<SanPhamController>/5
+        [HttpPut("SuaSanPham")]
+        public bool Update(SanPhamEntity sp)
+        {
+            //FK phai co: LoaiSPID, NSXID
+            var sanpham =  sanPhamRepo.UpdateSanPham(sp);
+            if (sanpham)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        // DELETE api/<SanPhamController>/5
+        [HttpDelete("XoaSanPham")]
+        public bool DeleteSanPham(SanPhamEntity sp)
+        {
+            //bool sanpham = sanPhamRepo.DeleteSanPham(sp);
+            //if (sanpham)
+            //{
+            //    return true;
+            //}
+            return false;
+
         }
     }
 }

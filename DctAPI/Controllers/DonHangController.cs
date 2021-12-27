@@ -50,7 +50,8 @@ namespace DctAPI.Controllers
         [HttpGet]
         public IEnumerable<DonHangEntity> Get()
         {
-            return donHangRepo.GetAll();
+            return donHangRepo.GetAllDonHang();
+            //return donHangRepo.GetAll();
         }
 
         // GET: api/<DonHangController>
@@ -98,8 +99,8 @@ namespace DctAPI.Controllers
             var shipper = await shipperRepo.Find(shipperId);
             if (donHang != null && shipper != null)
             {
-                if (donHang.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan 
-                    && shipper.KichHoat 
+                if (donHang.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan
+                    && shipper.KichHoat
                     && donHang.ShipperId == null)
                 {
                     var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
@@ -140,9 +141,9 @@ namespace DctAPI.Controllers
             try
             {//kiểm trác khách hàng có tồn tại không
                 var khachHang = await khachHangRepo.Find(dh.KhachHangId);
-                if(khachHang == null)
+                if (khachHang == null)
                 {
-                   return BadRequest(1);
+                    return BadRequest(1);
                 }
                 var cuahang = await cuahangRepo.Find(dh.CuaHangId);
                 // kiểm tra cửa hàng có tồn tại không
@@ -162,7 +163,7 @@ namespace DctAPI.Controllers
                     dh.DiaChiGiaoId = await diachiRepo.TaoDiaChi(dh.DiaChiGiao);
 
                 }
-               
+
                 dh.TTDHId = 1;
                 var listSP = dh.ListSanPham;
                 //tạo danh sách sản phẩm null của đơn hàng sau khi đã gán vào listSP
@@ -186,8 +187,8 @@ namespace DctAPI.Controllers
                     }
                 }
                 else { return BadRequest(4); }
-               
-              
+
+
                 return Ok(1);
             }
             catch (IndexOutOfRangeException e)
@@ -195,8 +196,38 @@ namespace DctAPI.Controllers
                 return BadRequest(e.Message);
             }
 
-            
 
+        }
+
+        //GET DonHangByUser
+        [HttpGet("DonHangByUser")]
+        public List<DonHangEntity> GetAllDonHang(int user)
+        {
+            var donhangs = donHangRepo.GetAllDonHangByUser(user);
+            return donhangs;
+        }
+
+        [HttpGet("DonHangDangXuLy")]
+        public List<DonHangEntity> GetDonHangDangXuLy(int user)
+        {
+            var donhangs = donHangRepo.GetAllDonHangByUser(user);
+            List<DonHangEntity> dangxuly = new List<DonHangEntity>();
+            foreach(var processing in donhangs)
+            {
+                if(processing.TTDHId !=(int)TrangThaiDonHang.DaGiaoHang && processing.TTDHId != (int)TrangThaiDonHang.DaHuy)
+                {
+                    dangxuly.Add(processing);
+                }    
+            }    
+            return dangxuly;
+        }
+
+        //GET DonHangByUserById
+        [HttpGet("DonHangByUserById")]
+        public DonHangEntity GetDonHang(int user, int id)
+        {
+            var donhang = donHangRepo.GetDonHang(user, id);
+            return donhang;
 
         }
     }
