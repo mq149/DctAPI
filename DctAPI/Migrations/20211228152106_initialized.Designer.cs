@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211226150417_initialized")]
+    [Migration("20211228152106_initialized")]
     partial class initialized
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -702,10 +702,7 @@ namespace DctAPI.Migrations
                     b.Property<float>("GiaSP")
                         .HasColumnType("real");
 
-                    b.Property<int>("HinhAnhId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("HinhSanPhamId")
+                    b.Property<int>("HinhSanPhamId")
                         .HasColumnType("integer");
 
                     b.Property<int>("LoaiSPId")
@@ -1241,7 +1238,9 @@ namespace DctAPI.Migrations
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "HinhSanPham")
                         .WithMany()
-                        .HasForeignKey("HinhSanPhamId");
+                        .HasForeignKey("HinhSanPhamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DctApi.Shared.Models.LoaiSanPhamEntity", "LoaiSP")
                         .WithMany()

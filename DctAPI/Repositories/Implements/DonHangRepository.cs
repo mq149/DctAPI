@@ -132,11 +132,7 @@ namespace DctAPI.Repositories.Implements
                 .Include(x=>x.DiaChiGiao)
                 .Include(x=> x.PTTT)
                 .Include(x=>x.TTDH)
-<<<<<<< HEAD
 
-=======
-             
->>>>>>> master
                 .OrderBy(dh => dh.NgayMuaHang)
                 .ToList();
                 //.ToListAsync();

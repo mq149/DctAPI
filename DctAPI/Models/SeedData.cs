@@ -357,7 +357,7 @@ namespace DctAPI.Models {
                     NgaySanXuat = new DateTime(2015, 12, 25),
                     MoTa = "Rất ngon và rẻ",
 
-                    HinhAnhId = 1,
+                    HinhSanPhamId = 1,
                     LoaiSPId = 4,
                     NSXId = 1
 
@@ -369,7 +369,7 @@ namespace DctAPI.Models {
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "Không ngon đâu",
 
-                       HinhAnhId = 1,
+                       HinhSanPhamId = 1,
                        LoaiSPId = 1,
                        NSXId = 2
                    },
@@ -380,7 +380,7 @@ namespace DctAPI.Models {
                        NgaySanXuat = new DateTime(2015, 12, 25),
                        MoTa = "C",
 
-                       HinhAnhId = 1,
+                       HinhSanPhamId = 1,
                        LoaiSPId = 3,
                        NSXId = 1
 
