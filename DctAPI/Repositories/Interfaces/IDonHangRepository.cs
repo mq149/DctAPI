@@ -11,18 +11,25 @@ namespace DctAPI.Repositories.Interfaces
     public interface IDonHangRepository : IRepositoryBase<DonHangEntity>
     {
         public List<DonHangEntity> GetChoXacNhan();
-        public Task<DonHangEntity> GetDonHang(int id);
+
         public Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper);
+
         public Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang);
 
         public Task<DonHangEntity> KhachHangDatHang(DonHangEntity dh);
+
         public Task<DonHangEntity> PostDonHang(DonHangEntity dh);
 
-        public DonHangEntity GetDonHang(int user, int id);
-        //public  Task<DonHangEntity> GetDonHang(int user, int id);
-        public List<DonHangEntity> GetAllDonHangByUser(int user);
-        //public Task<ActionResult<IEnumerable<DonHangEntity>>> GetAllDonHangByUser(int user);
-        public List<DonHangEntity> GetAllDonHang();
+        public Task<DonHangEntity> GetDonHang(int id);
+        public Task<List<DonHangEntity>> GetAllDonHang();
+
+        public Task<List<DonHangEntity>> GetAllDonHangByUser(int user);
+
+        public Task<List<DonHangEntity>> GetAllDonHangByShipper(int shipper);
+
+        public Task<List<DonHangEntity>> GetAllDonHangByCuaHang(int cuahang);
+        public Task<DonHangEntity> ShipperGiaoThanhCong(DonHangEntity donHang, ShipperEntity shipper);
+        public Task<DonHangEntity> ShipperDangGiaoHang(DonHangEntity donHang, ShipperEntity shipper);
 
     }
 }

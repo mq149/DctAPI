@@ -61,15 +61,15 @@ namespace DctAPI.Controllers
         // GET: api/<SanPhamController>
   
         // GET api/<SanPhamController>/5
-        [HttpGet("TenSanPham")]
-        public List<SanPhamEntity> GetSanPhamByName(string name)
+        [HttpGet("SanPhamTheoTen")]
+        public async Task<List<SanPhamEntity>> GetSanPhamByName(string name)
         {
-            return sanPhamRepo.GetSanPhamByName(name);
+            return await sanPhamRepo.GetSanPhamByName(name);
         }
-        [HttpGet("IDSanPham")]
-        public SanPhamEntity GetSanPhamById(int id)
+        [HttpGet("SanPhamTheoId")]
+        public async Task<SanPhamEntity> GetSanPhamById(int id)
         {
-            return sanPhamRepo.GetSanPhamById(id);
+            return await sanPhamRepo.GetSanPhamById(id);
         }
 
         // POST api/<SanPhamController>
@@ -87,11 +87,11 @@ namespace DctAPI.Controllers
 
         // PUT api/<SanPhamController>/5
         [HttpPut("SuaSanPham")]
-        public bool Update(SanPhamEntity sp)
+        public async Task<bool> Update(SanPhamEntity sp)
         {
             //FK phai co: LoaiSPID, NSXID
-            var sanpham =  sanPhamRepo.UpdateSanPham(sp);
-            if (sanpham)
+            var sanpham =  await sanPhamRepo.UpdateSanPham(sp);
+            if (sanpham!=null)
             {
                 return true;
             }
@@ -101,13 +101,13 @@ namespace DctAPI.Controllers
 
         // DELETE api/<SanPhamController>/5
         [HttpDelete("XoaSanPham")]
-        public bool DeleteSanPham(SanPhamEntity sp)
+        public async Task<bool> DeleteSanPham(int id)
         {
-            //bool sanpham = sanPhamRepo.DeleteSanPham(sp);
-            //if (sanpham)
-            //{
-            //    return true;
-            //}
+            var sanpham = await sanPhamRepo.DeleteSanPham(id);
+            if (sanpham != null)
+            {
+                return true;
+            }
             return false;
 
         }
