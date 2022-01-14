@@ -25,13 +25,15 @@ namespace DctAPI.Controllers
     {
         private readonly UserManager<UserEntity> _userManage;
         private readonly RoleManager<RoleEntity> _roleManage;
+        private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public AuthenticateController(UserManager<UserEntity> userManager, RoleManager<RoleEntity> roleManage, IConfiguration configuration)
+        public AuthenticateController(ApplicationDbContext context,UserManager<UserEntity> userManager, RoleManager<RoleEntity> roleManage, IConfiguration configuration)
         {
             _userManage = userManager;
             _roleManage = roleManage;
             _configuration = configuration;
+            _context = context;
         }
 
         [HttpPost]
@@ -55,6 +57,62 @@ namespace DctAPI.Controllers
                 await _roleManage.CreateAsync(new RoleEntity() { Id = (int)Role.KhachHang, Name = "Customer", Ten = "Khach Hang" });
             }
             await _userManage.AddToRoleAsync(userNew,RoleName.Customer);
+            _context.Add(new KhachHangEntity { UserId =userNew.Id, CMND=""});
+            _context.SaveChanges();
+            return Ok(new Response { status = "Success", message = "User created successfully" });
+
+        }
+
+        [HttpPost]
+        [Route("RegisterShipper")]
+        public async Task<IActionResult> RegisterShipper([FromBody] RegisteModel model) {
+            var userExits = await _userManage.FindByNameAsync(model.username);
+            if (userExits != null) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exits" });
+            }
+            UserEntity userNew = new UserEntity() {
+                UserName = model.username,
+                SDT = model.username,
+                Email = model.email,
+            };
+            var result = await _userManage.CreateAsync(userNew, model.password);
+            if (!result.Succeeded) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Create user faild" });
+            }
+            //set role for user
+            if (!await _roleManage.RoleExistsAsync(RoleName.Shipper)) {
+                await _roleManage.CreateAsync(new RoleEntity() { Id = (int)Role.Shipper, Name = "Shipper", Ten = "Shipper" });
+            }
+            await _userManage.AddToRoleAsync(userNew, RoleName.Shipper);
+            _context.Add(new ShipperEntity {UserId = userNew.Id, KichHoat = false, CMND = "", BienSo = "", DongXe = "" });
+            _context.SaveChanges();
+            return Ok(new Response { status = "Success", message = "User created successfully" });
+
+        }
+
+        [HttpPost]
+        [Route("RegisterStore")]
+        public async Task<IActionResult> RegisterStore([FromBody] RegisteModel model) {
+            var userExits = await _userManage.FindByNameAsync(model.username);
+            if (userExits != null) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exits" });
+            }
+            UserEntity userNew = new UserEntity() {
+                UserName = model.username,
+                SDT = model.username,
+                Email = model.email,
+            };
+            var result = await _userManage.CreateAsync(userNew, model.password);
+            if (!result.Succeeded) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Create user faild" });
+            }
+            //set role for user
+            if (!await _roleManage.RoleExistsAsync(RoleName.Store)) {
+                await _roleManage.CreateAsync(new RoleEntity() { Id = (int)Role.CuaHang, Name = "CuaHang", Ten = "CuaHang" });
+            }
+            await _userManage.AddToRoleAsync(userNew, RoleName.Shipper);
+            _context.Add(new CuaHangEntity {UserId = userNew.Id,TenCuaHang = "", TrangThaiKichHoat = false });
+            _context.SaveChanges();
             return Ok(new Response { status = "Success", message = "User created successfully" });
 
         }
@@ -92,6 +150,7 @@ namespace DctAPI.Controllers
                     DiaChiId = userExits.DiaChiId,
                     username=userExits.SDT,
                     password=userExits.PasswordHash,
+                    email=userExits.Email,
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     role=userRole,
                     expires=1,
@@ -102,7 +161,7 @@ namespace DctAPI.Controllers
 
         [HttpPost]
         [Route("LoginAccessToken")]
-        public async Task<UserEntity> LoginAccessToken(string accessToken) {
+        public async Task<IActionResult> LoginAccessToken([FromBody]string accessToken) {
             try {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]);
@@ -121,14 +180,30 @@ namespace DctAPI.Controllers
 
                 if (jwtSecurityToken != null && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase)) {
                     var userId = principle.FindFirst(ClaimTypes.Name)?.Value;
-                    return await _userManage.FindByNameAsync(userId);
+                    //return await _userManage.FindByNameAsync(userId);
+                    var userExits= await _userManage.FindByNameAsync(userId);
+                    var userRole = await _userManage.GetRolesAsync(userExits);
+                    return Ok(new {
+                        Id = userExits.Id,
+                        SDT = userExits.SDT,
+                        HoTen = userExits.HoTen,
+                        GioiTinh = userExits.GioiTinh,
+                        NgaySinh = userExits.NgaySinh,
+                        AvatarId = userExits.AvatarId,
+                        DiaChiId = userExits.DiaChiId,
+                        username = userExits.SDT,
+                        email=userExits.Email,
+                        password = userExits.PasswordHash,
+                        role = userRole,
+                    });
                 }
             }
             catch (Exception) {
-                return new UserEntity();
+                //return new UserEntity();
+                return Unauthorized();
             }
 
-            return new UserEntity();
+            return Unauthorized();
         }
     }
 }
