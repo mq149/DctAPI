@@ -2,6 +2,7 @@
 using DctApi.Shared.Models;
 using DctAPI.Models;
 using DctAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,8 @@ namespace DctAPI.Controllers
             return donHangRepo.GetAll();
         }
 
-        // GET: api/<DonHangController>
+        [EnableCors("AllowOrigin")]
+        // GET: api/<DonHangController>/ChoXacNhan
         [HttpGet("ChoXacNhan")]
         public IEnumerable<DonHangEntity> GetChoXacNhan()
         {
@@ -43,9 +45,9 @@ namespace DctAPI.Controllers
 
         // GET api/<DonHangController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<DonHangEntity> Get(int id)
         {
-            return "value";
+            return await donHangRepo.GetDonHang(id);
         }
 
         // POST api/<DonHangController>
@@ -66,6 +68,7 @@ namespace DctAPI.Controllers
         {
         }
 
+        [EnableCors("AllowOrigin")]
         // POST api/<DonHangController>/{id}/XacNhan/{shipperId}
         [HttpPost("{id}/ShipperXacNhan/{shipperId}")]
         public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
@@ -81,13 +84,14 @@ namespace DctAPI.Controllers
                     var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
                     if (_donHang != null)
                     {
-                        return Ok();
+                        return Ok(_donHang);
                     }
                 }
             }
-            return BadRequest();
+            return BadRequest("Yeu cau khong hop le");
         }
 
+        [EnableCors("AllowOrigin")]
         // POST api/<DonHangController>/{id}/Huy/{shipperId}
         [HttpPost("{id}/ShipperHuy/{shipperId}")]
         public async Task<ActionResult<DonHangEntity>> ShipperHuyDonHang(int id, int shipperId)
@@ -103,11 +107,11 @@ namespace DctAPI.Controllers
                     var _donHang = await donHangRepo.ShipperHuyDonHang(donHang);
                     if (_donHang != null)
                     {
-                        return Ok();
+                        return Ok(_donHang);
                     }
                 }
             }
-            return BadRequest();
+            return BadRequest("Yeu cau khong hop le");
         }
     }
 }

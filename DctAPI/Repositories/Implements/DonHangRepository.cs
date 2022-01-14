@@ -22,7 +22,7 @@ namespace DctAPI.Repositories.Implements
         public List<DonHangEntity> GetChoXacNhan()
         {
             return context.DonHang
-                .Where(dh => dh.ShipperId == null)
+                .Where(dh => dh.ShipperId == null && dh.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan)
                 .Include(dh => dh.CuaHang)
                     .ThenInclude(ch => ch.User.DiaChi)
                 .Include(dh => dh.KhachHang)
@@ -38,7 +38,9 @@ namespace DctAPI.Repositories.Implements
             return await context.DonHang
                 .Where(dh => dh.Id == id)
                 .Include(dh => dh.CuaHang)
+                    .ThenInclude(ch => ch.User.DiaChi)
                 .Include(dh => dh.KhachHang)
+                    .ThenInclude(ch => ch.User.DiaChi)
                 .Include(dh => dh.DiaChiGiao)
                 .Include(dh => dh.PTTT)
                 .Include(dh => dh.TTDH)
@@ -58,7 +60,7 @@ namespace DctAPI.Repositories.Implements
             {
                 return null;
             }
-            return donHang;
+            return await GetDonHang(donHang.Id);
         }
 
         public async Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang)
@@ -73,7 +75,7 @@ namespace DctAPI.Repositories.Implements
             {
                 return null;
             }
-            return donHang;
+            return await GetDonHang(donHang.Id);
         }
     }
 }
