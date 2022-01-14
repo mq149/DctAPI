@@ -36,7 +36,8 @@ namespace DctApi.Shared.Models
         public HinhAnhEntity GiayDKXMatTruoc { get; set; }
         [Required]
         public HinhAnhEntity GiayDKXMatSau { get; set; }
-        public int NamSxXe { get; set; }
+        [Required]
+        public int NamSXXe { get; set; }
         [Required]
         public HinhAnhEntity BHXMatTruoc { get; set; }
         [Required]

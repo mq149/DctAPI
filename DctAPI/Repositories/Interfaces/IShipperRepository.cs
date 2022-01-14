@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DctAPI.Repositories.Interfaces
 {
-    public interface IShipperRepository : IUserRepository
+    public interface IShipperRepository : IRepositoryBase<ShipperEntity>
     {
     }
 }
