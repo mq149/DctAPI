@@ -23,7 +23,7 @@ namespace DctApi.Shared.Models
         public DateTime? NgaySinh { get; set; }
         public HinhAnhEntity AvatarId { get; set; }
         [ForeignKey("DiaChi")]
-        public int DiaChiId { get; set; }
+        public int? DiaChiId { get; set; }
         public DiaChiEntity DiaChi { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
