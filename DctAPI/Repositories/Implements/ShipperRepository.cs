@@ -1,6 +1,7 @@
 ﻿using DctApi.Shared.Models;
 using DctAPI.Models;
 using DctAPI.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace DctAPI.Repositories.Implements
         {
             this.context = context;
         }
-
+        public async Task<ShipperEntity> GetShipper(int shipper)
+        {
+            return await context.Shipper.Where(sp => sp.Id == shipper)
+                .Include(x => x.User)
+                .FirstOrDefaultAsync();
+                
+        }
     }
 }

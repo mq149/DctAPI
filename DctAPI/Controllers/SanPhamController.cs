@@ -64,12 +64,18 @@ namespace DctAPI.Controllers
         [HttpGet("SanPhamTheoTen")]
         public async Task<List<SanPhamEntity>> GetSanPhamByName(string name)
         {
-            return await sanPhamRepo.GetSanPhamByName(name);
+            var sp =  await sanPhamRepo.GetSanPhamByName(name);
+            if (sp != null)
+                return sp;
+            return null; // not found
         }
         [HttpGet("SanPhamTheoId")]
         public async Task<SanPhamEntity> GetSanPhamById(int id)
         {
-            return await sanPhamRepo.GetSanPhamById(id);
+            var sp = await sanPhamRepo.GetSanPhamById(id);
+            if (sp != null)
+                return sp;
+            return null; //not found
         }
 
         // POST api/<SanPhamController>

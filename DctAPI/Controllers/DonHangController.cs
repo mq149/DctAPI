@@ -209,9 +209,9 @@ namespace DctAPI.Controllers
 
         [HttpGet("DonHangDangXuLy")]
         //Trang thai # DaHuy + DaGiaoHang
-        public async Task<List<DonHangEntity>> GetDonHangDangXuLy(int user)
+        public async Task<List<DonHangEntity>> GetDonHangDangXuLy(int KH)
         {
-            var donhangs = await donHangRepo.GetAllDonHangByUser(user);
+            var donhangs = await donHangRepo.GetAllDonHangByUser(KH);
             List<DonHangEntity> dangxuly = new List<DonHangEntity>();
             foreach(var processing in donhangs)
             {
@@ -224,26 +224,26 @@ namespace DctAPI.Controllers
         }
 
         //GET DonHangByUserById
-        [HttpGet("DonHangKhachHang/{khachhang}")]
-        public async Task<List<DonHangEntity>> GetDonHangByUser(int user)
+        [HttpGet("DonHangKhachHang")]
+        public async Task<List<DonHangEntity>> GetDonHangByUser(int KH)
         {
-            var donhangs = await donHangRepo.GetAllDonHangByUser(user);
+            var donhangs = await donHangRepo.GetAllDonHangByUser(KH);
             return donhangs;
         }
 
         //GET DonHangByUserByCuaHang
-        [HttpGet("DonHangCuaHang/{cuahang}")]
-        public async Task<List<DonHangEntity>> GetDonHangByCuaHang(int user)
+        [HttpGet("DonHangCuaHang")]
+        public async Task<List<DonHangEntity>> GetDonHangByCuaHang(int CH)
         {
-            var donhangs = await donHangRepo.GetAllDonHangByCuaHang(user);
+            var donhangs = await donHangRepo.GetAllDonHangByCuaHang(CH);
             return donhangs;
         }
 
         //GET DonHangByUserByShipper
-        [HttpGet("DonHangShipper/{shipper}")]
-        public async Task<List<DonHangEntity>> GetDonHangByShipper(int user)
+        [HttpGet("DonHangShipper")]
+        public async Task<List<DonHangEntity>> GetDonHangByShipper(int SP)
         {
-            var donhangs = await donHangRepo.GetAllDonHangByShipper(user);
+            var donhangs = await donHangRepo.GetAllDonHangByShipper(SP);
             return donhangs;
         }
         [HttpPut("{id}/ShipperDangGiaoHang/{shipperId}")]
@@ -282,6 +282,28 @@ namespace DctAPI.Controllers
                 }
             }
             return BadRequest();
+        }
+        [HttpGet("ThongTinShipper")]
+        public async Task<ShipperEntity> LayThongTinShipper(int shipper)
+        {
+            var sp = await shipperRepo.Find(shipper);
+            if(sp!=null)
+            {
+                return await shipperRepo.GetShipper(shipper);
+            }
+            return null;
+
+        }
+        [HttpGet("ThongTinCuaHang")]
+        public async Task<CuaHangEntity> LayThongTinCuaHang(int cuahang)
+        {
+            var ch = await cuahangRepo.Find(cuahang);
+            if (ch != null)
+            {
+                return await cuahangRepo.GetCuaHang(cuahang);
+            }
+            return null;
+
         }
     }
 }

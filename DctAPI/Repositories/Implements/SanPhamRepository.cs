@@ -81,7 +81,8 @@ namespace DctAPI.Repositories.Implements
         public async Task<List<SanPhamEntity>> GetSanPhamByName(string ten)
         {
             return await context.SanPham
-                .Where(sp => sp.Ten.ToLower() == ten.ToLower())
+                //.Where(sp => sp.Ten.ToLower() == ten.ToLower() )
+                .Where(sp => sp.Ten.ToLower().Contains(ten))
                 .Include(x => x.HinhSanPham)
                 .Include(x => x.LoaiSP)
                 .Include(x => x.NSX)

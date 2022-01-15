@@ -29,7 +29,7 @@ namespace DctAPI.Controllers
             return danhGiaRepo.GetAll();
         }
         // DANH GIA CUA CUA HANG
-        [HttpGet("DanhGiaCuaHang/{cuahang}")]
+        [HttpGet("DanhGiaCuaHang")]
         public async Task<List<DanhGiaEntity>> GetDanhGiaCuaHang(int cuahang)
         {
             var CH = await danhGiaRepo.GetDanhGiaCuaHang(cuahang);
@@ -37,7 +37,7 @@ namespace DctAPI.Controllers
            // return danhGiaRepo.GetDanhGiaCuaHang(cuahang);
         }
         // DANH GIA CUA SHIPPER
-        [HttpGet("DanhGiaShipper/{shipper}")]
+        [HttpGet("DanhGiaShipper")]
         public async Task<List<DanhGiaEntity>> GetDanhGiaShipper(int shipper)
         {
             var SP = await danhGiaRepo.GetDanhGiaShipper(shipper);

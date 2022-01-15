@@ -10,11 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:DctAPI/Migrations/20211226164323_initialized.Designer.cs
-    [Migration("20211226164323_initialized")]
-=======
-    [Migration("20211227161012_initialized")]
->>>>>>> master:DctAPI/Migrations/20211227161012_initialized.Designer.cs
+    [Migration("20220114090857_initialized")]
     partial class initialized
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,7 +100,7 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int>("LoaiCHId")
+                    b.Property<int?>("LoaiCHId")
                         .HasColumnType("integer");
 
                     b.Property<string>("TenCuaHang")
@@ -881,7 +877,7 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int>("DiaChiId")
+                    b.Property<int?>("DiaChiId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
@@ -1078,9 +1074,7 @@ namespace DctAPI.Migrations
                 {
                     b.HasOne("DctApi.Shared.Models.LoaiCuaHangEntity", "LoaiCH")
                         .WithMany()
-                        .HasForeignKey("LoaiCHId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LoaiCHId");
 
                     b.HasOne("DctApi.Shared.Models.UserEntity", "User")
                         .WithMany()
@@ -1284,9 +1278,7 @@ namespace DctAPI.Migrations
 
                     b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChi")
                         .WithMany()
-                        .HasForeignKey("DiaChiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiaChiId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
