@@ -65,19 +65,20 @@ namespace DctAPI.Controllers
 
         [HttpPost]
         [Route("RegisterShipper")]
-        public async Task<IActionResult> RegisterShipper([FromBody] RegisteModel model) {
-            var userExits = await _userManage.FindByNameAsync(model.username);
+        public async Task<IActionResult> RegisterShipper([FromBody] ShipperDangKyModel model) {
+            var userExits = await _userManage.FindByNameAsync(model.SDT);
             if (userExits != null) {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exits" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Số điện thoại đã được sử dụng" });
             }
             UserEntity userNew = new UserEntity() {
-                UserName = model.username,
-                SDT = model.username,
-                Email = model.email,
+                UserName = model.SDT,
+                SDT = model.SDT,
+                Email = model.Email,
+                HoTen = model.HoTen
             };
-            var result = await _userManage.CreateAsync(userNew, model.password);
+            var result = await _userManage.CreateAsync(userNew, model.MatKhau);
             if (!result.Succeeded) {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Create user faild" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Đã xảy ra lỗi, vui lòng kiểm tra lại" });
             }
             //set role for user
             if (!await _roleManage.RoleExistsAsync(RoleName.Shipper)) {
@@ -86,7 +87,7 @@ namespace DctAPI.Controllers
             await _userManage.AddToRoleAsync(userNew, RoleName.Shipper);
             _context.Add(new ShipperEntity {UserId = userNew.Id, KichHoat = false, CMND = "", BienSo = "", DongXe = "" });
             _context.SaveChanges();
-            return Ok(new Response { status = "Success", message = "User created successfully" });
+            return Ok(new Response { status = "Success", message = "Tạo tài khoản thành công" });
 
         }
 
