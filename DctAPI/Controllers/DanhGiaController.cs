@@ -29,16 +29,20 @@ namespace DctAPI.Controllers
             return danhGiaRepo.GetAll();
         }
         // DANH GIA CUA CUA HANG
-        [HttpGet("DanhGiaCuaHang/{cuahang}")]
-        public List<DanhGiaEntity> GetDanhGiaCuaHang(int cuahang)
+        [HttpGet("DanhGiaCuaHang")]
+        public async Task<List<DanhGiaEntity>> GetDanhGiaCuaHang(int cuahang)
         {
-            return danhGiaRepo.GetDanhGiaCuaHang(cuahang);
+            var CH = await danhGiaRepo.GetDanhGiaCuaHang(cuahang);
+            return CH;
+           // return danhGiaRepo.GetDanhGiaCuaHang(cuahang);
         }
         // DANH GIA CUA SHIPPER
-        [HttpGet("DanhGiaShipper/{shipper}")]
-        public List<DanhGiaEntity> GetDanhGiaShipper(int shipper)
+        [HttpGet("DanhGiaShipper")]
+        public async Task<List<DanhGiaEntity>> GetDanhGiaShipper(int shipper)
         {
-            return danhGiaRepo.GetDanhGiaShipper(shipper);
+            var SP = await danhGiaRepo.GetDanhGiaShipper(shipper);
+            return SP;
+           // return danhGiaRepo.GetDanhGiaShipper(shipper);
         }
 
         // GET api/<DanhGiaController>/5
@@ -52,9 +56,7 @@ namespace DctAPI.Controllers
         [HttpPost("TaoDanhGia")]
         public async Task<ActionResult<DanhGiaEntity>> CreateDanhGia([FromBody] DanhGiaEntity dg)
         {
-            
             var danhgia = await danhGiaRepo.CreateDanhGia(dg);
-
             //khoi can kiem tra id do da tu tang
             if (danhgia != null)
             {
