@@ -8,8 +8,8 @@ namespace DctApi.Shared.Common
     {
         public struct Regex
         {
-            public const string sdt = @"/((09|03|07|08|05)+([0-9]{8})\b)/g";
-            public const string email = "/^(([^<>()[\\]\\.,;:\\s@\"]+(\\.[^<>()[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@(([^<>()[\\]\\.,;:\\s@\"]+\\.)+[^<>()[\\]\\.,;:\\s@\"]{2,})$/i";
+            public const string sdt = @"((09|03|07|08|05)+([0-9]{8})\b)";
+            public const string email = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         }
 
         public struct ErrorMessage
