@@ -23,6 +23,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Http;
 
 namespace DctAPI
 {
@@ -129,10 +130,15 @@ namespace DctAPI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseStaticFiles();
             SeedData.Seed(_context,_userManage,_roleManage);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.Run(async (contex) => {
+                await contex.Response.WriteAsync("Khong Tim Thay");
             });
         }
     }

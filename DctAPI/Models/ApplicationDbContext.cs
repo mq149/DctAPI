@@ -47,6 +47,11 @@ namespace DctAPI.Models {
         public DbSet<LuaChonTracNghiemEntity> LuaChonTracNghiem { get; set; }
         public DbSet<KhoaDaoTaoEntity> KhoaDaoTao { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CuaHangSanPhamEntity>().HasKey(key => new { key.CuaHangId, key.SanPhamId });
+        }
+
         //protected override void OnModelCreating(ModelBuilder modelBuilder) {
         //    base.OnModelCreating(modelBuilder);
         //    modelBuilder.Entity<CauHoiTracNghiemEntity>()
@@ -209,7 +214,7 @@ namespace DctAPI.Models {
         //               TinhTP = "TP. HCM"
         //           }
         //       );
-            
+
         //    modelBuilder.Entity<PhuongThucThanhToanEntity>()
         //       .HasData(
         //           new PhuongThucThanhToanEntity { Id = 1, Ten = "Tiền mặt" },
