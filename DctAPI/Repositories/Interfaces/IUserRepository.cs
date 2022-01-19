@@ -8,7 +8,7 @@ namespace DctAPI.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        void DangKy(UserEntity user);
-        bool DangNhap(UserEntity user);
+        Task<UserEntity> Find(string SDT);
+        Task<UserEntity> Create(UserEntity user);
     }
 }

@@ -106,41 +106,87 @@ namespace DctAPI.Repositories.Implements
             return dh;
         }
         //public async Task<DonHangEntity> GetDonHang(int user, int id)
-        public DonHangEntity GetDonHang(int user, int id)
+        public async Task<DonHangEntity> GetDonHang(int user, int id)
         {
-            return  context.DonHang
+            return await context.DonHang
                 .Where(dh => dh.KhachHangId == user && dh.Id == id)
                 .Include(x => x.CuaHang).ThenInclude(k => k.User)
-                .Include(x => x.Shipper).ThenInclude(k=>k.User)
+                .Include(x => x.Shipper).ThenInclude(k => k.User)
                 .Include(x => x.DiaChiGiao)
                 .Include(x => x.PTTT)
                 .Include(x => x.TTDH)
-              
-                .FirstOrDefault();
-           // var donhang = (from dh in context.DonHang where dh.KhachHangId == user && dh.Id == id select dh).FirstOrDefault<DonHangEntity>();
-           // return donhang;
-            //return donhang;
+                .FirstAsync();
+                //.FirstOrDefault();
+
         }
         //        public List<DonHangEntity> GetAllDonHangByUser(int user)
 
-        public List<DonHangEntity> GetAllDonHangByUser(int user)
+        public async Task<List<DonHangEntity>> GetAllDonHang()
         {
-            return context.DonHang
+            return await context.DonHang
+                .OrderBy(dh => dh.NgayMuaHang)
+                .ToListAsync();
+            //.ToListAsync();
+        }
+        public async Task<List<DonHangEntity>> GetAllDonHangByUser(int user)
+        {
+            return await context.DonHang
                 .Where(dh => dh.KhachHangId == user)
                 .Include(x => x.Shipper).ThenInclude(k => k.User)
                 .Include(x => x.CuaHang).ThenInclude(k => k.User)
                 .Include(x=>x.DiaChiGiao)
                 .Include(x=> x.PTTT)
                 .Include(x=>x.TTDH)
-             
                 .OrderBy(dh => dh.NgayMuaHang)
-                .ToList();
+                .ToListAsync();
                 //.ToListAsync();
         }
-        public List<DonHangEntity> GetAllDonHang()
+        public async Task<List<DonHangEntity>> GetAllDonHangByCuaHang(int cuahang)
         {
-            return context.DonHang.ToList();
+            return await context.DonHang
+                .Where(dh => dh.CuaHangId ==cuahang)
+                .Include(x => x.Shipper).ThenInclude(k => k.User)
+                .Include(x => x.KhachHang).ThenInclude(k => k.User)
+                .Include(x => x.DiaChiGiao)
+                .Include(x => x.PTTT)
+                .Include(x => x.TTDH)
+                .OrderBy(dh => dh.NgayMuaHang)
+                .ToListAsync();
+        }
+        public async Task<List<DonHangEntity>> GetAllDonHangByShipper(int shipper)
+        {
+            return await context.DonHang
+                .Where(dh => dh.ShipperId == shipper)
+                .Include(x => x.Shipper).ThenInclude(k => k.User)
+                .Include(x => x.CuaHang).ThenInclude(k => k.User)
+                .Include(x => x.DiaChiGiao)
+                .Include(x => x.PTTT)
+                .Include(x => x.TTDH)
+                .OrderBy(dh => dh.NgayMuaHang)
+                .ToListAsync();
+        }
+        public async Task<DonHangEntity> ShipperDangGiaoHang(DonHangEntity donHang, ShipperEntity shipper)
+        {
+            if(donHang !=null & shipper != null)
+            {
+                donHang.ShipperId = shipper.Id;
+                donHang.TTDHId = (int)TrangThaiDonHang.DangGiaoHang;
+                await context.SaveChangesAsync();
+                return donHang;
+            }    
+            return null;
 
+        }
+        public async Task<DonHangEntity> ShipperGiaoThanhCong(DonHangEntity donHang, ShipperEntity shipper)
+        {
+            if (donHang != null & shipper != null)
+            {
+                donHang.ShipperId = shipper.Id;
+                donHang.TTDHId = (int)TrangThaiDonHang.DaGiaoHang;
+                await context.SaveChangesAsync();
+                return donHang;
+            }
+            return null;
         }
     }
 }

@@ -24,7 +24,6 @@ namespace DctApi.Shared.Models
 
         public int? AvatarId { get; set; }
         public HinhAnhEntity Avatar { get; set; }
-        [ForeignKey("DiaChi")]
         public int? DiaChiId { get; set; }
         public DiaChiEntity DiaChi { get; set; }
         [Timestamp]

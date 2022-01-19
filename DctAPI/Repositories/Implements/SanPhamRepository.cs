@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DctAPI.Repositories.Implements
 {
 
-    public class SanPhamRepository : RepositoryBase<SanPhamEntity>,   ISanPhamRepository
+    public class SanPhamRepository : RepositoryBase<SanPhamEntity>, ISanPhamRepository
 
     {
         private readonly ApplicationDbContext context;
@@ -38,7 +38,7 @@ namespace DctAPI.Repositories.Implements
         public IEnumerable<SanPhamEntity> GetAllSanPham()
         {
             return context.SanPham
-              
+
                .Include(sp => sp.HinhSanPham)
                .Include(sp => sp.LoaiSP)
                .Include(sp => sp.NSX)
@@ -53,80 +53,74 @@ namespace DctAPI.Repositories.Implements
               .Include(sp => sp.NSX)
               .ToList();
         }
-        
-    
-    
 
 
         public async Task<SanPhamEntity> CreateSanPham(SanPhamEntity sp)
         {
             //Kiem tra ng danh gia
-            
+
             var sanpham = await context.SanPham.AddAsync(sp);
             await context.SaveChangesAsync();
-            if(sanpham!=null)
+            if (sanpham != null)
             {
                 return sp;
             }
             return null;
         }
 
-        public SanPhamEntity GetSanPhamById(int id)
+        public async Task<SanPhamEntity> GetSanPhamById(int id)
         {
-            return context.SanPham
+            return await context.SanPham
                 .Where(sp => sp.Id == id)
                 .Include(x => x.HinhSanPham)
                 .Include(x => x.LoaiSP)
                 .Include(x => x.NSX)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public List<SanPhamEntity> GetSanPhamByName(string ten)
+        public async Task<List<SanPhamEntity>> GetSanPhamByName(string ten)
         {
-            return context.SanPham
-                .Where(sp => sp.Ten.ToLower() ==ten.ToLower())
+            return await context.SanPham
+                //.Where(sp => sp.Ten.ToLower() == ten.ToLower() )
+                .Where(sp => sp.Ten.ToLower().Contains(ten))
                 .Include(x => x.HinhSanPham)
-                .Include(x=>x.LoaiSP)
-                .Include(x=>x.NSX)
-                .ToList();
+                .Include(x => x.LoaiSP)
+                .Include(x => x.NSX)
+                .ToListAsync();
         }
-        //public async Task<SanPhamEntity> UpdateSanPham(SanPhamEntity sp)
-        public bool UpdateSanPham(SanPhamEntity sp)
-        {
-            //int id = sp.ID;
-            var sanpham=context.SanPham.Update(sp);
-            context.Entry(sp).State = EntityState.Modified;
-            context.SaveChanges();
-            if (sanpham != null)
-            {
-                return true;
-            }
-            return false;
-            //var DataList = context.SanPham.Where(x => x.ID==id).FirstOrDefault();
-            //if (DataList!=null)
-            //{
-            //    context.SanPham.Update(sp);
-            //    //context.Entry(sp).State = EntityState.Modified;
-            //    await context.SaveChangesAsync();
-            //    return DataList;
-            //}
-            //else
-            //{
-            //    return null;
-            //}
 
-        }
-        public bool DeleteSanPham(int id)
+        
+        public async Task<SanPhamEntity> UpdateSanPham(SanPhamEntity sp)
         {
-            //chua lam
-            //var sanpham = context.SanPham.Where(x => x.Id == id).
             
-            //context.SaveChanges();
-            //if(sanpham!=null)
-            //{
-            //    return true;
-            //}
-            return false;
+            SanPhamEntity spc = await context.SanPham.Where(x => x.Id == sp.Id).FirstOrDefaultAsync();
+            if(spc!=null)
+            {
+                spc.LoaiSP = sp.LoaiSP;
+                spc.HinhSanPham = sp.HinhSanPham;
+                spc.MoTa = sp.MoTa;
+                spc.NSX = sp.NSX;
+                spc.Ten = sp.Ten;
+                spc.GiaSP = sp.GiaSP;
+                spc.SoLuong = sp.SoLuong;
+                await context.SaveChangesAsync();
+                return sp;
+            }
+            return null;
+        }
+        public async Task<SanPhamEntity> DeleteSanPham(int id)
+        {
+            
+            //var sanpham = context.SanPham.Where(x => x.Id == id).
+            SanPhamEntity sp =  await context.SanPham.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (sp!= null)
+            {
+                 context.SanPham.Remove(sp);
+                await context.SaveChangesAsync();
+                return sp;
+            }
+
+            return null;
         }
     }
 }

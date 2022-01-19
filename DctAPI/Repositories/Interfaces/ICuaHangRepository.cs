@@ -8,6 +8,5 @@ using System.Threading.Tasks;
 {
     public interface ICuaHangRepository : IRepositoryBase<CuaHangEntity>
     {
-
     }
 }

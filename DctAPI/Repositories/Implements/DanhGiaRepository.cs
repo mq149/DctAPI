@@ -33,20 +33,14 @@ namespace DctAPI.Repositories.Implements
                 }
             }
             return null;
-
         }
-
-        public bool DeleteDanhGia(int id)
+        public async Task<List<DanhGiaEntity>> GetDanhGiaDonHang(int id)
         {
-            throw new NotImplementedException();
-        }
 
-        public List<DanhGiaEntity> GetDanhGiaByDonHang(int id)
-        {
             return context.DanhGia.Where(dg => dg.DonHangId == id).ToList();
         }
 
-        public List<DanhGiaEntity> GetDanhGiaCuaHang(int cuahang)
+        public async Task<List<DanhGiaEntity>> GetDanhGiaCuaHang(int cuahang)
         {
 
             return context.DanhGia
@@ -56,13 +50,18 @@ namespace DctAPI.Repositories.Implements
                 .ToList();
         }
 
-        public List<DanhGiaEntity> GetDanhGiaShipper(int shipper)
+        public async Task<List<DanhGiaEntity>> GetDanhGiaShipper(int shipper)
         {
             return context.DanhGia
                 .Where(dg => dg.LoaiDGId == 1 && dg.DonHang.ShipperId == shipper)
                 .Include(x => x.DonHang)
                 .OrderBy(dg =>dg.NgayDanhGia)
                 .ToList();
+        }
+
+        public bool DeleteDanhGia(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
