@@ -23,6 +23,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace DctAPI
 {
@@ -59,7 +63,14 @@ namespace DctAPI
 
 
             services.AddScoped<IDanhGiaRepository, DanhGiaRepository>();
+            services.AddScoped<IHinhAnhRepository, HinhAnhRepository>();
 
+            // FormOptions for image uploads
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
 
             //Json serializer
             services.AddControllersWithViews()
@@ -126,6 +137,15 @@ namespace DctAPI
             {
                 app.UseHsts();
             }
+
+            // Serving Static Files
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
