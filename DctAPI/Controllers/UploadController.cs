@@ -21,7 +21,21 @@ namespace DctAPI.Controllers
         {
             this.hinhAnhRepo = hinhAnhRepo;
         }
-
+        /// <summary>
+        /// Hàm upload hình ảnh
+        /// Nhận body là JSON với các key:
+        /// 
+        /// - file-name: tên file ảnh
+        /// - tên file ảnh: file ảnh
+        /// - user: số điện thoại (tuỳ chọn)
+        /// 
+        /// Nếu không có key user, ảnh sẽ lưu vào thư mục Resources/Images
+        /// Nếu có key user, ảnh lưu vào thư mục Resources/Images/Users/Số điện thoại (từ giá trị của key user)
+        /// </summary>
+        /// <returns>
+        /// Trả về 200 kèm đường dẫn đến file ảnh kèm id trong database nếu thành công.
+        /// Trả về 500 kèm lỗi nếu không thành công.
+        /// </returns>
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> UploadAsync()
         {

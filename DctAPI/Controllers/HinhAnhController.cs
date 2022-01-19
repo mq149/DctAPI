@@ -23,47 +23,47 @@ namespace DctAPI.Controllers
             this.hostEnvironment = hostEnvironment;
         }
 
-        // GET: api/<HinhAnhController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //// GET: api/<HinhAnhController>
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET api/<HinhAnhController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<HinhAnhEntity>> Get(int id)
-        {
-            var hinhAnh = await hinhAnhRepo.FindAsync(id);
-            if (hinhAnh == null)
-            {
-                return NotFound();
-            }
-            return hinhAnh;
-        }
+        //// GET api/<HinhAnhController>/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<HinhAnhEntity>> Get(int id)
+        //{
+        //    var hinhAnh = await hinhAnhRepo.FindAsync(id);
+        //    if (hinhAnh == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return hinhAnh;
+        //}
 
-        // POST api/<HinhAnhController>
-        [HttpPost]
-        public void Post([FromBody] HinhAnhEntity request)
-        {
-            if (ModelState.IsValid)
-            {
-                string wwwRootPath = hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(request.Anh.FileName);
-                string extension = Path.GetExtension()
-            }
-        }
+        //// POST api/<HinhAnhController>
+        //[HttpPost]
+        //public void Post([FromBody] HinhAnhEntity request)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        string wwwRootPath = hostEnvironment.WebRootPath;
+        //        string fileName = Path.GetFileNameWithoutExtension(request.Anh.FileName);
+        //        string extension = Path.GetExtension()
+        //    }
+        //}
 
-        // PUT api/<HinhAnhController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<HinhAnhController>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<HinhAnhController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<HinhAnhController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
