@@ -14,7 +14,7 @@ namespace DctApi.Shared.Models
         public DateTime? NgaySanXuat { get; set; }
         public string MoTa { get; set; }
 
-        public int HinhAnhId { get; set; }
+        public int HinhSanPhamId { get; set; }
         public HinhAnhEntity HinhSanPham { get; set; }
         public int LoaiSPId { get; set; }
         public LoaiSanPhamEntity LoaiSP { get; set; }

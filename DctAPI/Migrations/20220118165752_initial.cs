@@ -682,8 +682,7 @@ namespace DctAPI.Migrations
                     GiaSP = table.Column<float>(nullable: false),
                     NgaySanXuat = table.Column<DateTime>(nullable: true),
                     MoTa = table.Column<string>(nullable: true),
-                    HinhAnhId = table.Column<int>(nullable: false),
-                    HinhSanPhamId = table.Column<int>(nullable: true),
+                    HinhSanPhamId = table.Column<int>(nullable: false),
                     LoaiSPId = table.Column<int>(nullable: false),
                     NSXId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
@@ -705,7 +704,7 @@ namespace DctAPI.Migrations
                         column: x => x.HinhSanPhamId,
                         principalTable: "HinhAnh",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SanPham_LoaiSanPham_LoaiSPId",
                         column: x => x.LoaiSPId,
