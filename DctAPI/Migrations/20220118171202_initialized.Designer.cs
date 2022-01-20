@@ -3,15 +3,22 @@ using System;
 using DctAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+<<<<<<< HEAD:DctAPI/Migrations/20220118171202_initialized.Designer.cs
+    [Migration("20220118171202_initialized")]
+    partial class initialized
+=======
+    [Migration("20220116074913_initial")]
+    partial class initial
+>>>>>>> 000b05902cf2e5c67c996311df5c96cb69bec358:DctAPI/Migrations/20220116074913_initial.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

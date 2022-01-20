@@ -7,14 +7,15 @@ namespace DctApi.Shared.Models
 {
     public class CuaHangSanPhamEntity
     {
-        [Key]
-        public int Id { get; set; }
-
-
+        //[Key]
+        //public int Id { get; set; }
         public int CuaHangId { get; set; }
+        public CuaHangEntity CuaHang { get; set; }
         public int SanPhamId { get; set; }
+        public SanPhamEntity SanPham { get; set; }
 
-        public int SoLuong { get; set; }
+        public int? SoLuong { get; set; }
+
         [Timestamp]
         public byte[] CreatedAt { get; set; }
         [Timestamp]
