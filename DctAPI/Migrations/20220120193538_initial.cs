@@ -256,11 +256,7 @@ namespace DctAPI.Migrations
                     HoTen = table.Column<string>(nullable: true),
                     GioiTinh = table.Column<string>(nullable: true),
                     NgaySinh = table.Column<DateTime>(nullable: true),
-<<<<<<< HEAD:DctAPI/Migrations/20220118171202_initialized.cs
                     AvatarId = table.Column<int>(nullable: true),
-=======
-                    AvatarIdId = table.Column<int>(nullable: true),
->>>>>>> 000b05902cf2e5c67c996311df5c96cb69bec358:DctAPI/Migrations/20220116074913_initial.cs
                     DiaChiId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
