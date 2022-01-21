@@ -8,5 +8,6 @@ namespace DctAPI.Repositories.Interfaces
 {
     public interface IShipperRepository : IRepositoryBase<ShipperEntity>
     {
+        public Task<ShipperEntity> GetShipper(int shipper);
     }
 }

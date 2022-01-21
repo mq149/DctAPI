@@ -98,7 +98,7 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int>("LoaiCHId")
+                    b.Property<int?>("LoaiCHId")
                         .HasColumnType("integer");
 
                     b.Property<string>("TenCuaHang")
@@ -260,8 +260,14 @@ namespace DctAPI.Migrations
                     b.Property<DateTime>("NgayMuaHang")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("NguoiNhan")
+                        .HasColumnType("text");
+
                     b.Property<int>("PTTTId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("SDT")
+                        .HasColumnType("text");
 
                     b.Property<int?>("ShipperId")
                         .HasColumnType("integer");
@@ -872,7 +878,7 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int>("DiaChiId")
+                    b.Property<int?>("DiaChiId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
@@ -1069,9 +1075,7 @@ namespace DctAPI.Migrations
                 {
                     b.HasOne("DctApi.Shared.Models.LoaiCuaHangEntity", "LoaiCH")
                         .WithMany()
-                        .HasForeignKey("LoaiCHId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LoaiCHId");
 
                     b.HasOne("DctApi.Shared.Models.UserEntity", "User")
                         .WithMany()
@@ -1277,9 +1281,7 @@ namespace DctAPI.Migrations
 
                     b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChi")
                         .WithMany()
-                        .HasForeignKey("DiaChiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiaChiId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

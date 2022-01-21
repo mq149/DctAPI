@@ -274,7 +274,7 @@ namespace DctAPI.Migrations
                     GioiTinh = table.Column<string>(nullable: true),
                     NgaySinh = table.Column<DateTime>(nullable: true),
                     AvatarIdId = table.Column<int>(nullable: true),
-                    DiaChiId = table.Column<int>(nullable: false),
+                    DiaChiId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
@@ -292,7 +292,7 @@ namespace DctAPI.Migrations
                         column: x => x.DiaChiId,
                         principalTable: "DiaChi",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -486,7 +486,7 @@ namespace DctAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TrangThaiKichHoat = table.Column<bool>(nullable: false),
                     TenCuaHang = table.Column<string>(nullable: true),
-                    LoaiCHId = table.Column<int>(nullable: false),
+                    LoaiCHId = table.Column<int>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
@@ -499,7 +499,7 @@ namespace DctAPI.Migrations
                         column: x => x.LoaiCHId,
                         principalTable: "LoaiCuaHang",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CuaHang_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -593,6 +593,8 @@ namespace DctAPI.Migrations
                     ShipperId = table.Column<int>(nullable: true),
                     DiaChiGiaoId = table.Column<int>(nullable: false),
                     TTDHId = table.Column<int>(nullable: false),
+                    SDT = table.Column<string>(nullable: true),
+                    NguoiNhan = table.Column<string>(nullable: true),
                     PTTTId = table.Column<int>(nullable: false),
                     TongTien = table.Column<float>(nullable: false),
                     NgayMuaHang = table.Column<DateTime>(nullable: false),

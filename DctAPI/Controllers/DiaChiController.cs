@@ -1,4 +1,5 @@
 ﻿using DctApi.Shared.Models;
+using DctAPI.Models;
 using DctAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,9 +16,14 @@ namespace DctAPI.Controllers
     public class DiaChiController : ControllerBase
     {
         private readonly IDiaChiRepository DiaChiRepo;
-        public DiaChiController(IDiaChiRepository DiaChiRepo)
+        private readonly IDonHangRepository DonHangRepo;
+        private readonly IKhachHangRepository KhachHangRepo;
+
+        public DiaChiController(IDiaChiRepository DiaChiRepo,IDonHangRepository DH, IKhachHangRepository KH)
         {
             this.DiaChiRepo = DiaChiRepo;
+            this.DonHangRepo = DH;
+            this.KhachHangRepo = KH;
 
         }
         // GET: api/<DiaChiController>
@@ -33,7 +39,43 @@ namespace DctAPI.Controllers
         {
             return "value";
         }
+        [HttpGet("getdiachidathang/{id}")]
+        public async Task<List<DiaChiDatHangModel>>  GetDiaChiDatHang(int id)
+        {
+          
+            List<DiaChiDatHangModel> listDiaChi = new List<DiaChiDatHangModel>();
+ 
+            var khachHang = await KhachHangRepo.findIdKhachHang(id);
+            if (khachHang < 1)
+            {
+                return null;
 
+            }
+            var donhang = await DonHangRepo.GetAllDonHangByUser(khachHang);
+            if (donhang != null)
+            {
+                for (int i = 0; i < donhang.Count; i++)
+                {
+                    DiaChiDatHangModel diachiNhanHang = new DiaChiDatHangModel();
+                    DiaChiEntity diaChi = await DiaChiRepo.Find(donhang[i].DiaChiGiaoId);
+                    diachiNhanHang.Id = diaChi.Id;
+                    diachiNhanHang.SDT = donhang[i].SDT;
+                    diachiNhanHang.NguoiNhan = donhang[i].NguoiNhan;
+                    diachiNhanHang.SoNhaTo = diaChi.SoNhaTo;
+                    diachiNhanHang.Duong = diaChi.Duong;
+                    diachiNhanHang.XaPhuong = diaChi.XaPhuong;
+                    diachiNhanHang.QuanHuyen = diaChi.QuanHuyen;
+                    diachiNhanHang.TinhTP = diaChi.TinhTP;
+                
+                        
+
+        listDiaChi.Add(diachiNhanHang);
+                }
+                return listDiaChi;
+            }
+           
+            return null;
+        }
         // POST api/<DiaChiController>
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] DiaChiEntity dc)

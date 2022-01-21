@@ -175,55 +175,54 @@ namespace DctAPI.Models {
         }
         public static void SeedDataCauhoiTracNghiem(ApplicationDbContext _context) {
             if (!_context.CauHoiTracNghiem.Any()) {
-                _context.CauHoiTracNghiem.AddRange(new CauHoiTracNghiemEntity { Id = 1, NoiDung = "Sơ đồ nào sau đây phù hợp với thiết kế động?" },
-                    new CauHoiTracNghiemEntity { Id = 2, NoiDung = "1+2=?" },
-                    new CauHoiTracNghiemEntity { Id = 3, NoiDung = "Vai trò nào không có trong ĐI CHỢ THUÊ" },
-                    new CauHoiTracNghiemEntity { Id = 4, NoiDung = "Trong sơ đồ class, quan hệ aggregration được thể hiện bằng" },
-                    new CauHoiTracNghiemEntity { Id = 5, NoiDung = "Trong mô hình MVC, View đóng vai trò" });
+                _context.CauHoiTracNghiem.AddRange(new CauHoiTracNghiemEntity { /*Id = 1,*/ NoiDung = "Sơ đồ nào sau đây phù hợp với thiết kế động?" },
+                    new CauHoiTracNghiemEntity { /*Id = 2,*/ NoiDung = "1+2=?" },
+                    new CauHoiTracNghiemEntity { /*Id = 3,*/ NoiDung = "Vai trò nào không có trong ĐI CHỢ THUÊ" },
+                    new CauHoiTracNghiemEntity {/* Id = 4,*/ NoiDung = "Trong sơ đồ class, quan hệ aggregration được thể hiện bằng" },
+                    new CauHoiTracNghiemEntity { /*Id = 5, */NoiDung = "Trong mô hình MVC, View đóng vai trò" });
             }
             _context.SaveChanges();
         }
         public static void SeedDataLuaChonTracNghiem(ApplicationDbContext _context) {
             if (!_context.LuaChonTracNghiem.Any()) {
-                _context.LuaChonTracNghiem.AddRange(new LuaChonTracNghiemEntity { Id = 1, NoiDung = "Class diagram", Dung = false, CauHoiId = 1 },
-                    new LuaChonTracNghiemEntity { Id = 2, NoiDung = "Sequence diagram", Dung = true, CauHoiId = 1 },
-                    new LuaChonTracNghiemEntity { Id = 3, NoiDung = "Use case diagram", Dung = false, CauHoiId = 1 },
-                    new LuaChonTracNghiemEntity { Id = 4, NoiDung = "Package diagram", Dung = false, CauHoiId = 1 },
-                    new LuaChonTracNghiemEntity { Id = 5, NoiDung = "1", Dung = false, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity { Id = 6, NoiDung = "2", Dung = false, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity { Id = 7, NoiDung = "3", Dung = true, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity { Id = 8, NoiDung = "4", Dung = false, CauHoiId = 2 },
-                    new LuaChonTracNghiemEntity { Id = 9, NoiDung = "Shipper", Dung = false, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity { Id = 10, NoiDung = "Khách hàng", Dung = false, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity { Id = 11, NoiDung = "Nhân viên kho", Dung = true, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity { Id = 12, NoiDung = "Cửa hàng", Dung = false, CauHoiId = 3 },
-                    new LuaChonTracNghiemEntity { Id = 13, NoiDung = "Mũi tên", Dung = false, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity { Id = 14, NoiDung = "Đường nối", Dung = false, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity { Id = 15, NoiDung = "Hình thoi đen", Dung = false, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity { Id = 16, NoiDung = "Hình thoi trắng", Dung = true, CauHoiId = 4 },
-                    new LuaChonTracNghiemEntity { Id = 17, NoiDung = "Gửi request đến và nhận response từ Controller", Dung = true, CauHoiId = 5 },
-                    new LuaChonTracNghiemEntity { Id = 18, NoiDung = "Cập nhật giao diện", Dung = false, CauHoiId = 5 },
-                    new LuaChonTracNghiemEntity { Id = 19, NoiDung = "Kiểm tra logic dữ liệu", Dung = false, CauHoiId = 5 },
-                    new LuaChonTracNghiemEntity { Id = 20, NoiDung = "Lưu trữ dữ liệu vào database", Dung = false, CauHoiId = 5 });
+                _context.LuaChonTracNghiem.AddRange(new LuaChonTracNghiemEntity {NoiDung = "Class diagram", Dung = false, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity { /*Id = 2,*/ NoiDung = "Sequence diagram", Dung = true, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity { /*Id = 3,*/ NoiDung = "Use case diagram", Dung = false, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity { /*Id = 4,*/ NoiDung = "Package diagram", Dung = false, CauHoiId = 1 },
+                    new LuaChonTracNghiemEntity {/* Id = 5,*/ NoiDung = "1", Dung = false, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity {/* Id = 6,*/ NoiDung = "2", Dung = false, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity { /*Id = 7,*/ NoiDung = "3", Dung = true, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity { /*Id = 8,*/ NoiDung = "4", Dung = false, CauHoiId = 2 },
+                    new LuaChonTracNghiemEntity { /*Id = 9,*/ NoiDung = "Shipper", Dung = false, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity {/* Id = 10, */NoiDung = "Khách hàng", Dung = false, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity { /*Id = 11,*/ NoiDung = "Nhân viên kho", Dung = true, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity { /*Id = 12, */NoiDung = "Cửa hàng", Dung = false, CauHoiId = 3 },
+                    new LuaChonTracNghiemEntity { /*Id = 13,*/ NoiDung = "Mũi tên", Dung = false, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity { /*Id = 14,*/ NoiDung = "Đường nối", Dung = false, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity { /*Id = 15,*/ NoiDung = "Hình thoi đen", Dung = false, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity { /*Id = 16,*/ NoiDung = "Hình thoi trắng", Dung = true, CauHoiId = 4 },
+                    new LuaChonTracNghiemEntity {/* Id = 17, */NoiDung = "Gửi request đến và nhận response từ Controller", Dung = true, CauHoiId = 5 },
+                    new LuaChonTracNghiemEntity { /*Id = 18, */NoiDung = "Cập nhật giao diện", Dung = false, CauHoiId = 5 },
+                    new LuaChonTracNghiemEntity { /*Id = 19,*/ NoiDung = "Kiểm tra logic dữ liệu", Dung = false, CauHoiId = 5 },
+                    new LuaChonTracNghiemEntity {/* Id = 20,*/ NoiDung = "Lưu trữ dữ liệu vào database", Dung = false, CauHoiId = 5 });
             }
             _context.SaveChanges();
         }
         public static void SeedDataTrangThaiDonHang(ApplicationDbContext _context) {
             if (!_context.TrangThaiDonHang.Any()) {
                 _context.TrangThaiDonHang.AddRange(
-                    new TrangThaiDonHangEntity { Id = 1, Ten = "Chờ xác nhận" },
-                    new TrangThaiDonHangEntity { Id = 2, Ten = "Cửa hàng đã xác nhận" },
-                    new TrangThaiDonHangEntity { Id = 3, Ten = "Đang lấy hàng" },
-                    new TrangThaiDonHangEntity { Id = 4, Ten = "Đang giao hàng" },
-                    new TrangThaiDonHangEntity { Id = 5, Ten = "Đã giao hàng" },
-                    new TrangThaiDonHangEntity { Id = 6, Ten = "Đã huỷ" });
+                    new TrangThaiDonHangEntity { Ten = "Chờ xác nhận" },
+                    new TrangThaiDonHangEntity { Ten = "Cửa hàng đã xác nhận" },
+                    new TrangThaiDonHangEntity {Ten = "Đang lấy hàng" },
+                    new TrangThaiDonHangEntity {Ten = "Đang giao hàng" },
+                    new TrangThaiDonHangEntity {Ten = "Đã giao hàng" },
+                    new TrangThaiDonHangEntity {Ten = "Đã huỷ" });
             }
             _context.SaveChanges();
         }
         public static void SeedDataKhoaDaoTao(ApplicationDbContext _context) {
             if (!_context.KhoaDaoTao.Any()) {
                 _context.KhoaDaoTao.AddRange(new KhoaDaoTaoEntity {
-                    ID = 1,
                     NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
                     HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
                     URL = "https://www.youtube.com/embed/LcRG816Syvc"
@@ -235,32 +234,26 @@ namespace DctAPI.Models {
             if (!_context.HinhAnh.Any()) {
                 _context.HinhAnh.AddRange(
                     new HinhAnhEntity {
-                        Id = 1,
                         Ten = "shorts",
                         Url = "https://i.ibb.co/4ZN1Rqd/shorts.png"
                     },
                        new HinhAnhEntity {
-                           Id = 2,
                            Ten = "trousers",
                            Url = "https://i.ibb.co/JpWst3h/trousers.png"
                        },
                          new HinhAnhEntity {
-                             Id = 3,
                              Ten = "shirt",
                              Url = "https://i.ibb.co/KDm7xG1/shirt.png"
                          },
                            new HinhAnhEntity {
-                               Id = 4,
                                Ten = "tie",
                                Url = "https://i.ibb.co/YpxxV8L/tie.png"
                            },
                              new HinhAnhEntity {
-                                 Id = 5,
                                  Ten = "sweater",
                                  Url = "https://i.ibb.co/hY1ft7r/sweater1.png"
                              },
                                new HinhAnhEntity {
-                                   Id = 6,
                                    Ten = "shoes",
                                    Url = "https://i.ibb.co/djqfkpN/shoes.png"
                                });
@@ -270,18 +263,17 @@ namespace DctAPI.Models {
         public static void SeedDataLoaiSanPham(ApplicationDbContext _context) {
             if (!_context.LoaiSanPham.Any()) {
                 _context.LoaiSanPham.AddRange(
-                     new LoaiSanPhamEntity { Id = 1, Ten = "Thức ăn", },
-                    new LoaiSanPhamEntity { Id = 2, Ten = "Nước Giải Khát" },
-                    new LoaiSanPhamEntity { Id = 3, Ten = "Thực phẩm chức năng" },
-                    new LoaiSanPhamEntity { Id = 4, Ten = "Hải sản" },
-                    new LoaiSanPhamEntity { Id = 5, Ten = "Đồ dùng" });
+                     new LoaiSanPhamEntity {  Ten = "Thức ăn", },
+                    new LoaiSanPhamEntity { Ten = "Nước Giải Khát" },
+                    new LoaiSanPhamEntity { Ten = "Thực phẩm chức năng" },
+                    new LoaiSanPhamEntity { Ten = "Hải sản" },
+                    new LoaiSanPhamEntity { Ten = "Đồ dùng" });
             }
             _context.SaveChanges();
         }
         public static void SeedDataDiaChi(ApplicationDbContext _context) {
             if (!_context.DiaChi.Any()) {
                 _context.DiaChi.AddRange(new DiaChiEntity {
-                    Id = 1,
                     SoNhaTo = "29",
                     Duong = "Hoàng Diệu",
                     XaPhuong = "Phường 1",
@@ -289,7 +281,6 @@ namespace DctAPI.Models {
                     TinhTP = "TP Hồ Chí Minh"
                 },
                    new DiaChiEntity {
-                       Id = 2,
                        SoNhaTo = "69",
                        Duong = "Ba Tháng Hai",
                        XaPhuong = "Phường 10",
@@ -297,7 +288,6 @@ namespace DctAPI.Models {
                        TinhTP = "TP Hồ Chí Minh"
                    },
                    new DiaChiEntity {
-                       Id = 3,
                        SoNhaTo = "19",
                        Duong = "Lý Thường Kiệt",
                        XaPhuong = "Phường 3",
@@ -305,7 +295,6 @@ namespace DctAPI.Models {
                        TinhTP = "TP Hồ Chí Minh"
                    },
                    new DiaChiEntity {
-                       Id = 4,
                        SoNhaTo = "12",
                        Duong = "K3",
                        XaPhuong = "Vĩnh Sơn",
@@ -313,7 +302,6 @@ namespace DctAPI.Models {
                        TinhTP = "Bình Định"
                    },
                    new DiaChiEntity {
-                       Id = 5,
                        SoNhaTo = "227",
                        Duong = "Nguyễn Văn Cừ",
                        XaPhuong = "Phường 4",
@@ -321,7 +309,6 @@ namespace DctAPI.Models {
                        TinhTP = "TP. HCM"
                    },
                    new DiaChiEntity {
-                       Id = 6,
                        SoNhaTo = "189C",
                        Duong = "Cống Quỳnh",
                        XaPhuong = "Nguyễn Cư Trinh",
@@ -334,24 +321,23 @@ namespace DctAPI.Models {
         public static void SeedDataPhuongThucThanhToan(ApplicationDbContext _context) {
             if (!_context.PhuongThucThanhToan.Any()) {
                 _context.PhuongThucThanhToan.AddRange(
-                     new PhuongThucThanhToanEntity { Id = 1, Ten = "Tiền mặt" },
-                   new PhuongThucThanhToanEntity { Id = 2, Ten = "Thẻ ATM" },
-                   new PhuongThucThanhToanEntity { Id = 3, Ten = "Ví điện tử" });
+                     new PhuongThucThanhToanEntity { Ten = "Tiền mặt" },
+                   new PhuongThucThanhToanEntity { Ten = "Thẻ ATM" },
+                   new PhuongThucThanhToanEntity { Ten = "Ví điện tử" });
             }
             _context.SaveChanges();
         }
         public static void SeedDataNhaSanXuat(ApplicationDbContext _context) {
             if (!_context.NhaSanXuat.Any()) {
-                _context.NhaSanXuat.AddRange(new NhaSanXuatEntity { Id = 1, Ten = "Công ty TNHH X", DiaChiId = 1 },
-                   new NhaSanXuatEntity { Id = 2, Ten = "Công ty Y", DiaChiId = 2 },
-                   new NhaSanXuatEntity { Id = 3, Ten = "Công ty Z", DiaChiId = 3 });
+                _context.NhaSanXuat.AddRange(new NhaSanXuatEntity {/* Id = 1, */Ten = "Công ty TNHH X", DiaChiId = 1 },
+                   new NhaSanXuatEntity { Ten = "Công ty Y", DiaChiId = 2 },
+                   new NhaSanXuatEntity { Ten = "Công ty Z", DiaChiId = 3 });
             }
             _context.SaveChanges();
         }
         public static void SeedDataSanPham(ApplicationDbContext _context) {
             if (!_context.SanPham.Any()) {
                 _context.SanPham.AddRange(new SanPhamEntity {
-                    Id = 1,
                     Ten = "Cá Thu",
                     GiaSP = 120000,
                     NgaySanXuat = new DateTime(2015, 12, 25),
@@ -363,7 +349,6 @@ namespace DctAPI.Models {
 
                 },
                    new SanPhamEntity {
-                       Id = 2,
                        Ten = "Cà Rốt",
                        GiaSP = 12000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
@@ -374,7 +359,6 @@ namespace DctAPI.Models {
                        NSXId = 2
                    },
                    new SanPhamEntity {
-                       Id = 3,
                        Ten = "Vitamin C",
                        GiaSP = 120000,
                        NgaySanXuat = new DateTime(2015, 12, 25),
@@ -390,40 +374,40 @@ namespace DctAPI.Models {
         }
         public static void SeedDataCuaHang(ApplicationDbContext _context) {
             if (!_context.CuaHang.Any()) {
-                _context.CuaHang.AddRange(new CuaHangEntity { Id = 1, UserId = 2, LoaiCHId = 1, TenCuaHang = "Bách Hóa X", TrangThaiKichHoat = true },
-                    new CuaHangEntity { Id = 2, UserId = 4, LoaiCHId = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true });
+                _context.CuaHang.AddRange(new CuaHangEntity {/* Id = 1, */UserId = 2, LoaiCHId = 1, TenCuaHang = "Bách Hóa X", TrangThaiKichHoat = true },
+                    new CuaHangEntity {/* Id = 2, */UserId = 4, LoaiCHId = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true });
             }
             _context.SaveChanges();
         }
         public static void SeedDataShipper(ApplicationDbContext _context) {
             if (!_context.Shipper.Any()) {
-                _context.Shipper.AddRange(new ShipperEntity { Id = 1, UserId = 3, KichHoat = true, CMND = "18277821", BienSo = "85D2-12111", DongXe = "Wave" },
-                    new ShipperEntity { Id = 2, UserId = 5, KichHoat = true, CMND = "000111222", BienSo = "00A0-0000", DongXe = "Honda Wave" });
+                _context.Shipper.AddRange(new ShipperEntity { /*Id = 1,*/ UserId = 3, KichHoat = true, CMND = "18277821", BienSo = "85D2-12111", DongXe = "Wave" },
+                    new ShipperEntity {/* Id = 2, */UserId = 5, KichHoat = true, CMND = "000111222", BienSo = "00A0-0000", DongXe = "Honda Wave" });
             }
             _context.SaveChanges();
         }
 
         public static void SeedDataKhachHang(ApplicationDbContext _context) {
             if (!_context.KhachHang.Any()) {
-                _context.KhachHang.AddRange(new KhachHangEntity { Id = 1, UserId = 3, CMND = "18219821" },
-                    new KhachHangEntity { Id = 2, UserId = 6, CMND = "5361152421" });
+                _context.KhachHang.AddRange(new KhachHangEntity { /*Id = 1,*/ UserId = 3, CMND = "18219821" },
+                    new KhachHangEntity {/* Id = 2,*/ UserId = 6, CMND = "5361152421" });
             }
             _context.SaveChanges();
         }
         public static void SeedDataLoaiDanhGia(ApplicationDbContext _context) {
             if (!_context.LoaiDanhGia.Any()) {
-                _context.LoaiDanhGia.AddRange(new LoaiDanhGiaEntity { Id = 1, Ten = "Shipper" },
-                    new LoaiDanhGiaEntity { Id = 2, Ten = "Cửa hàng" });
+                _context.LoaiDanhGia.AddRange(new LoaiDanhGiaEntity { /*Id = 1,*/ Ten = "Shipper" },
+                    new LoaiDanhGiaEntity { /*Id = 2,*/ Ten = "Cửa hàng" });
             }
             _context.SaveChanges();
         }
 
         public static void SeedDataLoaiCuaHang(ApplicationDbContext _context) {
             if (!_context.LoaiCuaHang.Any()) {
-                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { Id = 1, Ten = "Bán sỉ" },
-                    new LoaiCuaHangEntity { Id = 2, Ten = "Bán lẻ" },
-                    new LoaiCuaHangEntity { Id = 3, Ten = "Bán quà lưu niệm" },
-                    new LoaiCuaHangEntity { Id = 4, Ten = "Bán online" });
+                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { /*Id = 1, */Ten = "Bán sỉ" },
+                    new LoaiCuaHangEntity {/* Id = 2,*/ Ten = "Bán lẻ" },
+                    new LoaiCuaHangEntity {/* Id = 3,*/ Ten = "Bán quà lưu niệm" },
+                    new LoaiCuaHangEntity {/* Id = 4,*/ Ten = "Bán online" });
             }
             _context.SaveChanges();
         }
@@ -431,7 +415,7 @@ namespace DctAPI.Models {
         public static void SeedDataDonHang(ApplicationDbContext _context) {
             if (!_context.DonHang.Any()) {
                 _context.DonHang.AddRange(new DonHangEntity {
-                    Id = 1,
+                    //Id = 1,
                     KhachHangId = 1,
                     CuaHangId = 1,
                     ShipperId = 1,
@@ -443,7 +427,7 @@ namespace DctAPI.Models {
                     NgayMuaHang = new DateTime(2021, 11, 1)
                 },
                   new DonHangEntity {
-                      Id = 2,
+                      //Id = 2,
                       KhachHangId = 1,
                       CuaHangId = 1,
                       ShipperId = null,
@@ -455,7 +439,7 @@ namespace DctAPI.Models {
                       NgayMuaHang = new DateTime(2021, 11, 1)
                   },
                   new DonHangEntity {
-                      Id = 3,
+                      //Id = 3,
                       KhachHangId = 2,
                       CuaHangId = 2,
                       ShipperId = null,
@@ -473,7 +457,7 @@ namespace DctAPI.Models {
         public static void SeedDataChiTietDonHang(ApplicationDbContext _context) {
             if (!_context.ChiTietDonHang.Any()) {
                 _context.ChiTietDonHang.AddRange(new ChiTietDonHangEntity {
-                    Id = 1,
+                    //Id = 1,
                     DonHangId = 1,
                     SanPhamId = 1,
                     DonGia = 37000,
@@ -481,7 +465,7 @@ namespace DctAPI.Models {
                     KhoiLuong = 1
                 },
                    new ChiTietDonHangEntity {
-                       Id = 2,
+                       //Id = 2,
                        DonHangId = 1,
                        SanPhamId = 2,
                        DonGia = 25000,
@@ -489,7 +473,7 @@ namespace DctAPI.Models {
                        KhoiLuong = 1
                    },
                    new ChiTietDonHangEntity {
-                       Id = 3,
+                       //Id = 3,
                        DonHangId = 2,
                        SanPhamId = 1,
                        DonGia = 500000,
@@ -497,7 +481,7 @@ namespace DctAPI.Models {
                        KhoiLuong = 1
                    },
                    new ChiTietDonHangEntity {
-                       Id = 4,
+                       //Id = 4,
                        DonHangId = 2,
                        SanPhamId = 2,
                        DonGia = 210000,
@@ -505,7 +489,7 @@ namespace DctAPI.Models {
                        KhoiLuong = 1
                    },
                    new ChiTietDonHangEntity {
-                       Id = 5,
+                       //Id = 5,
                        DonHangId = 2,
                        SanPhamId = 3,
                        DonGia = 210000,
@@ -513,7 +497,7 @@ namespace DctAPI.Models {
                        KhoiLuong = 1
                    },
                    new ChiTietDonHangEntity {
-                       Id = 6,
+                       //Id = 6,
                        DonHangId = 3,
                        SanPhamId = 1,
                        DonGia = 43000,
@@ -526,8 +510,8 @@ namespace DctAPI.Models {
 
         public static void SeedDataDanhGia(ApplicationDbContext _context) {
             if (!_context.DanhGia.Any()) {
-                _context.DanhGia.AddRange(new DanhGiaEntity { Id = 1, DonHangId = 1, LoaiDGId = 1, NoiDung = "Tốt", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 5 },
-                    new DanhGiaEntity { Id = 2, DonHangId = 1, LoaiDGId = 2, NoiDung = "Tạm được", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 4 });
+                _context.DanhGia.AddRange(new DanhGiaEntity { /*Id = 1, */DonHangId = 1, LoaiDGId = 1, NoiDung = "Tốt", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 5 },
+                    new DanhGiaEntity {/* Id = 2, */DonHangId = 1, LoaiDGId = 2, NoiDung = "Tạm được", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 4 });
             }
             _context.SaveChanges();
         }

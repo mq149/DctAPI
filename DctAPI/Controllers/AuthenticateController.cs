@@ -23,38 +23,97 @@ namespace DctAPI.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly UserManager<UserEntity> _userManage;
-        private readonly RoleManager<RoleEntity> _roleManage;
+        private readonly UserManager<UserEntity> _userManager;
+        private readonly RoleManager<RoleEntity> _roleManager;
+        private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public AuthenticateController(UserManager<UserEntity> userManager, RoleManager<RoleEntity> roleManage, IConfiguration configuration)
+        public AuthenticateController(ApplicationDbContext context,UserManager<UserEntity> userManager, RoleManager<RoleEntity> roleManage, IConfiguration configuration)
         {
-            _userManage = userManager;
-            _roleManage = roleManage;
+            _userManager = userManager;
+            _roleManager = roleManage;
             _configuration = configuration;
+            _context = context;
         }
 
         [HttpPost]
         [Route("RegisterCustomer")]
         public async Task<IActionResult> RegisterCustomer([FromBody] RegisteModel model) {
-            var userExits = await _userManage.FindByNameAsync(model.username);
-            if (userExits != null) {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exits" });
+            var user = await _userManager.FindByNameAsync(model.username);
+            if (user != null) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exists" });
             }
             UserEntity userNew = new UserEntity() {
                 UserName = model.username,
                 SDT = model.username,
                 Email = model.email,
             };
-            var result = await _userManage.CreateAsync(userNew, model.password);
+            var result = await _userManager.CreateAsync(userNew, model.password);
             if (!result.Succeeded) {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Create user faild" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Create user failed" });
             }
             //set role for user
-            if (!await _roleManage.RoleExistsAsync(RoleName.Customer)) {
-                await _roleManage.CreateAsync(new RoleEntity() { Id = (int)Role.KhachHang, Name = "Customer", Ten = "Khach Hang" });
+            if (!await _roleManager.RoleExistsAsync(RoleName.Customer)) {
+                await _roleManager.CreateAsync(new RoleEntity() { Id = (int)Role.KhachHang, Name = "Customer", Ten = "Khach Hang" });
             }
-            await _userManage.AddToRoleAsync(userNew,RoleName.Customer);
+            await _userManager.AddToRoleAsync(userNew,RoleName.Customer);
+            _context.Add(new KhachHangEntity { UserId =userNew.Id, CMND=""});
+            _context.SaveChanges();
+            return Ok(new Response { status = "Success", message = "User created successfully" });
+
+        }
+
+        [HttpPost]
+        [Route("RegisterShipper")]
+        public async Task<IActionResult> RegisterShipper([FromBody] ShipperDangKyModel model) {
+            var user = await _userManager.FindByNameAsync(model.SDT);
+            if (user != null) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Số điện thoại đã được sử dụng" });
+            }
+            UserEntity userNew = new UserEntity() {
+                UserName = model.SDT,
+                SDT = model.SDT,
+                Email = model.Email,
+                HoTen = model.HoTen
+            };
+            var result = await _userManager.CreateAsync(userNew, model.MatKhau);
+            if (!result.Succeeded) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Đã xảy ra lỗi, vui lòng kiểm tra lại" });
+            }
+            //set role for user
+            if (!await _roleManager.RoleExistsAsync(RoleName.Shipper)) {
+                await _roleManager.CreateAsync(new RoleEntity() { Id = (int)Role.Shipper, Name = "Shipper", Ten = "Shipper" });
+            }
+            await _userManager.AddToRoleAsync(userNew, RoleName.Shipper);
+            _context.Add(new ShipperEntity {UserId = userNew.Id, KichHoat = false, CMND = "", BienSo = "", DongXe = "" });
+            _context.SaveChanges();
+            return Ok(new Response { status = "Success", message = "Tạo tài khoản thành công" });
+
+        }
+
+        [HttpPost]
+        [Route("RegisterStore")]
+        public async Task<IActionResult> RegisterStore([FromBody] RegisteModel model) {
+            var user = await _userManager.FindByNameAsync(model.username);
+            if (user != null) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exists" });
+            }
+            UserEntity userNew = new UserEntity() {
+                UserName = model.username,
+                SDT = model.username,
+                Email = model.email,
+            };
+            var result = await _userManager.CreateAsync(userNew, model.password);
+            if (!result.Succeeded) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Create user failed" });
+            }
+            //set role for user
+            if (!await _roleManager.RoleExistsAsync(RoleName.Store)) {
+                await _roleManager.CreateAsync(new RoleEntity() { Id = (int)Role.CuaHang, Name = "CuaHang", Ten = "CuaHang" });
+            }
+            await _userManager.AddToRoleAsync(userNew, RoleName.Shipper);
+            _context.Add(new CuaHangEntity {UserId = userNew.Id,TenCuaHang = "", TrangThaiKichHoat = false });
+            _context.SaveChanges();
             return Ok(new Response { status = "Success", message = "User created successfully" });
 
         }
@@ -63,11 +122,11 @@ namespace DctAPI.Controllers
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model) {
-            var userExits = await _userManage.FindByNameAsync(model.username);
-            if(userExits!=null&& await _userManage.CheckPasswordAsync(userExits,model.password) ) {
-                var userRole = await _userManage.GetRolesAsync(userExits);
+            var user = await _userManager.FindByNameAsync(model.username);
+            if(user!=null&& await _userManager.CheckPasswordAsync(user,model.password) ) {
+                var userRole = await _userManager.GetRolesAsync(user);
                 var auth = new List<Claim> {
-                    new Claim(ClaimTypes.Name,userExits.UserName),
+                    new Claim(ClaimTypes.Name,user.UserName),
                     new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
                 };
                 foreach(var itm in userRole) {
@@ -83,17 +142,18 @@ namespace DctAPI.Controllers
                     );
 
                 return Ok(new {
-                    Id = userExits.Id,
-                    SDT = userExits.SDT,
-                    HoTen = userExits.HoTen,
-                    GioiTinh = userExits.GioiTinh,
-                    NgaySinh = userExits.NgaySinh,
-                    AvatarId = userExits.AvatarId,
-                    DiaChiId = userExits.DiaChiId,
-                    username=userExits.SDT,
-                    password=userExits.PasswordHash,
+                    Id = user.Id,
+                    SDT = user.SDT,
+                    HoTen = user.HoTen,
+                    GioiTinh = user.GioiTinh,
+                    NgaySinh = user.NgaySinh,
+                    AvatarId = user.AvatarId,
+                    DiaChiId = user.DiaChiId,
+                    username = user.SDT,
+                    password = user.PasswordHash,
+                    email = user.Email,
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    role=userRole,
+                    role = userRole,
                     expires=1,
                 });
             }
@@ -102,7 +162,7 @@ namespace DctAPI.Controllers
 
         [HttpPost]
         [Route("LoginAccessToken")]
-        public async Task<UserEntity> LoginAccessToken(string accessToken) {
+        public async Task<IActionResult> LoginAccessToken([FromBody]string accessToken) {
             try {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]);
@@ -121,14 +181,30 @@ namespace DctAPI.Controllers
 
                 if (jwtSecurityToken != null && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase)) {
                     var userId = principle.FindFirst(ClaimTypes.Name)?.Value;
-                    return await _userManage.FindByNameAsync(userId);
+                    //return await _userManage.FindByNameAsync(userId);
+                    var user= await _userManager.FindByNameAsync(userId);
+                    var userRole = await _userManager.GetRolesAsync(user);
+                    return Ok(new {
+                        Id = user.Id,
+                        SDT = user.SDT,
+                        HoTen = user.HoTen,
+                        GioiTinh = user.GioiTinh,
+                        NgaySinh = user.NgaySinh,
+                        AvatarId = user.AvatarId,
+                        DiaChiId = user.DiaChiId,
+                        username = user.SDT,
+                        email=user.Email,
+                        password = user.PasswordHash,
+                        role = userRole,
+                    });
                 }
             }
             catch (Exception) {
-                return new UserEntity();
+                //return new UserEntity();
+                return Unauthorized();
             }
 
-            return new UserEntity();
+            return Unauthorized();
         }
     }
 }
