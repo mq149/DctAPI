@@ -2,6 +2,7 @@
 using DctApi.Shared.Models;
 using DctAPI.Models;
 using DctAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,7 @@ namespace DctAPI.Controllers
             //return donHangRepo.GetAll();
         }
 
-        // GET: api/<DonHangController>
+        // GET: api/<DonHangController>/ChoXacNhan
         [HttpGet("ChoXacNhan")]
         public IEnumerable<DonHangEntity> GetChoXacNhan()
         {
@@ -63,24 +64,21 @@ namespace DctAPI.Controllers
 
         // GET api/<DonHangController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<DonHangEntity> Get(int id)
         {
-            return "value";
+            return await donHangRepo.GetDonHang(id);
         }
 
         // POST api/<DonHangController>
         [HttpPost]
         public async Task<ActionResult<DonHangEntity>> PostDonHang([FromBody] DonHangEntity dh)
-
         {
-
             var result = await donHangRepo.PostDonHang(dh);
             return result;
-
         }
 
-            // PUT api/<DonHangController>/5
-            [HttpPut("{id}")]
+        // PUT api/<DonHangController>/5
+        [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
@@ -106,11 +104,11 @@ namespace DctAPI.Controllers
                     var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
                     if (_donHang != null)
                     {
-                        return Ok();
+                        return Ok(_donHang);
                     }
                 }
             }
-            return BadRequest();
+            return BadRequest("Yeu cau khong hop le");
         }
 
         // POST api/<DonHangController>/{id}/Huy/{shipperId}
@@ -128,11 +126,11 @@ namespace DctAPI.Controllers
                     var _donHang = await donHangRepo.ShipperHuyDonHang(donHang);
                     if (_donHang != null)
                     {
-                        return Ok();
+                        return Ok(_donHang);
                     }
                 }
             }
-            return BadRequest();
+            return BadRequest("Yeu cau khong hop le");
         }
 
         [HttpPost("KhachHangDatHang")]
