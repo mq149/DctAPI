@@ -126,23 +126,18 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.CuaHangSanPhamEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<byte[]>("CreatedAt")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bytea");
-
                     b.Property<int>("CuaHangId")
                         .HasColumnType("integer");
 
                     b.Property<int>("SanPhamId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SoLuong")
+                    b.Property<byte[]>("CreatedAt")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
+
+                    b.Property<int?>("SoLuong")
                         .HasColumnType("integer");
 
                     b.Property<byte[]>("UpdatedAt")
@@ -150,7 +145,9 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.HasKey("Id");
+                    b.HasKey("CuaHangId", "SanPhamId");
+
+                    b.HasIndex("SanPhamId");
 
                     b.ToTable("CuaHangSanPham");
                 });
@@ -700,10 +697,7 @@ namespace DctAPI.Migrations
                     b.Property<float>("GiaSP")
                         .HasColumnType("real");
 
-                    b.Property<int>("HinhAnhId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("HinhSanPhamId")
+                    b.Property<int>("HinhSanPhamId")
                         .HasColumnType("integer");
 
                     b.Property<int>("LoaiSPId")
@@ -815,15 +809,12 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
-                    b.Property<int?>("UserEntityId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserEntityId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("TaiKhoanNganHang");
                 });
@@ -863,7 +854,7 @@ namespace DctAPI.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("AvatarIdId")
+                    b.Property<int?>("AvatarId")
                         .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -938,7 +929,7 @@ namespace DctAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AvatarIdId");
+                    b.HasIndex("AvatarId");
 
                     b.HasIndex("DiaChiId");
 
@@ -1077,6 +1068,21 @@ namespace DctAPI.Migrations
                     b.HasOne("DctApi.Shared.Models.UserEntity", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DctApi.Shared.Models.CuaHangSanPhamEntity", b =>
+                {
+                    b.HasOne("DctApi.Shared.Models.CuaHangEntity", "CuaHang")
+                        .WithMany()
+                        .HasForeignKey("CuaHangId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DctApi.Shared.Models.SanPhamEntity", "SanPham")
+                        .WithMany()
+                        .HasForeignKey("SanPhamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1237,7 +1243,9 @@ namespace DctAPI.Migrations
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "HinhSanPham")
                         .WithMany()
-                        .HasForeignKey("HinhSanPhamId");
+                        .HasForeignKey("HinhSanPhamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DctApi.Shared.Models.LoaiSanPhamEntity", "LoaiSP")
                         .WithMany()
@@ -1263,16 +1271,18 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.TaiKhoanNganHangEntity", b =>
                 {
-                    b.HasOne("DctApi.Shared.Models.UserEntity", "UserEntity")
+                    b.HasOne("DctApi.Shared.Models.UserEntity", "User")
                         .WithMany()
-                        .HasForeignKey("UserEntityId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.UserEntity", b =>
                 {
-                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "AvatarId")
+                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "Avatar")
                         .WithMany()
-                        .HasForeignKey("AvatarIdId");
+                        .HasForeignKey("AvatarId");
 
                     b.HasOne("DctApi.Shared.Models.DiaChiEntity", "DiaChi")
                         .WithMany()

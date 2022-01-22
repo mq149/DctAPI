@@ -7,6 +7,8 @@
   <ItemGroup>
     <Folder Include="Resources\Images\Users\" />
     <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
   <ItemGroup>

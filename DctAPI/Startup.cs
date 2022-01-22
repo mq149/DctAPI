@@ -149,10 +149,15 @@ namespace DctAPI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseStaticFiles();
             SeedData.Seed(_context,_userManage,_roleManage);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.Run(async (contex) => {
+                await contex.Response.WriteAsync("Khong Tim Thay");
             });
         }
     }
