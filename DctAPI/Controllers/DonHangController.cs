@@ -55,7 +55,6 @@ namespace DctAPI.Controllers
             //return donHangRepo.GetAll();
         }
 
-        [EnableCors("AllowOrigin")]
         // GET: api/<DonHangController>/ChoXacNhan
         [HttpGet("ChoXacNhan")]
         public IEnumerable<DonHangEntity> GetChoXacNhan()
@@ -73,16 +72,13 @@ namespace DctAPI.Controllers
         // POST api/<DonHangController>
         [HttpPost]
         public async Task<ActionResult<DonHangEntity>> PostDonHang([FromBody] DonHangEntity dh)
-
         {
-
             var result = await donHangRepo.PostDonHang(dh);
             return result;
-
         }
 
-            // PUT api/<DonHangController>/5
-            [HttpPut("{id}")]
+        // PUT api/<DonHangController>/5
+        [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
@@ -93,7 +89,6 @@ namespace DctAPI.Controllers
         {
         }
 
-        [EnableCors("AllowOrigin")]
         // POST api/<DonHangController>/{id}/XacNhan/{shipperId}
         [HttpPost("{id}/ShipperXacNhan/{shipperId}")]
         public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
@@ -116,7 +111,6 @@ namespace DctAPI.Controllers
             return BadRequest("Yeu cau khong hop le");
         }
 
-        [EnableCors("AllowOrigin")]
         // POST api/<DonHangController>/{id}/Huy/{shipperId}
         [HttpPost("{id}/ShipperHuy/{shipperId}")]
         public async Task<ActionResult<DonHangEntity>> ShipperHuyDonHang(int id, int shipperId)
