@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
-    public partial class initialized : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,23 +37,6 @@ namespace DctAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CauHoiTracNghiem", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CuaHangSanPham",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CuaHangId = table.Column<int>(nullable: false),
-                    SanPhamId = table.Column<int>(nullable: false),
-                    SoLuong = table.Column<int>(nullable: false),
-                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CuaHangSanPham", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,7 +256,7 @@ namespace DctAPI.Migrations
                     HoTen = table.Column<string>(nullable: true),
                     GioiTinh = table.Column<string>(nullable: true),
                     NgaySinh = table.Column<DateTime>(nullable: true),
-                    AvatarIdId = table.Column<int>(nullable: true),
+                    AvatarId = table.Column<int>(nullable: true),
                     DiaChiId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
@@ -282,8 +265,8 @@ namespace DctAPI.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_HinhAnh_AvatarIdId",
-                        column: x => x.AvatarIdId,
+                        name: "FK_AspNetUsers_HinhAnh_AvatarId",
+                        column: x => x.AvatarId,
                         principalTable: "HinhAnh",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -567,7 +550,6 @@ namespace DctAPI.Migrations
                     MaNganHang = table.Column<string>(nullable: true),
                     LienKet = table.Column<bool>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
-                    UserEntityId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
@@ -575,11 +557,11 @@ namespace DctAPI.Migrations
                 {
                     table.PrimaryKey("PK_TaiKhoanNganHang", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TaiKhoanNganHang_AspNetUsers_UserEntityId",
-                        column: x => x.UserEntityId,
+                        name: "FK_TaiKhoanNganHang_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -752,6 +734,33 @@ namespace DctAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CuaHangSanPham",
+                columns: table => new
+                {
+                    CuaHangId = table.Column<int>(nullable: false),
+                    SanPhamId = table.Column<int>(nullable: false),
+                    SoLuong = table.Column<int>(nullable: true),
+                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CuaHangSanPham", x => new { x.CuaHangId, x.SanPhamId });
+                    table.ForeignKey(
+                        name: "FK_CuaHangSanPham_CuaHang_CuaHangId",
+                        column: x => x.CuaHangId,
+                        principalTable: "CuaHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CuaHangSanPham_SanPham_SanPhamId",
+                        column: x => x.SanPhamId,
+                        principalTable: "SanPham",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -779,9 +788,9 @@ namespace DctAPI.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_AvatarIdId",
+                name: "IX_AspNetUsers_AvatarId",
                 table: "AspNetUsers",
-                column: "AvatarIdId");
+                column: "AvatarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_DiaChiId",
@@ -818,6 +827,11 @@ namespace DctAPI.Migrations
                 name: "IX_CuaHang_UserId",
                 table: "CuaHang",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CuaHangSanPham_SanPhamId",
+                table: "CuaHangSanPham",
+                column: "SanPhamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DanhGia_DonHangId",
@@ -955,9 +969,9 @@ namespace DctAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TaiKhoanNganHang_UserEntityId",
+                name: "IX_TaiKhoanNganHang_UserId",
                 table: "TaiKhoanNganHang",
-                column: "UserEntityId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

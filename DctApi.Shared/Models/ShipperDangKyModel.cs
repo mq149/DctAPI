@@ -17,21 +17,8 @@ namespace DctApi.Shared.Models
         public string HoTen { get; set; }
         [Required]
         public string MatKhau { get; set; }
-        [Compare("MatKhau", ErrorMessage = Config.ErrorMessage.comfirmPassword)]
-        public string XacNhanMatKhau { get; set; }
         [Required,
             RegularExpression(Config.Regex.email, ErrorMessage = Config.ErrorMessage.emailRegex)]
         public string Email { get; set; }
-
-        public string toJSON()
-        {
-            return JsonSerializer.Serialize(new
-            {
-                SDT = this.SDT,
-                HoTen = this.HoTen,
-                MatKhau = this.MatKhau,
-                Email = this.Email
-            });
-        }
     }
 }

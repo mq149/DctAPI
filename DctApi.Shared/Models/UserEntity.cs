@@ -21,11 +21,16 @@ namespace DctApi.Shared.Models
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
-        public HinhAnhEntity AvatarId { get; set; }
+
 
         //[ForeignKey("DiaChi")]
 
         //[ForeignKey("DiaChi")]
+
+
+
+        public int? AvatarId { get; set; }
+        public HinhAnhEntity Avatar { get; set; }
 
         public int? DiaChiId { get; set; }
         public DiaChiEntity DiaChi { get; set; }
