@@ -33,7 +33,7 @@ namespace DctAPI.Controllers {
 
         [HttpPost]
         [Route("RegisterAdmin")]
-        public async Task<IActionResult> Register([FromBody] RegisteModel model) {
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisteModel model) {
             var userExits = await _userManage.FindByNameAsync(model.username);
             if (userExits != null) {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exits" });
@@ -56,29 +56,6 @@ namespace DctAPI.Controllers {
 
         }
 
-        [HttpPost]
-        [Route("RegisterShipper")]
-        public async Task<IActionResult> RegisterShipper([FromBody] RegisteModel model) {
-            var userExits = await _userManage.FindByNameAsync(model.username);
-            if (userExits != null) {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "User already exits" });
-            }
-            UserEntity userNew = new UserEntity() {
-                UserName = model.username,
-                SDT = model.username,
-                Email = model.email,
-            };
-            var result = await _userManage.CreateAsync(userNew, model.password);
-            if (!result.Succeeded) {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { status = "Error", message = "Create user faild" });
-            }
-            //set role for user
-            if (!await _roleManage.RoleExistsAsync(RoleName.Shipper)) {
-                await _roleManage.CreateAsync(new RoleEntity() { Id = (int)Role.Shipper, Name = "Shipper", Ten = "Shipper" });
-            }
-            await _userManage.AddToRoleAsync(userNew, RoleName.Shipper);
-            return Ok(new Response { status = "Success", message = "User created successfully" });
-
-        }
+       
     }
 }

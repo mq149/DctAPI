@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DctAPI.Repositories.Interfaces
 {
-    public interface IShipperRepository : IRepositoryBase<ShipperEntity>
+    public interface IHinhAnhRepository : IRepositoryBase<HinhAnhEntity>
     {
-        public Task<ShipperEntity> GetShipper(int shipper);
+        public Task<int?> Upsert(HinhAnhEntity hinhAnh);
     }
 }

@@ -13,12 +13,11 @@ namespace DctAPI.Repositories.Interfaces
         public IEnumerable<SanPhamEntity> GetAllSanPham();
         public IEnumerable<SanPhamEntity> GetSanPhamID(int id);
 
-        public SanPhamEntity GetSanPhamById(int id);
-        public List<SanPhamEntity> GetSanPhamByName(string name);
+        public Task<SanPhamEntity> GetSanPhamById(int id);
+        public Task<List<SanPhamEntity>> GetSanPhamByName(string name);
         public Task<SanPhamEntity> CreateSanPham(SanPhamEntity sp);
-        //public Task<SanPhamEntity> UpdateSanPham(SanPhamEntity sp);
-        public bool UpdateSanPham(SanPhamEntity sp);
-        public bool DeleteSanPham(int id);
+        public Task<SanPhamEntity> UpdateSanPham(SanPhamEntity sp);
+        public Task<SanPhamEntity> DeleteSanPham(int id);
 
 
     }
