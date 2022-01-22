@@ -18,6 +18,11 @@ namespace DctAPI.Repositories.Implements
             this.context = context;
         }
 
+        public async Task<HinhAnhEntity> FindAsync(int id)
+        {
+            return await context.HinhAnh.FindAsync(id);
+        }
+
         public async Task<int?> Upsert(HinhAnhEntity hinhAnh)
         {
             var _hinhAnh = context.HinhAnh

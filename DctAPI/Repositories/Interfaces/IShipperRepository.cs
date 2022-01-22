@@ -9,5 +9,6 @@ namespace DctAPI.Repositories.Interfaces
     public interface IShipperRepository : IRepositoryBase<ShipperEntity>
     {
         public Task<ShipperEntity> GetShipper(int shipper);
+        public Task<Object> GetShipper(int userId, string sdt, string email);
     }
 }
