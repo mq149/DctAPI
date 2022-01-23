@@ -10,6 +10,10 @@ namespace DctApi.Shared.Models
         [Key]
         public int Id { get; set; }
         public string Ten { get; set; }
+
+        public string DienGiai { get; set; }
+        public int? HinhAnhId { get; set; }
+        public HinhAnhEntity HinhAnh { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
         [Timestamp]

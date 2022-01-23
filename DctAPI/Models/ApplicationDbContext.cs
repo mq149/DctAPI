@@ -11,7 +11,7 @@ using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace DctAPI.Models {
-    public class ApplicationDbContext : IdentityDbContext<UserEntity, RoleEntity,int> {
+    public class ApplicationDbContext : IdentityDbContext<UserEntity, RoleEntity, int> {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
 
         }
@@ -29,12 +29,13 @@ namespace DctAPI.Models {
         public DbSet<LoaiDanhGiaEntity> LoaiDanhGia { get; set; }
         public DbSet<LoaiSanPhamEntity> LoaiSanPham { get; set; }
         public DbSet<CuaHangEntity> CuaHang { get; set; }
+        public DbSet<ChiTietCuaHang> ChiTietCuaHang { get; set; }
+        public DbSet<ThoiGianMoCuaHang> ThoiGianCuaHang { get; set; }
         public DbSet<NhaSanXuatEntity> NhaSanXuat { get; set; }
         public DbSet<SanPhamEntity> SanPham { get; set; }
         public DbSet<CuaHangSanPhamEntity> CuaHangSanPham { get; set; }
 
-        internal object Set<T>(object sanPham)
-        {
+        internal object Set<T>(object sanPham) {
             throw new NotImplementedException();
         }
 
@@ -49,7 +50,19 @@ namespace DctAPI.Models {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<CuaHangSanPhamEntity>().HasKey(key => new { key.CuaHangId, key.SanPhamId });
+            modelBuilder.Entity<CuaHangSanPhamEntity>(entity => {
+                entity.HasKey(key => new { key.CuaHangId, key.SanPhamId });
+
+                entity.HasOne(d => d.CuaHang)
+                   .WithMany(p => p.CuaHangSanPham)
+                   .HasForeignKey(d => d.CuaHangId)
+                   .HasConstraintName("FK__CuaHangSanPham__CuaHang__43D61337");
+
+                entity.HasOne(d => d.SanPham)
+                    .WithMany(p => p.CuaHangSanPham)
+                    .HasForeignKey(d => d.SanPhamId)
+                    .HasConstraintName("FK__CuaHangSanPham__SanPham___42E1EEFE");
+            });
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder) {
