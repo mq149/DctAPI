@@ -8,5 +8,6 @@ namespace DctAPI.Repositories.Interfaces
 {
     public interface IKhachHangRepository: IRepositoryBase<KhachHangEntity>
     {
+        public Task<int> findIdKhachHang(int id);
     }
 }

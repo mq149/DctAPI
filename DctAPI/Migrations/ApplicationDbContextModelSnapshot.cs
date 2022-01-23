@@ -257,8 +257,14 @@ namespace DctAPI.Migrations
                     b.Property<DateTime>("NgayMuaHang")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("NguoiNhan")
+                        .HasColumnType("text");
+
                     b.Property<int>("PTTTId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("SDT")
+                        .HasColumnType("text");
 
                     b.Property<int?>("ShipperId")
                         .HasColumnType("integer");
