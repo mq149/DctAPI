@@ -18,6 +18,18 @@ namespace DctAPI.Repositories.Implements
             this.context = context;
         }
 
+        public async Task<Object> GetShipperId(int userId)
+        {
+            var shipper = await context.Shipper
+                .Where(s => s.UserId == userId)
+                .FirstOrDefaultAsync();
+            if (shipper != null)
+            {
+                return shipper.Id;
+            }
+            return null;
+        }
+
         public async Task<ShipperEntity> GetShipper(int shipper)
         {
             return await context.Shipper.Where(sp => sp.Id == shipper)
