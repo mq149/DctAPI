@@ -1,5 +1,7 @@
 ﻿using DctApi.Shared.Models;
+
 using DctAPI.Models;
+
 using DctAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +16,7 @@ namespace DctAPI.Controllers {
 
     [Route("api/[Controller]")]
     [ApiController]
+
     public class CuaHangController : ControllerBase {
         private readonly ICuaHangRepository _cuahangRepository;
 
@@ -29,8 +32,18 @@ namespace DctAPI.Controllers {
 
         [HttpGet]
         [Route("getstorebyuserId")]
-        public async Task<ActionResult<CuaHangEntity>> GetCuaHangByUserId(int UserId) {
+        public async Task<ActionResult<CuaHangEntity>> GetCuaHangByUserId(int UserId)
+        {
             return await _cuahangRepository.GetCuaHangByUserId(UserId);
         }
+        [HttpGet("TatCaCuaHang")]
+        public IEnumerable<CuaHangEntity> GetAllCuaHang()
+        {
+            return _cuahangRepository.GetAllCuaHang();
+
+        }
+
+  
+ 
     }
 }

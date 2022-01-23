@@ -33,7 +33,8 @@ namespace DctAPI.Repositories.Implements
             return false;
         }
 
-        public async Task<CuaHangEntity> GetCuaHangByUserId(int UserId) {
+        public async Task<CuaHangEntity> GetCuaHangByUserId(int UserId)
+        {
             return await context.CuaHang.Where(cuahang => cuahang.UserId == UserId)
                                                                     .Include(cuahang => cuahang.ChiTietCuaHang)
                                                                     .Include(cuahang => cuahang.ChiTietCuaHang.AnhQuan)
@@ -41,6 +42,12 @@ namespace DctAPI.Repositories.Implements
                                                                     .Include(cuahang => cuahang.HinhChungMinhNhanDan)
                                                                     .Include(cuahang => cuahang.LoaiCH)
                                                                     .Include(cuahang => cuahang.DiaChiCuaHang).FirstOrDefaultAsync();
+        }
+        public IEnumerable<CuaHangEntity> GetAllCuaHang()
+        {
+            return context.CuaHang    
+               .ToList();
+
         }
     }
 }
