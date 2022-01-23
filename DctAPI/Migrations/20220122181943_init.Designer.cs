@@ -10,13 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:DctAPI/Migrations/20220120193538_initial.Designer.cs
-    [Migration("20220120193538_initial")]
-    partial class initial
-=======
-    [Migration("20220122160040_init")]
+    [Migration("20220122181943_init")]
     partial class init
->>>>>>> master:DctAPI/Migrations/20220122160040_init.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
