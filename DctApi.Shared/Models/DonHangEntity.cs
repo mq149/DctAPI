@@ -15,8 +15,6 @@ namespace DctApi.Shared.Models
         public int KhachHangId { get; set; }
         public KhachHangEntity KhachHang { get; set; }
         [Required]
-
-
         public int CuaHangId { get; set; }
         public CuaHangEntity CuaHang { get; set; }
         public int? ShipperId { get; set; }
@@ -29,23 +27,19 @@ namespace DctApi.Shared.Models
         [ForeignKey("TTDH")]
         public int TTDHId { get; set; }
         public TrangThaiDonHangEntity TTDH { get; set; }
-
-      
-    
+        public string SDT { get; set; }
+        public string NguoiNhan { get; set; }
         [Required]
         [ForeignKey("PTTT")]
         public int PTTTId { get; set; }
-
         public PhuongThucThanhToanEntity PTTT { get; set; }
         [Required]
         public float TongTien { get; set; }
         [Required]
         public DateTime NgayMuaHang { get; set; }
         public DateTime NgayGiao { get; set; }
-       
         public virtual List<SanPhamEntity> ListSanPham { get; set; }
-
-    [Timestamp]
+        [Timestamp]
         public byte[] CreatedAt { get; set; }
         [Timestamp]
         public byte[] UpdatedAt { get; set; }

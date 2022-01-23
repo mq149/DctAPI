@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DctApi.Shared.Models
@@ -9,39 +10,29 @@ namespace DctApi.Shared.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        [ForeignKey("Shipper")]
+        public int ShipperId { get; set; }
+        public ShipperEntity Shipper { get; set; }
         public string NgheNghiep { get; set; }
-        [Required]
         public HinhAnhEntity CMNDMatTruoc { get; set; }
-        [Required]
         public HinhAnhEntity CMNDMatSau { get; set; }
-        [Required]
-        public DateTime CMNDNgayCap { get; set; }
-        [Required]
+        public DateTime? CMNDNgayCap { get; set; }
         public string CMNDNoiCap { get; set; }
-        [Required]
         public string BLXSo { get; set; }
-        [Required]
         public string BLXHang { get; set; }
-        [Required]
         public HinhAnhEntity BLXMatTruoc { get; set; }
-        [Required]
         public HinhAnhEntity BLXMatSau { get; set; }
-        [Required]
         public HinhAnhEntity PhuongTienHinhDau { get; set; }
-        [Required]
         public HinhAnhEntity PhuongTienHinhDuoi { get; set; }
-        [Required]
         public HinhAnhEntity GiayKiemTraXe { get; set; }
-        [Required]
         public HinhAnhEntity GiayDKXMatTruoc { get; set; }
-        [Required]
         public HinhAnhEntity GiayDKXMatSau { get; set; }
-        [Required]
-        public int NamSXXe { get; set; }
-        [Required]
+        public int? NamSXXe { get; set; }
         public HinhAnhEntity BHXMatTruoc { get; set; }
-        [Required]
         public HinhAnhEntity BHXMatSau { get; set; }
+        public bool? HoanThanh { get; set; }
+        public bool? DaDuyet { get; set; }
         public decimal? DiemBaiKiemTra { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }

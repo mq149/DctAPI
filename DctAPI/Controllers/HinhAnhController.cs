@@ -30,17 +30,17 @@ namespace DctAPI.Controllers
         //    return new string[] { "value1", "value2" };
         //}
 
-        //// GET api/<HinhAnhController>/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<HinhAnhEntity>> Get(int id)
-        //{
-        //    var hinhAnh = await hinhAnhRepo.FindAsync(id);
-        //    if (hinhAnh == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return hinhAnh;
-        //}
+        // GET api/<HinhAnhController>/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<HinhAnhEntity>> Get(int id)
+        {
+            var hinhAnh = await hinhAnhRepo.FindAsync(id);
+            if (hinhAnh == null)
+            {
+                return NotFound();
+            }
+            return hinhAnh;
+        }
 
         //// POST api/<HinhAnhController>
         //[HttpPost]

@@ -29,5 +29,28 @@ namespace DctAPI.Controllers
             this.shipperRepo = shipperRepo;
         }
 
+        // POST api/<ShipperController>/ThongTinCaNhan
+        [HttpPost("ThongTinCaNhan")]
+        public async Task<ActionResult<ShipperEntity>> Get([FromBody] UserBasicInfo user)
+        {
+            var shipperInfo = await shipperRepo.GetShipper(user.Id, user.SDT, user.Email);
+            if (shipperInfo != null)
+            {
+                return Ok(shipperInfo);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("GetId/{userId}")]
+        public async Task<ActionResult<ShipperEntity>> GetShipperId(int userId)
+        {
+            var id = await shipperRepo.GetShipperId(userId);
+            if (id != null)
+            {
+                return Ok(id);
+            }
+            return NotFound();
+        }
+
     }
 }

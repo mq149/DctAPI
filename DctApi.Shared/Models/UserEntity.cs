@@ -12,16 +12,13 @@ namespace DctApi.Shared.Models
     {
         [Key]
         public override int Id { get; set; }
-
         [Required(ErrorMessage = Config.ErrorMessage.sdtRequired),
             RegularExpression(Config.Regex.sdt, ErrorMessage = Config.ErrorMessage.sdtRegex)]
         public string SDT { get; set; }
-
         public override string Email { get; set ; }
         public string HoTen { get; set; }
         public string GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
-
         public int? AvatarId { get; set; }
         public HinhAnhEntity Avatar { get; set; }
         public int? DiaChiId { get; set; }
