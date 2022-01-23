@@ -9,5 +9,6 @@ namespace DctAPI.Repositories.Interfaces
     public interface IHinhAnhRepository : IRepositoryBase<HinhAnhEntity>
     {
         public Task<int?> Upsert(HinhAnhEntity hinhAnh);
+        public Task<HinhAnhEntity> FindAsync(int id);
     }
 }

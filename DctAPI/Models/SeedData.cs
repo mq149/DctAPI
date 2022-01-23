@@ -25,6 +25,7 @@ namespace DctAPI.Models {
             SeedUser(_userManage);
             SeedDataLoaiCuaHang(_context);
             SeedDataCuaHang(_context);
+            SeedDataCuaHangSanPham(_context);
             SeedDataShipper(_context);
             SeedDataKhachHang(_context);
             SeedDataLoaiDanhGia(_context);
@@ -211,12 +212,12 @@ namespace DctAPI.Models {
         public static void SeedDataTrangThaiDonHang(ApplicationDbContext _context) {
             if (!_context.TrangThaiDonHang.Any()) {
                 _context.TrangThaiDonHang.AddRange(
-                    new TrangThaiDonHangEntity { Ten = "Chờ xác nhận" },
-                    new TrangThaiDonHangEntity { Ten = "Cửa hàng đã xác nhận" },
-                    new TrangThaiDonHangEntity {Ten = "Đang lấy hàng" },
-                    new TrangThaiDonHangEntity {Ten = "Đang giao hàng" },
-                    new TrangThaiDonHangEntity {Ten = "Đã giao hàng" },
-                    new TrangThaiDonHangEntity {Ten = "Đã huỷ" });
+                    new TrangThaiDonHangEntity { Id=1,Ten = "Chờ xác nhận" },
+                    new TrangThaiDonHangEntity {Id=2, Ten = "Cửa hàng đã xác nhận" },
+                    new TrangThaiDonHangEntity {Id=3,Ten = "Đang lấy hàng" },
+                    new TrangThaiDonHangEntity {Id=4,Ten = "Đang giao hàng" },
+                    new TrangThaiDonHangEntity {Id=5,Ten = "Đã giao hàng" },
+                    new TrangThaiDonHangEntity {Id=6,Ten = "Đã huỷ" });
             }
             _context.SaveChanges();
         }
@@ -256,6 +257,22 @@ namespace DctAPI.Models {
                                new HinhAnhEntity {
                                    Ten = "shoes",
                                    Url = "https://i.ibb.co/djqfkpN/shoes.png"
+                               },
+                                 new HinhAnhEntity {
+                                     Ten = "SieuThiMini",
+                                     Url = "https://gs25.com.vn/media/1049/cuahang.jpg"
+                                 },
+                           new HinhAnhEntity {
+                               Ten = "HaiSan",
+                               Url = "https://haisanhoanglong.com/wp-content/uploads/2018/06/hai-san-tuoi-song.jpg"
+                           },
+                             new HinhAnhEntity {
+                                 Ten = "BachHoaTongHop",
+                                 Url = "https://posm.asia/wp-content/uploads/2020/10/Thiet-ke-thi-cong-sieu-thi-bach-hoa-xanh-7.jpg"
+                             },
+                               new HinhAnhEntity {
+                                   Ten = "RauCu",
+                                   Url = "https://photo-cms-baonghean.zadn.vn/w607/Uploaded/2021/nkdkswkqoc/201604/original/images1516345_cu_qua_2.jpg"
                                });
             }
             _context.SaveChanges();
@@ -374,8 +391,22 @@ namespace DctAPI.Models {
         }
         public static void SeedDataCuaHang(ApplicationDbContext _context) {
             if (!_context.CuaHang.Any()) {
-                _context.CuaHang.AddRange(new CuaHangEntity {/* Id = 1, */UserId = 2, LoaiCHId = 1, TenCuaHang = "Bách Hóa X", TrangThaiKichHoat = true },
-                    new CuaHangEntity {/* Id = 2, */UserId = 4, LoaiCHId = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true });
+                _context.CuaHang.AddRange(new CuaHangEntity {/* Id = 1, */UserId = 2, LoaiCHId = 1, TenCuaHang = "Bách Hóa X", TrangThaiKichHoat = true,LoaiHinhDangKy=1 },
+                    new CuaHangEntity {/* Id = 2, */UserId = 4, LoaiCHId = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true,LoaiHinhDangKy=2 });
+            }
+            _context.SaveChanges();
+        }
+
+        public static void SeedDataCuaHangSanPham(ApplicationDbContext _context) {
+            if (!_context.CuaHangSanPham.Any()) {
+                _context.CuaHangSanPham.AddRange(
+                    new CuaHangSanPhamEntity {CuaHangId=1,SanPhamId=1,SoLuong=100},
+                    new CuaHangSanPhamEntity {CuaHangId=2,SanPhamId=2,SoLuong=50 },
+                    new CuaHangSanPhamEntity {CuaHangId=1,SanPhamId=3,SoLuong=50 },
+                    new CuaHangSanPhamEntity {CuaHangId=2,SanPhamId=1,SoLuong=200 },
+                    new CuaHangSanPhamEntity {CuaHangId=1,SanPhamId=2,SoLuong=300 },
+                    new CuaHangSanPhamEntity {CuaHangId=2,SanPhamId=3,SoLuong=500 }
+                    );
             }
             _context.SaveChanges();
         }
@@ -404,10 +435,10 @@ namespace DctAPI.Models {
 
         public static void SeedDataLoaiCuaHang(ApplicationDbContext _context) {
             if (!_context.LoaiCuaHang.Any()) {
-                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { /*Id = 1, */Ten = "Bán sỉ" },
-                    new LoaiCuaHangEntity {/* Id = 2,*/ Ten = "Bán lẻ" },
-                    new LoaiCuaHangEntity {/* Id = 3,*/ Ten = "Bán quà lưu niệm" },
-                    new LoaiCuaHangEntity {/* Id = 4,*/ Ten = "Bán online" });
+                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { /*Id = 1, */Ten = "Siêu Thị Mini", DienGiai="Kinh doanh tổng hợp các loại mặt hàng thiết yếu, đồ ăn, thức uống và nhu yếu phẩm, v.v",HinhAnhId=4 },
+                    new LoaiCuaHangEntity {/* Id = 2,*/ Ten = "Hải Sản", DienGiai="Kinh doanh hải sản tươi sống như mực, tôm, cua, ghẹ, cá các loại, v.v",HinhAnhId=3 },
+                    new LoaiCuaHangEntity {/* Id = 3,*/ Ten = "Bách Hóa Tổng Hợp", DienGiai="Kinh doanh các loại thực phẩm tươi sống như thịt, cá, trứng đến các loại thực phẩm rau củ quả và nhu yếu phẩm, v.v",HinhAnhId=2 },
+                    new LoaiCuaHangEntity {/* Id = 4,*/ Ten = "Rau Củ", DienGiai="Kinh doanh các loại rau củ quả sạch, v.v",HinhAnhId=1 });
             }
             _context.SaveChanges();
         }
