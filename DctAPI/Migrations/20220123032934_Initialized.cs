@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
-    public partial class init : Migration
+    public partial class Initialized : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -279,104 +279,6 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HoSoShipper",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NgheNghiep = table.Column<string>(nullable: true),
-                    CMNDMatTruocId = table.Column<int>(nullable: false),
-                    CMNDMatSauId = table.Column<int>(nullable: false),
-                    CMNDNgayCap = table.Column<DateTime>(nullable: false),
-                    CMNDNoiCap = table.Column<string>(nullable: false),
-                    BLXSo = table.Column<string>(nullable: false),
-                    BLXHang = table.Column<string>(nullable: false),
-                    BLXMatTruocId = table.Column<int>(nullable: false),
-                    BLXMatSauId = table.Column<int>(nullable: false),
-                    PhuongTienHinhDauId = table.Column<int>(nullable: false),
-                    PhuongTienHinhDuoiId = table.Column<int>(nullable: false),
-                    GiayKiemTraXeId = table.Column<int>(nullable: false),
-                    GiayDKXMatTruocId = table.Column<int>(nullable: false),
-                    GiayDKXMatSauId = table.Column<int>(nullable: false),
-                    NamSXXe = table.Column<int>(nullable: false),
-                    BHXMatTruocId = table.Column<int>(nullable: false),
-                    BHXMatSauId = table.Column<int>(nullable: false),
-                    DiemBaiKiemTra = table.Column<decimal>(nullable: true),
-                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HoSoShipper", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_BHXMatSauId",
-                        column: x => x.BHXMatSauId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_BHXMatTruocId",
-                        column: x => x.BHXMatTruocId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_BLXMatSauId",
-                        column: x => x.BLXMatSauId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_BLXMatTruocId",
-                        column: x => x.BLXMatTruocId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_CMNDMatSauId",
-                        column: x => x.CMNDMatSauId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_CMNDMatTruocId",
-                        column: x => x.CMNDMatTruocId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_GiayDKXMatSauId",
-                        column: x => x.GiayDKXMatSauId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_GiayDKXMatTruocId",
-                        column: x => x.GiayDKXMatTruocId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_GiayKiemTraXeId",
-                        column: x => x.GiayKiemTraXeId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_PhuongTienHinhDauId",
-                        column: x => x.PhuongTienHinhDauId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HoSoShipper_HinhAnh_PhuongTienHinhDuoiId",
-                        column: x => x.PhuongTienHinhDuoiId,
-                        principalTable: "HinhAnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -621,6 +523,111 @@ namespace DctAPI.Migrations
                         name: "FK_DonHang_TrangThaiDonHang_TTDHId",
                         column: x => x.TTDHId,
                         principalTable: "TrangThaiDonHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HoSoShipper",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ShipperId = table.Column<int>(nullable: false),
+                    NgheNghiep = table.Column<string>(nullable: true),
+                    CMNDMatTruocId = table.Column<int>(nullable: true),
+                    CMNDMatSauId = table.Column<int>(nullable: true),
+                    CMNDNgayCap = table.Column<DateTime>(nullable: true),
+                    CMNDNoiCap = table.Column<string>(nullable: true),
+                    BLXSo = table.Column<string>(nullable: true),
+                    BLXHang = table.Column<string>(nullable: true),
+                    BLXMatTruocId = table.Column<int>(nullable: true),
+                    BLXMatSauId = table.Column<int>(nullable: true),
+                    PhuongTienHinhDauId = table.Column<int>(nullable: true),
+                    PhuongTienHinhDuoiId = table.Column<int>(nullable: true),
+                    GiayKiemTraXeId = table.Column<int>(nullable: true),
+                    GiayDKXMatTruocId = table.Column<int>(nullable: true),
+                    GiayDKXMatSauId = table.Column<int>(nullable: true),
+                    NamSXXe = table.Column<int>(nullable: true),
+                    BHXMatTruocId = table.Column<int>(nullable: true),
+                    BHXMatSauId = table.Column<int>(nullable: true),
+                    DiemBaiKiemTra = table.Column<decimal>(nullable: true),
+                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HoSoShipper", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_BHXMatSauId",
+                        column: x => x.BHXMatSauId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_BHXMatTruocId",
+                        column: x => x.BHXMatTruocId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_BLXMatSauId",
+                        column: x => x.BLXMatSauId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_BLXMatTruocId",
+                        column: x => x.BLXMatTruocId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_CMNDMatSauId",
+                        column: x => x.CMNDMatSauId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_CMNDMatTruocId",
+                        column: x => x.CMNDMatTruocId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_GiayDKXMatSauId",
+                        column: x => x.GiayDKXMatSauId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_GiayDKXMatTruocId",
+                        column: x => x.GiayDKXMatTruocId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_GiayKiemTraXeId",
+                        column: x => x.GiayKiemTraXeId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_PhuongTienHinhDauId",
+                        column: x => x.PhuongTienHinhDauId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_HinhAnh_PhuongTienHinhDuoiId",
+                        column: x => x.PhuongTienHinhDuoiId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoSoShipper_Shipper_ShipperId",
+                        column: x => x.ShipperId,
+                        principalTable: "Shipper",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -927,6 +934,11 @@ namespace DctAPI.Migrations
                 name: "IX_HoSoShipper_PhuongTienHinhDuoiId",
                 table: "HoSoShipper",
                 column: "PhuongTienHinhDuoiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HoSoShipper_ShipperId",
+                table: "HoSoShipper",
+                column: "ShipperId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_KhachHang_UserId",

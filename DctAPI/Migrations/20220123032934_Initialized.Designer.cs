@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220122160040_init")]
-    partial class init
+    [Migration("20220123032934_Initialized")]
+    partial class Initialized
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -335,37 +335,34 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("BHXMatSauId")
+                    b.Property<int?>("BHXMatSauId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("BHXMatTruocId")
+                    b.Property<int?>("BHXMatTruocId")
                         .HasColumnType("integer");
 
                     b.Property<string>("BLXHang")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("BLXMatSauId")
+                    b.Property<int?>("BLXMatSauId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("BLXMatTruocId")
+                    b.Property<int?>("BLXMatTruocId")
                         .HasColumnType("integer");
 
                     b.Property<string>("BLXSo")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("CMNDMatSauId")
+                    b.Property<int?>("CMNDMatSauId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CMNDMatTruocId")
+                    b.Property<int?>("CMNDMatTruocId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CMNDNgayCap")
+                    b.Property<DateTime?>("CMNDNgayCap")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("CMNDNoiCap")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<byte[]>("CreatedAt")
@@ -376,25 +373,28 @@ namespace DctAPI.Migrations
                     b.Property<decimal?>("DiemBaiKiemTra")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("GiayDKXMatSauId")
+                    b.Property<int?>("GiayDKXMatSauId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("GiayDKXMatTruocId")
+                    b.Property<int?>("GiayDKXMatTruocId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("GiayKiemTraXeId")
+                    b.Property<int?>("GiayKiemTraXeId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("NamSXXe")
+                    b.Property<int?>("NamSXXe")
                         .HasColumnType("integer");
 
                     b.Property<string>("NgheNghiep")
                         .HasColumnType("text");
 
-                    b.Property<int>("PhuongTienHinhDauId")
+                    b.Property<int?>("PhuongTienHinhDauId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("PhuongTienHinhDuoiId")
+                    b.Property<int?>("PhuongTienHinhDuoiId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ShipperId")
                         .HasColumnType("integer");
 
                     b.Property<byte[]>("UpdatedAt")
@@ -425,6 +425,8 @@ namespace DctAPI.Migrations
                     b.HasIndex("PhuongTienHinhDauId");
 
                     b.HasIndex("PhuongTienHinhDuoiId");
+
+                    b.HasIndex("ShipperId");
 
                     b.ToTable("HoSoShipper");
                 });
@@ -1151,67 +1153,51 @@ namespace DctAPI.Migrations
                 {
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "BHXMatSau")
                         .WithMany()
-                        .HasForeignKey("BHXMatSauId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BHXMatSauId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "BHXMatTruoc")
                         .WithMany()
-                        .HasForeignKey("BHXMatTruocId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BHXMatTruocId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "BLXMatSau")
                         .WithMany()
-                        .HasForeignKey("BLXMatSauId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BLXMatSauId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "BLXMatTruoc")
                         .WithMany()
-                        .HasForeignKey("BLXMatTruocId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BLXMatTruocId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "CMNDMatSau")
                         .WithMany()
-                        .HasForeignKey("CMNDMatSauId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CMNDMatSauId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "CMNDMatTruoc")
                         .WithMany()
-                        .HasForeignKey("CMNDMatTruocId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CMNDMatTruocId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "GiayDKXMatSau")
                         .WithMany()
-                        .HasForeignKey("GiayDKXMatSauId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GiayDKXMatSauId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "GiayDKXMatTruoc")
                         .WithMany()
-                        .HasForeignKey("GiayDKXMatTruocId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GiayDKXMatTruocId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "GiayKiemTraXe")
                         .WithMany()
-                        .HasForeignKey("GiayKiemTraXeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GiayKiemTraXeId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "PhuongTienHinhDau")
                         .WithMany()
-                        .HasForeignKey("PhuongTienHinhDauId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PhuongTienHinhDauId");
 
                     b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "PhuongTienHinhDuoi")
                         .WithMany()
-                        .HasForeignKey("PhuongTienHinhDuoiId")
+                        .HasForeignKey("PhuongTienHinhDuoiId");
+
+                    b.HasOne("DctApi.Shared.Models.ShipperEntity", "Shipper")
+                        .WithMany()
+                        .HasForeignKey("ShipperId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
