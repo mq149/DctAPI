@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220123032934_Initialized")]
+    [Migration("20220123033902_Initialized")]
     partial class Initialized
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -370,6 +370,9 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
+                    b.Property<bool?>("DaDuyet")
+                        .HasColumnType("boolean");
+
                     b.Property<decimal?>("DiemBaiKiemTra")
                         .HasColumnType("numeric");
 
@@ -381,6 +384,9 @@ namespace DctAPI.Migrations
 
                     b.Property<int?>("GiayKiemTraXeId")
                         .HasColumnType("integer");
+
+                    b.Property<bool?>("HoanThanh")
+                        .HasColumnType("boolean");
 
                     b.Property<int?>("NamSXXe")
                         .HasColumnType("integer");

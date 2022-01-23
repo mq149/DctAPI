@@ -25,8 +25,8 @@ namespace DctAPI.Controllers
         /// Hàm upload hình ảnh
         /// Nhận body là JSON với các key:
         /// 
-        /// - file-name: tên file ảnh
-        /// - tên file ảnh: file ảnh
+        /// - fileName: tên file ảnh
+        /// - file: file ảnh
         /// - user: số điện thoại (tuỳ chọn)
         /// 
         /// Nếu không có key user, ảnh sẽ lưu vào thư mục Resources/Images
@@ -37,11 +37,11 @@ namespace DctAPI.Controllers
         /// Trả về 500 kèm lỗi nếu không thành công.
         /// </returns>
         [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> UploadAsync()
+        public async Task<IActionResult> UploadAsync([FromForm] IFormCollection form)
         {
             try
             {
-                var form = await Request.ReadFormAsync();
+                //var form = await Request.ReadFormAsync();
                 var file = form.Files.First();
                 var folderName = Path.Combine("Resources", "Images");
                 if (!string.IsNullOrEmpty(form["user"]))
@@ -53,20 +53,24 @@ namespace DctAPI.Controllers
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    
+                    if (!string.IsNullOrEmpty(form["fileName"]))
+                    {
+                        var fileExtension = Path.GetExtension(fileName);
+                        fileName = form["fileName"] + fileExtension;
+                    } 
                     var fullPath = Path.Combine(pathToSave, fileName);
                     Console.WriteLine(fullPath);
-                    var dbPath = Path.Combine(folderName, fileName);
-                    dbPath = dbPath.Replace('\\', '/');
+                    var Url = Path.Combine(folderName, fileName);
+                    Url = Url.Replace('\\', '/');
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
                     var hinhAnh = new HinhAnhEntity();
                     hinhAnh.Ten = fileName;
-                    hinhAnh.Url = dbPath;
-                    int? id = await hinhAnhRepo.Upsert(hinhAnh);
-                    return Ok(new { dbPath, id });
+                    hinhAnh.Url = Url;
+                    int? Id = await hinhAnhRepo.Upsert(hinhAnh);
+                    return Ok(new { Url, Id });
                 }
                 else
                 {

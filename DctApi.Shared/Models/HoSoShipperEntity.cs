@@ -31,6 +31,8 @@ namespace DctApi.Shared.Models
         public int? NamSXXe { get; set; }
         public HinhAnhEntity BHXMatTruoc { get; set; }
         public HinhAnhEntity BHXMatSau { get; set; }
+        public bool? HoanThanh { get; set; }
+        public bool? DaDuyet { get; set; }
         public decimal? DiemBaiKiemTra { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }

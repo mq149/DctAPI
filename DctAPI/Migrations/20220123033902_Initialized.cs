@@ -551,6 +551,8 @@ namespace DctAPI.Migrations
                     NamSXXe = table.Column<int>(nullable: true),
                     BHXMatTruocId = table.Column<int>(nullable: true),
                     BHXMatSauId = table.Column<int>(nullable: true),
+                    HoanThanh = table.Column<bool>(nullable: true),
+                    DaDuyet = table.Column<bool>(nullable: true),
                     DiemBaiKiemTra = table.Column<decimal>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)

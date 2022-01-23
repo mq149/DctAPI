@@ -368,6 +368,9 @@ namespace DctAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
 
+                    b.Property<bool?>("DaDuyet")
+                        .HasColumnType("boolean");
+
                     b.Property<decimal?>("DiemBaiKiemTra")
                         .HasColumnType("numeric");
 
@@ -379,6 +382,9 @@ namespace DctAPI.Migrations
 
                     b.Property<int?>("GiayKiemTraXeId")
                         .HasColumnType("integer");
+
+                    b.Property<bool?>("HoanThanh")
+                        .HasColumnType("boolean");
 
                     b.Property<int?>("NamSXXe")
                         .HasColumnType("integer");
