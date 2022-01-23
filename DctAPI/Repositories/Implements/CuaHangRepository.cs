@@ -23,5 +23,11 @@ namespace DctAPI.Repositories.Implements
                 .Include(x => x.User)
                 .FirstOrDefaultAsync();
         }
+        public IEnumerable<CuaHangEntity> GetAllCuaHang()
+        {
+            return context.CuaHang
+           
+               .ToList();
+        }
     }
 }

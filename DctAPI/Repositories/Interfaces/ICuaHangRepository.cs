@@ -7,6 +7,7 @@ using System.Threading.Tasks;
  namespace DctAPI.Repositories.Interfaces
 {
     public interface ICuaHangRepository : IRepositoryBase<CuaHangEntity> {
-        Task<CuaHangEntity> GetCuaHang(int cuahang);
+        public Task<CuaHangEntity> GetCuaHang(int cuahang);
+        public IEnumerable<CuaHangEntity> GetAllCuaHang();
     }
 }
