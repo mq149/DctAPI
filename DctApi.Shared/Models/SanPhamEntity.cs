@@ -7,6 +7,10 @@ namespace DctApi.Shared.Models
 {
     public class SanPhamEntity
     {
+
+        public SanPhamEntity() {
+            CuaHangSanPham = new HashSet<CuaHangSanPhamEntity>();
+        }
         [Key]
         public int Id { get; set; }
         public string Ten { get; set; }
@@ -21,6 +25,8 @@ namespace DctApi.Shared.Models
         public int NSXId { get; set; }
 
         public NhaSanXuatEntity NSX { get; set; }
+
+        public virtual ICollection<CuaHangSanPhamEntity> CuaHangSanPham { get; set; }
         [Timestamp]
         public byte[] CreatedAt { get; set; }
         [Timestamp]

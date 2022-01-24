@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
-    public partial class Initialized : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,22 +59,6 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HinhAnh",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Ten = table.Column<string>(nullable: false),
-                    Url = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HinhAnh", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "KhoaDaoTao",
                 columns: table => new
                 {
@@ -89,21 +73,6 @@ namespace DctAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KhoaDaoTao", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LoaiCuaHang",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Ten = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LoaiCuaHang", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,6 +118,40 @@ namespace DctAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PhuongThucThanhToan", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ThoiGianCuaHang",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CuaHangId = table.Column<int>(nullable: true),
+                    ChuNhat = table.Column<bool>(nullable: false),
+                    GioMoCuaCN = table.Column<TimeSpan>(nullable: false),
+                    GioDongCuaCN = table.Column<TimeSpan>(nullable: false),
+                    ThuHai = table.Column<bool>(nullable: false),
+                    GioMoCuaT2 = table.Column<TimeSpan>(nullable: false),
+                    GioDongCuaT2 = table.Column<TimeSpan>(nullable: false),
+                    ThuBa = table.Column<bool>(nullable: false),
+                    GioMoCuaT3 = table.Column<TimeSpan>(nullable: false),
+                    GioDongCuaT3 = table.Column<TimeSpan>(nullable: false),
+                    ThuTu = table.Column<bool>(nullable: false),
+                    GioMoCuaT4 = table.Column<TimeSpan>(nullable: false),
+                    GioDongCuaT4 = table.Column<TimeSpan>(nullable: false),
+                    ThuNam = table.Column<bool>(nullable: false),
+                    GioMoCuaT5 = table.Column<TimeSpan>(nullable: false),
+                    GioDongCuaT5 = table.Column<TimeSpan>(nullable: false),
+                    ThuSau = table.Column<bool>(nullable: false),
+                    GioMoCuaT6 = table.Column<TimeSpan>(nullable: false),
+                    GioDongCuaT6 = table.Column<TimeSpan>(nullable: false),
+                    ThuBay = table.Column<bool>(nullable: false),
+                    GioMoCuaT7 = table.Column<TimeSpan>(nullable: false),
+                    GioDongCuaT7 = table.Column<TimeSpan>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ThoiGianCuaHang", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,6 +236,161 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ChiTietCuaHang",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CuaHangId = table.Column<int>(nullable: false),
+                    ThoiGianId = table.Column<int>(nullable: false),
+                    TuKhoaTimKiem = table.Column<string>(nullable: true),
+                    MieuTaQuan = table.Column<string>(nullable: true),
+                    AnhDaiDienId = table.Column<int>(nullable: false),
+                    AnhBiaId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChiTietCuaHang", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChiTietCuaHang_ThoiGianCuaHang_ThoiGianId",
+                        column: x => x.ThoiGianId,
+                        principalTable: "ThoiGianCuaHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CuaHang",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ChiTietCuaHangId = table.Column<int>(nullable: true),
+                    TrangThaiKichHoat = table.Column<bool>(nullable: false),
+                    TenCuaHang = table.Column<string>(nullable: true),
+                    SoDienThoaiLienHe = table.Column<string>(nullable: true),
+                    LoaiHinhDangKy = table.Column<int>(nullable: false),
+                    TenNguoiDaiDien = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    SoDienThoaiNguoiDaiDien = table.Column<string>(nullable: true),
+                    HinhChungMinhNhanDanMatTruocId = table.Column<int>(nullable: true),
+                    HinhChungMinhNhanDanMatSauId = table.Column<int>(nullable: true),
+                    MaSoThue = table.Column<string>(nullable: true),
+                    DiaChiCuaHangId = table.Column<int>(nullable: true),
+                    LoaiCHId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
+                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CuaHang", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CuaHang_ChiTietCuaHang_ChiTietCuaHangId",
+                        column: x => x.ChiTietCuaHangId,
+                        principalTable: "ChiTietCuaHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CuaHang_DiaChi_DiaChiCuaHangId",
+                        column: x => x.DiaChiCuaHangId,
+                        principalTable: "DiaChi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HinhAnh",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Ten = table.Column<string>(nullable: false),
+                    Url = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    ChiTietCuaHangId = table.Column<int>(nullable: true),
+                    CuaHangEntityId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HinhAnh", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HinhAnh_ChiTietCuaHang_ChiTietCuaHangId",
+                        column: x => x.ChiTietCuaHangId,
+                        principalTable: "ChiTietCuaHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HinhAnh_CuaHang_CuaHangEntityId",
+                        column: x => x.CuaHangEntityId,
+                        principalTable: "CuaHang",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -279,118 +437,26 @@ namespace DctAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
+                name: "LoaiCuaHang",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
-                {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CuaHang",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TrangThaiKichHoat = table.Column<bool>(nullable: false),
-                    TenCuaHang = table.Column<string>(nullable: true),
-                    LoaiCHId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
+                    Ten = table.Column<string>(nullable: true),
+                    DienGiai = table.Column<string>(nullable: true),
+                    HinhAnhId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CuaHang", x => x.Id);
+                    table.PrimaryKey("PK_LoaiCuaHang", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CuaHang_LoaiCuaHang_LoaiCHId",
-                        column: x => x.LoaiCHId,
-                        principalTable: "LoaiCuaHang",
+                        name: "FK_LoaiCuaHang_HinhAnh_HinhAnhId",
+                        column: x => x.HinhAnhId,
+                        principalTable: "HinhAnh",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CuaHang_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -757,13 +823,13 @@ namespace DctAPI.Migrations
                 {
                     table.PrimaryKey("PK_CuaHangSanPham", x => new { x.CuaHangId, x.SanPhamId });
                     table.ForeignKey(
-                        name: "FK_CuaHangSanPham_CuaHang_CuaHangId",
+                        name: "FK__CuaHangSanPham__CuaHang__43D61337",
                         column: x => x.CuaHangId,
                         principalTable: "CuaHang",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CuaHangSanPham_SanPham_SanPhamId",
+                        name: "FK__CuaHangSanPham__SanPham___42E1EEFE",
                         column: x => x.SanPhamId,
                         principalTable: "SanPham",
                         principalColumn: "Id",
@@ -818,6 +884,11 @@ namespace DctAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ChiTietCuaHang_ThoiGianId",
+                table: "ChiTietCuaHang",
+                column: "ThoiGianId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ChiTietDonHang_DonHangId",
                 table: "ChiTietDonHang",
                 column: "DonHangId");
@@ -826,6 +897,16 @@ namespace DctAPI.Migrations
                 name: "IX_ChiTietDonHang_SanPhamId",
                 table: "ChiTietDonHang",
                 column: "SanPhamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CuaHang_ChiTietCuaHangId",
+                table: "CuaHang",
+                column: "ChiTietCuaHangId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CuaHang_DiaChiCuaHangId",
+                table: "CuaHang",
+                column: "DiaChiCuaHangId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CuaHang_LoaiCHId",
@@ -881,6 +962,16 @@ namespace DctAPI.Migrations
                 name: "IX_DonHang_TTDHId",
                 table: "DonHang",
                 column: "TTDHId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HinhAnh_ChiTietCuaHangId",
+                table: "HinhAnh",
+                column: "ChiTietCuaHangId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HinhAnh_CuaHangEntityId",
+                table: "HinhAnh",
+                column: "CuaHangEntityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HoSoShipper_BHXMatSauId",
@@ -948,6 +1039,11 @@ namespace DctAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LoaiCuaHang_HinhAnhId",
+                table: "LoaiCuaHang",
+                column: "HinhAnhId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LuaChonTracNghiem_CauHoiId",
                 table: "LuaChonTracNghiem",
                 column: "CauHoiId");
@@ -986,10 +1082,66 @@ namespace DctAPI.Migrations
                 name: "IX_TaiKhoanNganHang_UserId",
                 table: "TaiKhoanNganHang",
                 column: "UserId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                table: "AspNetUserRoles",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                table: "AspNetUserTokens",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_CuaHang_AspNetUsers_UserId",
+                table: "CuaHang",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_CuaHang_LoaiCuaHang_LoaiCHId",
+                table: "CuaHang",
+                column: "LoaiCHId",
+                principalTable: "LoaiCuaHang",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_CuaHang_AspNetUsers_UserId",
+                table: "CuaHang");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_LoaiCuaHang_HinhAnh_HinhAnhId",
+                table: "LoaiCuaHang");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -1048,9 +1200,6 @@ namespace DctAPI.Migrations
                 name: "NhaSanXuat");
 
             migrationBuilder.DropTable(
-                name: "CuaHang");
-
-            migrationBuilder.DropTable(
                 name: "KhachHang");
 
             migrationBuilder.DropTable(
@@ -1063,16 +1212,25 @@ namespace DctAPI.Migrations
                 name: "TrangThaiDonHang");
 
             migrationBuilder.DropTable(
-                name: "LoaiCuaHang");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "HinhAnh");
 
             migrationBuilder.DropTable(
+                name: "CuaHang");
+
+            migrationBuilder.DropTable(
+                name: "ChiTietCuaHang");
+
+            migrationBuilder.DropTable(
                 name: "DiaChi");
+
+            migrationBuilder.DropTable(
+                name: "LoaiCuaHang");
+
+            migrationBuilder.DropTable(
+                name: "ThoiGianCuaHang");
         }
     }
 }
