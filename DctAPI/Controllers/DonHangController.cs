@@ -91,21 +91,24 @@ namespace DctAPI.Controllers
         }
 
         // POST api/<DonHangController>/{id}/XacNhan/{shipperId}
-        [HttpPost("{id}/ShipperXacNhan/{shipperId}")]
-        public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(int id, int shipperId)
+        [HttpPost("ShipperXacNhan")]
+        public async Task<ActionResult<DonHangEntity>> ShipperXacNhanDonHang(ShipperXacNhanDonHangModel model)
         {
-            var donHang = await donHangRepo.GetDonHang(id);
-            var shipper = await shipperRepo.Find(shipperId);
-            if (donHang != null && shipper != null)
+            if (!(await donHangRepo.ShipperDangCoDonHang(model.ShipperId)))
             {
-                if (donHang.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan
-                    && shipper.KichHoat
-                    && donHang.ShipperId == null)
+                var donHang = await donHangRepo.GetDonHang(model.DonHangId);
+                var shipper = await shipperRepo.Find(model.ShipperId);
+                if (donHang != null && shipper != null)
                 {
-                    var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
-                    if (_donHang != null)
+                    if (donHang.TTDHId == (int)TrangThaiDonHang.CuaHangDaXacNhan
+                        && shipper.KichHoat
+                        && donHang.ShipperId == null)
                     {
-                        return Ok(_donHang);
+                        var _donHang = await donHangRepo.ShipperXacNhanDonHang(donHang, shipper);
+                        if (_donHang != null)
+                        {
+                            return Ok(_donHang);
+                        }
                     }
                 }
             }
@@ -113,18 +116,18 @@ namespace DctAPI.Controllers
         }
 
         // POST api/<DonHangController>/{id}/Huy/{shipperId}
-        [HttpPost("{id}/ShipperHuy/{shipperId}")]
-        public async Task<ActionResult<DonHangEntity>> ShipperHuyDonHang(int id, int shipperId)
+        [HttpPost("ShipperHuy")]
+        public async Task<ActionResult<DonHangEntity>> ShipperHuyDonHang(ShipperHuyDonHangModel model)
         {
-            var donHang = await donHangRepo.Find(id);
-            var shipper = await shipperRepo.Find(shipperId);
+            var donHang = await donHangRepo.Find(model.DonHangId);
+            var shipper = await shipperRepo.Find(model.ShipperId);
             if (donHang != null && shipper != null)
             {
                 if ((donHang.TTDHId == (int)TrangThaiDonHang.DangLayHang
                     || donHang.TTDHId == (int)TrangThaiDonHang.DangGiaoHang)
                     && shipper.Id == donHang.ShipperId)
                 {
-                    var _donHang = await donHangRepo.ShipperHuyDonHang(donHang);
+                    var _donHang = await donHangRepo.ShipperHuyDonHang(donHang, model.LyDoHuy);
                     if (_donHang != null)
                     {
                         return Ok(_donHang);
