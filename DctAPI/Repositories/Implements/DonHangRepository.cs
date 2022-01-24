@@ -48,6 +48,16 @@ namespace DctAPI.Repositories.Implements
                 .FirstAsync();
         }
 
+        public async Task<bool> ShipperDangCoDonHang(int shipperId)
+        {
+            var dsDonHang = await context.DonHang
+                .Where(dh => dh.ShipperId == shipperId)
+                .Where(dh => (dh.TTDHId == (int)TrangThaiDonHang.DaGiaoHang
+                    || dh.TTDHId == (int)TrangThaiDonHang.DangLayHang))
+                .ToListAsync();
+            return dsDonHang.Count > 0;
+        }
+
         public async Task<DonHangEntity> ShipperXacNhanDonHang(DonHangEntity donHang, ShipperEntity shipper)
         {
             donHang.ShipperId = shipper.Id;
@@ -64,9 +74,10 @@ namespace DctAPI.Repositories.Implements
             return await GetDonHang(donHang.Id);
         }
 
-        public async Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang)
+        public async Task<DonHangEntity> ShipperHuyDonHang(DonHangEntity donHang, string lyDoHuy)
         {
             donHang.TTDHId = (int)TrangThaiDonHang.DaHuy;
+            donHang.LyDoHuy = lyDoHuy;
             context.Entry(donHang).State = EntityState.Modified;
             try
             {

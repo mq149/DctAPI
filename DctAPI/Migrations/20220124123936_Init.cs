@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -545,6 +545,7 @@ namespace DctAPI.Migrations
                     TTDHId = table.Column<int>(nullable: false),
                     SDT = table.Column<string>(nullable: true),
                     NguoiNhan = table.Column<string>(nullable: true),
+                    LyDoHuy = table.Column<string>(nullable: true),
                     PTTTId = table.Column<int>(nullable: false),
                     TongTien = table.Column<float>(nullable: false),
                     NgayMuaHang = table.Column<DateTime>(nullable: false),
