@@ -41,13 +41,13 @@ namespace DctAPI.Controllers
             return NotFound();
         }
 
-        [HttpGet("GetId/{userId}")]
-        public async Task<ActionResult<ShipperEntity>> GetShipperId(int userId)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<ShipperEntity>> GetShipper(int userId)
         {
-            var id = await shipperRepo.GetShipperId(userId);
-            if (id != null)
+            var shipper = await shipperRepo.GetShipperByUserId(userId);
+            if (shipper != null)
             {
-                return Ok(id);
+                return Ok(shipper);
             }
             return NotFound();
         }
