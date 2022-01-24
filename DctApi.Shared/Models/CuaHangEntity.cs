@@ -23,7 +23,7 @@ namespace DctApi.Shared.Models
 
         public string SoDienThoaiLienHe { get; set; }
 
-        public int LoaiHinhDangKy { get; set; }
+        public int? LoaiHinhDangKy { get; set; }
 
         public string TenNguoiDaiDien { get; set; }
 

@@ -59,7 +59,7 @@ namespace DctAPI.Controllers
             await _userManager.AddToRoleAsync(userNew,RoleName.Customer);
             _context.Add(new KhachHangEntity { UserId =userNew.Id, CMND=""});
             _context.SaveChanges();
-            return Ok(new Response { status = "Success", message = "User created successfully" });
+            return Ok(new Response { status = "Success", message = "Tạo tài khoản thành công" });
 
         }
 
@@ -111,10 +111,8 @@ namespace DctAPI.Controllers
             if (!await _roleManager.RoleExistsAsync(RoleName.Store)) {
                 await _roleManager.CreateAsync(new RoleEntity() { Id = (int)Role.CuaHang, Name = "CuaHang", Ten = "CuaHang" });
             }
-            await _userManager.AddToRoleAsync(userNew, RoleName.Shipper);
-            _context.Add(new CuaHangEntity {UserId = userNew.Id,TenCuaHang = "", TrangThaiKichHoat = false });
-            _context.SaveChanges();
-            return Ok(new Response { status = "Success", message = "User created successfully" });
+            await _userManager.AddToRoleAsync(userNew, RoleName.Store);
+            return Ok(new Response { status = "Success", message = "Tạo tài khoản thành công" });
 
         }
 

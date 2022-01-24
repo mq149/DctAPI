@@ -1,6 +1,7 @@
 ﻿using DctApi.Shared.Models;
 using DctAPI.Models;
 using DctAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +18,17 @@ namespace DctAPI.Repositories.Implements
         public CuaHangRepository(ApplicationDbContext context) : base(context)
         {
             this.context = context;
+        }
+
+        public async Task<bool> TaoCuaHang(CuaHangEntity cuahang) {
+            try {
+                await context.CuaHang.AddAsync(new CuaHangEntity() { UserId = cuahang.UserId, LoaiCHId = cuahang.LoaiCHId, TrangThaiKichHoat = false });
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch {
+                return false;
+            }
         }
         public async Task<CuaHangEntity> GetCuaHang(int cuahang)
         {

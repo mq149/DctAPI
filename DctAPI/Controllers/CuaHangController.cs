@@ -32,5 +32,17 @@ namespace DctAPI.Controllers {
         public async Task<ActionResult<CuaHangEntity>> GetCuaHangByUserId(int UserId) {
             return await _cuahangRepository.GetCuaHangByUserId(UserId);
         }
+
+        [HttpPost]
+        [Route("create-store")]
+        public async Task<IActionResult> TaoCuaHang([FromBody]CuaHangEntity cuahang) {
+            var check= await _cuahangRepository.TaoCuaHang(cuahang);
+            if(check==true) {
+                return StatusCode(StatusCodes.Status200OK, new Response { status = "Success", message = "Khởi tạo của hàng thành công" });
+            }
+            else {
+                return StatusCode(StatusCodes.Status400BadRequest, new Response { status = "Error", message = "Khởi tạo của hàng không thành công" });
+            }
+        }
     }
 }
