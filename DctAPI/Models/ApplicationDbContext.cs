@@ -64,6 +64,9 @@ namespace DctAPI.Models {
                     .HasForeignKey(d => d.SanPhamId)
                     .HasConstraintName("FK__CuaHangSanPham__SanPham___42E1EEFE");
             });
+            modelBuilder.Entity<HinhAnhEntity>(entity => {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            });
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder) {

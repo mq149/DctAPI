@@ -9,6 +9,7 @@ namespace DctApi.Shared.Models
     public class HinhAnhEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string Ten { get; set; }

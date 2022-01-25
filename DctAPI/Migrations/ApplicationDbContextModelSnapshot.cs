@@ -145,9 +145,6 @@ namespace DctAPI.Migrations
                     b.Property<int?>("HinhChungMinhNhanDanMatTruocId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("HoTen")
-                        .HasColumnType("text");
-
                     b.Property<int?>("LoaiCHId")
                         .HasColumnType("integer");
 
