@@ -789,8 +789,8 @@ namespace DctAPI.Models {
         public static void SeedDataCuaHangSanPham(ApplicationDbContext _context) {
             if (!_context.CuaHangSanPham.Any()) {
                 _context.CuaHangSanPham.AddRange(
-                    new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 1, SoLuong = 16 },
-                    new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 3, SoLuong = 50 },
+                   
+                   
                     new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 22, SoLuong = 70 },
                     new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 21, SoLuong = 190 },
                     new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 20, SoLuong = 300 },
@@ -808,14 +808,13 @@ namespace DctAPI.Models {
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 19, SoLuong = 500 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 15, SoLuong =  167},
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 13, SoLuong = 312 },
-                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 12, SoLuong = 510 },
+                   
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 11, SoLuong = 440 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 9, SoLuong = 540 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 7, SoLuong = 33 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 5, SoLuong = 17 },               
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 3, SoLuong = 411 },
-                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 1, SoLuong = 13 },
-                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 2, SoLuong = 50 }
+                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 1, SoLuong = 13 }
 
 
                     );
@@ -831,9 +830,10 @@ namespace DctAPI.Models {
         }
 
         public static void SeedDataKhachHang(ApplicationDbContext _context) {
-            if (!_context.KhachHang.Any()) {
-                _context.KhachHang.AddRange(new KhachHangEntity { /*Id = 1,*/ UserId = 3, CMND = "18219821" },
-                    new KhachHangEntity {/* Id = 2,*/ UserId = 6, CMND = "5361152421" });
+            if (!_context.KhachHang.Any())
+            {
+                _context.KhachHang.AddRange(new KhachHangEntity { /*Id = 1,*/ UserId = 3, CMND = "18219821", GioiTinh = "Nữ", NgaySinh = new DateTime(1999, 1, 1), HoTen = "Nguyễn Thị X", SDT = "0933113113" },
+                    new KhachHangEntity {/* Id = 2,*/ UserId = 6, CMND = "5361152421", GioiTinh = "Nam", NgaySinh = new DateTime(1988, 1, 1), HoTen = "Nguyễn Văn Y", SDT = "0944114114" });
             }
             _context.SaveChanges();
         }

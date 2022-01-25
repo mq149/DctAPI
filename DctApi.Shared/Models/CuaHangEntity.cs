@@ -15,7 +15,7 @@ namespace DctApi.Shared.Models
         }
         [Key]
         public int Id { get; set; }
-
+        public string HoTen { get; set; }
         public int? ChiTietCuaHangId { get; set; }
         public ChiTietCuaHang ChiTietCuaHang { get; set; }
         public Boolean TrangThaiKichHoat { get; set; }
