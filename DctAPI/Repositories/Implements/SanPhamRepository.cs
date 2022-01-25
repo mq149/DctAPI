@@ -82,7 +82,7 @@ namespace DctAPI.Repositories.Implements
         {
             return await context.SanPham
                 //.Where(sp => sp.Ten.ToLower() == ten.ToLower() )
-                .Where(sp => sp.Ten.ToLower().Contains(ten))
+                .Where(sp => sp.Ten.ToLower().Contains(ten.ToLower()))
                 .Include(x => x.HinhSanPham)
                 .Include(x => x.LoaiSP)
                 .Include(x => x.NSX)
@@ -109,8 +109,7 @@ namespace DctAPI.Repositories.Implements
             return null;
         }
         public async Task<SanPhamEntity> DeleteSanPham(int id)
-        {
-            
+        {     
             //var sanpham = context.SanPham.Where(x => x.Id == id).
             SanPhamEntity sp =  await context.SanPham.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (sp!= null)
