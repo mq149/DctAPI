@@ -82,7 +82,7 @@ namespace DctAPI.Repositories.Implements
         {
             return await context.SanPham
                 //.Where(sp => sp.Ten.ToLower() == ten.ToLower() )
-                .Where(sp => sp.Ten.ToLower().Contains(ten))
+                .Where(sp => sp.Ten.ToLower().Contains(ten.ToLower()))
                 .Include(x => x.HinhSanPham)
                 .Include(x => x.LoaiSP)
                 .Include(x => x.NSX)

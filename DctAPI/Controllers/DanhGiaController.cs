@@ -51,7 +51,24 @@ namespace DctAPI.Controllers
         {
             return "value";
         }
+        [HttpGet("KiemTraDanhGia/{id}")]
+        public async Task<int> GetKiemTraDanhGia(int id)
+        {
+            List<DanhGiaEntity> DG = await danhGiaRepo.GetDanhGiaDonHang(id);
+            if(DG.Count == 0)
+            {
+                return 0;
+            }else if (DG.Count == 2)
+            {
+                return 3;
+            }
+            else
+            {
+                return DG[0].LoaiDGId;
+            }
 
+         
+        }
         // POST api/<DanhGiaController>
         [HttpPost("TaoDanhGia")]
         public async Task<ActionResult<DanhGiaEntity>> CreateDanhGia([FromBody] DanhGiaEntity dg)
