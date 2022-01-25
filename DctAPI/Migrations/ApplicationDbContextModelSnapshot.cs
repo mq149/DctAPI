@@ -145,6 +145,9 @@ namespace DctAPI.Migrations
                     b.Property<int?>("HinhChungMinhNhanDanMatTruocId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("HoTen")
+                        .HasColumnType("text");
+
                     b.Property<int?>("LoaiCHId")
                         .HasColumnType("integer");
 
@@ -536,14 +539,28 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int?>("AvatarId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("CMND")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<byte[]>("CreatedAt")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bytea");
+
+                    b.Property<string>("GioiTinh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HoTen")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("NgaySinh")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("SDT")
+                        .HasColumnType("text");
 
                     b.Property<byte[]>("UpdatedAt")
                         .IsConcurrencyToken()
@@ -554,6 +571,8 @@ namespace DctAPI.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AvatarId");
 
                     b.HasIndex("UserId");
 
@@ -1418,6 +1437,10 @@ namespace DctAPI.Migrations
 
             modelBuilder.Entity("DctApi.Shared.Models.KhachHangEntity", b =>
                 {
+                    b.HasOne("DctApi.Shared.Models.HinhAnhEntity", "Avatar")
+                        .WithMany()
+                        .HasForeignKey("AvatarId");
+
                     b.HasOne("DctApi.Shared.Models.UserEntity", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
