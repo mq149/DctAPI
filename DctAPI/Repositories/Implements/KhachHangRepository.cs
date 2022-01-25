@@ -25,5 +25,24 @@ namespace DctAPI.Repositories.Implements
                 .FirstOrDefaultAsync();
             return temp.Id;
         }
+        //public async Task<bool> UpdateKhachHang(string cmnd, string hoTen, string gioiTinh, DateTime ngaySinh, int hinhAnhId)
+        public async Task<KhachHangEntity> UpdateKhachHang(KhachHangEntity kh)
+        {
+
+            var temp = await context.KhachHang.Where(t => t.UserId == kh.UserId).SingleOrDefaultAsync();
+            if(temp!=null)
+            {
+                if (kh.CMND != null) temp.CMND = kh.CMND;
+                if (kh.GioiTinh != null) temp.GioiTinh = kh.GioiTinh;
+                if (kh.HoTen != null) temp.HoTen = kh.HoTen;
+                if (kh.NgaySinh != null) temp.NgaySinh = kh.NgaySinh;
+                if (kh.SDT != null) temp.SDT = kh.SDT;
+                if (kh.AvatarId != null) temp.AvatarId = kh.AvatarId;
+                await context.SaveChangesAsync();
+                return kh;
+            }
+                //changing inf
+            return null;
+        }
     }
 }

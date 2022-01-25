@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -326,6 +326,7 @@ namespace DctAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    HoTen = table.Column<string>(nullable: true),
                     ChiTietCuaHangId = table.Column<int>(nullable: true),
                     TrangThaiKichHoat = table.Column<bool>(nullable: false),
                     TenCuaHang = table.Column<string>(nullable: true),
@@ -465,14 +466,25 @@ namespace DctAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CMND = table.Column<string>(nullable: false),
+                    CMND = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
+                    GioiTinh = table.Column<string>(nullable: true),
+                    NgaySinh = table.Column<DateTime>(nullable: true),
+                    AvatarId = table.Column<int>(nullable: true),
+                    SDT = table.Column<string>(nullable: true),
+                    HoTen = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UpdatedAt = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KhachHang", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_KhachHang_HinhAnh_AvatarId",
+                        column: x => x.AvatarId,
+                        principalTable: "HinhAnh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_KhachHang_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -1033,6 +1045,11 @@ namespace DctAPI.Migrations
                 name: "IX_HoSoShipper_ShipperId",
                 table: "HoSoShipper",
                 column: "ShipperId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KhachHang_AvatarId",
+                table: "KhachHang",
+                column: "AvatarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_KhachHang_UserId",
