@@ -1,61 +1,60 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using DctApi.Shared.Models;
+using DctAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace DctAPI.Controllers {
     [Route("api/[Controller]")]
     [ApiController]
     public class UploadFileController : ControllerBase {
-        public static IWebHostEnvironment _env;
-        public UploadFileController(IWebHostEnvironment env) {
-            _env = env;
+        private readonly IHopDongRepository _hopdongRepo;
+
+        public UploadFileController(IHopDongRepository hopdongRepo) {
+            this._hopdongRepo = hopdongRepo;
         }
 
-        public class UpLoadFileAPI {
-            public IFormFile files { get; set; }
-        }
-
-        [HttpPost]
-        public async Task<string> PostFile([FromForm]UpLoadFileAPI objfile) {
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> UploadHopDongAsync([FromForm] IFormCollection form) {
             try {
-                if (objfile.files.Length > 0) {
-                    if (!Directory.Exists(_env.WebRootPath + "\\Upload\\")) {
-                            Directory.CreateDirectory(_env.WebRootPath + "\\Upload\\");
-                        }
-                    using (FileStream fileStream = System.IO.File.Create(_env.WebRootPath + "\\Upload\\" + objfile.files.FileName)) {
-                        objfile.files.CopyTo(fileStream);
-                        fileStream.Flush();
-                        return "\\Upload\\" + objfile.files.FileName;
+                //var form = await Request.ReadFormAsync();
+                var file = form.Files.First();
+                var folderName = Path.Combine("Resources", "Contracts");
+                if (!string.IsNullOrEmpty(form["userName"])) {
+                    folderName = Path.Combine("Resources", "Contracts", form["userName"]);
+                    Directory.CreateDirectory(folderName);
+                }
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if (file.Length > 0) {
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    if (!string.IsNullOrEmpty(form["fileName"])) {
+                        var fileExtension = Path.GetExtension(fileName);
+                        fileName = form["fileName"] + fileExtension;
                     }
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    Console.WriteLine(fullPath);
+                    var Url = Path.Combine(folderName, fileName);
+                    Url = Url.Replace('\\', '/');
+                    using (var stream = new FileStream(fullPath, FileMode.Create)) {
+                        file.CopyTo(stream);
+                    }
+                    var hopdong = new HopDongEntity();
+                    hopdong.Url = Url;
+                    int? Id = await _hopdongRepo.Upsert(hopdong);
+                    return Ok(new { Url, Id });
                 }
                 else {
-                    return "Upload File Failed!";
+                    return BadRequest();
                 }
             }
-            catch(Exception ex) {
-                return ex.Message.ToString();
-            }
-        }
-
-        [HttpDelete]
-        public async Task<string> DeleteFile(string fileName) {
-            if(fileName.Length>0) {
-                var path = Path.Combine(_env.WebRootPath + "\\Upload\\" + fileName);
-                if(System.IO.File.Exists(path)) {
-                    System.IO.File.Delete(path);
-                    return "Delete success";
-                }
-                else {
-                    return "Not found file";
-                }
-            }
-            else {
-                return "File Name is not empty";
+            catch (Exception ex) {
+                return StatusCode(500, $"Internal server error: {ex}");
             }
         }
     }

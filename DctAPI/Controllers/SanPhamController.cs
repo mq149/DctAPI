@@ -117,5 +117,12 @@ namespace DctAPI.Controllers
             return false;
 
         }
+
+        //cua hang
+        [HttpGet]
+        [Route("cuahang-sanpham")]
+        public async Task<List<SanPhamEntity>> SanPhamCuaHang(int userId) {
+            return await sanPhamRepo.SanPhamCuaHang(userId);
+        }
     }
 }

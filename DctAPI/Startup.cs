@@ -64,6 +64,7 @@ namespace DctAPI
 
             services.AddScoped<IDanhGiaRepository, DanhGiaRepository>();
             services.AddScoped<IHinhAnhRepository, HinhAnhRepository>();
+            services.AddScoped<IHopDongRepository, HopDongRepository>();
 
             // FormOptions for image uploads
             services.Configure<FormOptions>(o => {

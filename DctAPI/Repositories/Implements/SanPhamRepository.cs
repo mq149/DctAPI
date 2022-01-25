@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace DctAPI.Repositories.Implements
@@ -121,6 +122,17 @@ namespace DctAPI.Repositories.Implements
             }
 
             return null;
+        }
+
+        //cua hang
+        public async Task<List<SanPhamEntity>> SanPhamCuaHang(int userId) {
+            var _listSp = new List<SanPhamEntity>();
+            var cuahangId = (from itm in context.CuaHang where itm.UserId == userId select itm.Id).FirstOrDefault(); 
+            var _listobj=await context.CuaHangSanPham.Where(chsp => chsp.CuaHangId == cuahangId).ToListAsync();
+            foreach(var itm in _listobj) {
+                _listSp.Add(await context.SanPham.FindAsync(itm.SanPhamId));
+            }
+            return _listSp.OrderBy(sp => sp.Id).ToList();
         }
     }
 }

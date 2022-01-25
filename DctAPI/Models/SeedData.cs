@@ -847,10 +847,10 @@ namespace DctAPI.Models {
 
         public static void SeedDataLoaiCuaHang(ApplicationDbContext _context) {
             if (!_context.LoaiCuaHang.Any()) {
-                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { /*Id = 1, */Ten = "Siêu Thị Mini", DienGiai="Kinh doanh tổng hợp các loại mặt hàng thiết yếu, đồ ăn, thức uống và nhu yếu phẩm, v.v",HinhAnhId=4 },
-                    new LoaiCuaHangEntity {/* Id = 2,*/ Ten = "Hải Sản", DienGiai="Kinh doanh hải sản tươi sống như mực, tôm, cua, ghẹ, cá các loại, v.v",HinhAnhId=3 },
-                    new LoaiCuaHangEntity {/* Id = 3,*/ Ten = "Bách Hóa Tổng Hợp", DienGiai="Kinh doanh các loại thực phẩm tươi sống như thịt, cá, trứng đến các loại thực phẩm rau củ quả và nhu yếu phẩm, v.v",HinhAnhId=2 },
-                    new LoaiCuaHangEntity {/* Id = 4,*/ Ten = "Rau Củ", DienGiai="Kinh doanh các loại rau củ quả sạch, v.v",HinhAnhId=1 });
+                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { /*Id = 1, */Ten = "Siêu Thị Mini", DienGiai="Kinh doanh tổng hợp các loại mặt hàng thiết yếu, đồ ăn, thức uống và nhu yếu phẩm, v.v",HinhAnhId=26 },
+                    new LoaiCuaHangEntity {/* Id = 2,*/ Ten = "Hải Sản", DienGiai="Kinh doanh hải sản tươi sống như mực, tôm, cua, ghẹ, cá các loại, v.v",HinhAnhId=25 },
+                    new LoaiCuaHangEntity {/* Id = 3,*/ Ten = "Bách Hóa Tổng Hợp", DienGiai="Kinh doanh các loại thực phẩm tươi sống như thịt, cá, trứng đến các loại thực phẩm rau củ quả và nhu yếu phẩm, v.v",HinhAnhId=24 },
+                    new LoaiCuaHangEntity {/* Id = 4,*/ Ten = "Rau Củ", DienGiai="Kinh doanh các loại rau củ quả sạch, v.v",HinhAnhId=23 });
             }
             _context.SaveChanges();
         }

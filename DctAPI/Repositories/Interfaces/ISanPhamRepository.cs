@@ -19,6 +19,10 @@ namespace DctAPI.Repositories.Interfaces
         public Task<SanPhamEntity> UpdateSanPham(SanPhamEntity sp);
         public Task<SanPhamEntity> DeleteSanPham(int id);
 
+        //CuaHang
+
+        public Task<List<SanPhamEntity>> SanPhamCuaHang(int cuahangId);
+
 
     }
 }

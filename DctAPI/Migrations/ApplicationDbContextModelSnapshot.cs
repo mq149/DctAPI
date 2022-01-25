@@ -514,6 +514,21 @@ namespace DctAPI.Migrations
                     b.ToTable("HoSoShipper");
                 });
 
+            modelBuilder.Entity("DctApi.Shared.Models.HopDongEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HopDong");
+                });
+
             modelBuilder.Entity("DctApi.Shared.Models.KhachHangEntity", b =>
                 {
                     b.Property<int>("Id")

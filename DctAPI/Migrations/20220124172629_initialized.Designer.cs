@@ -10,13 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:DctAPI/Migrations/20220123193724_initialized.Designer.cs
-    [Migration("20220123193724_initialized")]
+    [Migration("20220124172629_initialized")]
     partial class initialized
-=======
-    [Migration("20220124123936_Init")]
-    partial class Init
->>>>>>> 9b124f3ddbd5e89404c795d8723ecfdfc8b26f66:DctAPI/Migrations/20220124123936_Init.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -519,6 +514,21 @@ namespace DctAPI.Migrations
                     b.HasIndex("ShipperId");
 
                     b.ToTable("HoSoShipper");
+                });
+
+            modelBuilder.Entity("DctApi.Shared.Models.HopDongEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HopDong");
                 });
 
             modelBuilder.Entity("DctApi.Shared.Models.KhachHangEntity", b =>

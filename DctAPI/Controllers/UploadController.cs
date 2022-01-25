@@ -36,6 +36,8 @@ namespace DctAPI.Controllers
         /// Trả về 200 kèm đường dẫn đến file ảnh kèm id trong database nếu thành công.
         /// Trả về 500 kèm lỗi nếu không thành công.
         /// </returns>
+        /// 
+
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> UploadAsync([FromForm] IFormCollection form)
         {

@@ -4,11 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
-<<<<<<< HEAD:DctAPI/Migrations/20220123193724_initialized.cs
     public partial class initialized : Migration
-=======
-    public partial class Init : Migration
->>>>>>> 9b124f3ddbd5e89404c795d8723ecfdfc8b26f66:DctAPI/Migrations/20220124123936_Init.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,6 +56,19 @@ namespace DctAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DiaChi", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HopDong",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Url = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HopDong", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1170,6 +1179,9 @@ namespace DctAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "DanhGia");
+
+            migrationBuilder.DropTable(
+                name: "HopDong");
 
             migrationBuilder.DropTable(
                 name: "HoSoShipper");
