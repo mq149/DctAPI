@@ -7,10 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DctAPI.Models {
-    public static class SeedData {
+namespace DctAPI.Models
+{
+    public static class SeedData
+    {
 
-        public static void Seed(ApplicationDbContext _context, UserManager<UserEntity> _userManage, RoleManager<RoleEntity> _roleManage) {
+        public static void Seed(ApplicationDbContext _context, UserManager<UserEntity> _userManage, RoleManager<RoleEntity> _roleManage)
+        {
             SeedDataDiaChi(_context);
             SeedDataCauhoiTracNghiem(_context);
             SeedDataLuaChonTracNghiem(_context);
@@ -33,9 +36,12 @@ namespace DctAPI.Models {
             SeedDataChiTietDonHang(_context);
             SeedDataDanhGia(_context);
         }
-        public static void SeedUser(UserManager<UserEntity> _userManage) {
-            if (_userManage.FindByNameAsync("123456789").Result == null) {
-                var user1 = new UserEntity() {
+        public static void SeedUser(UserManager<UserEntity> _userManage)
+        {
+            if (_userManage.FindByNameAsync("123456789").Result == null)
+            {
+                var user1 = new UserEntity()
+                {
                     UserName = "123456789",
                     NormalizedUserName = "123456789",
                     Email = "Admin@gmail.com",
@@ -49,11 +55,13 @@ namespace DctAPI.Models {
 
                 };
                 var result = _userManage.CreateAsync(user1, "Admin@123").Result;
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     _userManage.AddToRoleAsync(user1, RoleName.Admin).Wait();
                 }
 
-                var user2 = new UserEntity() {
+                var user2 = new UserEntity()
+                {
                     UserName = "0123456789",
                     NormalizedUserName = "0123456789",
                     Email = "Admin@gmail.com",
@@ -66,11 +74,13 @@ namespace DctAPI.Models {
                     DiaChiId = 1
                 };
                 var result2 = _userManage.CreateAsync(user2, "Admin@123").Result;
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     _userManage.AddToRoleAsync(user2, RoleName.Store).Wait();
                 }
 
-                var user3 = new UserEntity() {
+                var user3 = new UserEntity()
+                {
                     UserName = "987654321",
                     NormalizedUserName = "987654321",
                     Email = "Admin@gmail.com",
@@ -83,11 +93,13 @@ namespace DctAPI.Models {
                     DiaChiId = 5
                 };
                 var result3 = _userManage.CreateAsync(user3, "Admin@123").Result;
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     _userManage.AddToRoleAsync(user2, RoleName.Customer).Wait();
                 }
 
-                var user4 = new UserEntity() {
+                var user4 = new UserEntity()
+                {
                     UserName = "9876543210",
                     NormalizedUserName = "0123456789",
                     Email = "Admin@gmail.com",
@@ -100,11 +112,13 @@ namespace DctAPI.Models {
                     DiaChiId = 6
                 };
                 var result4 = _userManage.CreateAsync(user4, "Admin@123").Result;
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     _userManage.AddToRoleAsync(user4, RoleName.Store).Wait();
                 }
 
-                var user5 = new UserEntity() {
+                var user5 = new UserEntity()
+                {
                     UserName = "12344321",
                     NormalizedUserName = "12344321",
                     Email = "Admin@gmail.com",
@@ -117,11 +131,13 @@ namespace DctAPI.Models {
                     DiaChiId = 1
                 };
                 var result5 = _userManage.CreateAsync(user5, "Admin@123").Result;
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     _userManage.AddToRoleAsync(user5, RoleName.Shipper).Wait();
                 }
 
-                var user6 = new UserEntity() {
+                var user6 = new UserEntity()
+                {
                     UserName = "567898765",
                     NormalizedUserName = "567898765",
                     Email = "Admin@gmail.com",
@@ -134,39 +150,49 @@ namespace DctAPI.Models {
                     DiaChiId = 3
                 };
                 var result6 = _userManage.CreateAsync(user6, "Admin@123").Result;
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     _userManage.AddToRoleAsync(user6, RoleName.Customer).Wait();
                 }
             }
         }
 
-        public static void SeedRole(RoleManager<RoleEntity> _roleManage) {
-            if (!_roleManage.RoleExistsAsync(RoleName.Admin).Result) {
-                var role = new RoleEntity() {
+        public static void SeedRole(RoleManager<RoleEntity> _roleManage)
+        {
+            if (!_roleManage.RoleExistsAsync(RoleName.Admin).Result)
+            {
+                var role = new RoleEntity()
+                {
                     Name = "Admin",
                     NormalizedName = "Admin",
                     Ten = "Admin"
                 };
                 _roleManage.CreateAsync(role).Wait();
             }
-            if (!_roleManage.RoleExistsAsync(RoleName.Store).Result) {
-                var role = new RoleEntity() {
+            if (!_roleManage.RoleExistsAsync(RoleName.Store).Result)
+            {
+                var role = new RoleEntity()
+                {
                     Name = "CuaHang",
                     NormalizedName = "CuaHang",
                     Ten = "CuaHang"
                 };
                 _roleManage.CreateAsync(role).Wait();
             }
-            if (!_roleManage.RoleExistsAsync(RoleName.Shipper).Result) {
-                var role = new RoleEntity() {
+            if (!_roleManage.RoleExistsAsync(RoleName.Shipper).Result)
+            {
+                var role = new RoleEntity()
+                {
                     Name = "Shipper",
                     NormalizedName = "Shipper",
                     Ten = "Shipper"
                 };
                 _roleManage.CreateAsync(role).Wait();
             }
-            if (!_roleManage.RoleExistsAsync(RoleName.Customer).Result) {
-                var role = new RoleEntity() {
+            if (!_roleManage.RoleExistsAsync(RoleName.Customer).Result)
+            {
+                var role = new RoleEntity()
+                {
                     Name = "KhachHang",
                     NormalizedName = "KhachHang",
                     Ten = "KhachHang"
@@ -174,8 +200,10 @@ namespace DctAPI.Models {
                 _roleManage.CreateAsync(role).Wait();
             }
         }
-        public static void SeedDataCauhoiTracNghiem(ApplicationDbContext _context) {
-            if (!_context.CauHoiTracNghiem.Any()) {
+        public static void SeedDataCauhoiTracNghiem(ApplicationDbContext _context)
+        {
+            if (!_context.CauHoiTracNghiem.Any())
+            {
                 _context.CauHoiTracNghiem.AddRange(new CauHoiTracNghiemEntity { /*Id = 1,*/ NoiDung = "Sơ đồ nào sau đây phù hợp với thiết kế động?" },
                     new CauHoiTracNghiemEntity { /*Id = 2,*/ NoiDung = "1+2=?" },
                     new CauHoiTracNghiemEntity { /*Id = 3,*/ NoiDung = "Vai trò nào không có trong ĐI CHỢ THUÊ" },
@@ -184,9 +212,11 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataLuaChonTracNghiem(ApplicationDbContext _context) {
-            if (!_context.LuaChonTracNghiem.Any()) {
-                _context.LuaChonTracNghiem.AddRange(new LuaChonTracNghiemEntity {NoiDung = "Class diagram", Dung = false, CauHoiId = 1 },
+        public static void SeedDataLuaChonTracNghiem(ApplicationDbContext _context)
+        {
+            if (!_context.LuaChonTracNghiem.Any())
+            {
+                _context.LuaChonTracNghiem.AddRange(new LuaChonTracNghiemEntity { NoiDung = "Class diagram", Dung = false, CauHoiId = 1 },
                     new LuaChonTracNghiemEntity { /*Id = 2,*/ NoiDung = "Sequence diagram", Dung = true, CauHoiId = 1 },
                     new LuaChonTracNghiemEntity { /*Id = 3,*/ NoiDung = "Use case diagram", Dung = false, CauHoiId = 1 },
                     new LuaChonTracNghiemEntity { /*Id = 4,*/ NoiDung = "Package diagram", Dung = false, CauHoiId = 1 },
@@ -209,21 +239,26 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataTrangThaiDonHang(ApplicationDbContext _context) {
-            if (!_context.TrangThaiDonHang.Any()) {
+        public static void SeedDataTrangThaiDonHang(ApplicationDbContext _context)
+        {
+            if (!_context.TrangThaiDonHang.Any())
+            {
                 _context.TrangThaiDonHang.AddRange(
-                    new TrangThaiDonHangEntity { Id=1,Ten = "Chờ xác nhận" },
-                    new TrangThaiDonHangEntity {Id=2, Ten = "Cửa hàng đã xác nhận" },
-                    new TrangThaiDonHangEntity {Id=3,Ten = "Đang lấy hàng" },
-                    new TrangThaiDonHangEntity {Id=4,Ten = "Đang giao hàng" },
-                    new TrangThaiDonHangEntity {Id=5,Ten = "Đã giao hàng" },
-                    new TrangThaiDonHangEntity {Id=6,Ten = "Đã huỷ" });
+                    new TrangThaiDonHangEntity { Id = 1, Ten = "Chờ xác nhận" },
+                    new TrangThaiDonHangEntity { Id = 2, Ten = "Cửa hàng đã xác nhận" },
+                    new TrangThaiDonHangEntity { Id = 3, Ten = "Đang lấy hàng" },
+                    new TrangThaiDonHangEntity { Id = 4, Ten = "Đang giao hàng" },
+                    new TrangThaiDonHangEntity { Id = 5, Ten = "Đã giao hàng" },
+                    new TrangThaiDonHangEntity { Id = 6, Ten = "Đã huỷ" });
             }
             _context.SaveChanges();
         }
-        public static void SeedDataKhoaDaoTao(ApplicationDbContext _context) {
-            if (!_context.KhoaDaoTao.Any()) {
-                _context.KhoaDaoTao.AddRange(new KhoaDaoTaoEntity {
+        public static void SeedDataKhoaDaoTao(ApplicationDbContext _context)
+        {
+            if (!_context.KhoaDaoTao.Any())
+            {
+                _context.KhoaDaoTao.AddRange(new KhoaDaoTaoEntity
+                {
                     NoiDung = "Khoá đào tạo shipper Đi Chợ Thuê",
                     HuongDan = "Vui lòng xem video hướng dẫn để làm bài kiểm tra.",
                     URL = "https://www.youtube.com/embed/LcRG816Syvc"
@@ -231,191 +266,180 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataHinhAnh(ApplicationDbContext _context) {
-            if (!_context.HinhAnh.Any()) {
+        public static void SeedDataHinhAnh(ApplicationDbContext _context)
+        {
+            if (!_context.HinhAnh.Any())
+            {
                 _context.HinhAnh.AddRange(
-                    new HinhAnhEntity {
-                        Id = 32,
-                        Ten = "shorts",
-                        Url = "https://i.ibb.co/4ZN1Rqd/shorts.png"
-                    },
-                       new HinhAnhEntity {
-                           Id = 31,
-                           Ten = "trousers",
-                           Url = "https://i.ibb.co/JpWst3h/trousers.png"
-                       },
-                         new HinhAnhEntity {
-                             Id = 30,
-                             Ten = "shirt",
-                             Url = "https://i.ibb.co/KDm7xG1/shirt.png"
-                         },
-                           new HinhAnhEntity {
-                               Id = 29,
-                               Ten = "tie",
-                               Url = "https://i.ibb.co/YpxxV8L/tie.png"
-                           },
-                             new HinhAnhEntity {
-                                 Id = 28,
-                                 Ten = "sweater",
-                                 Url = "https://i.ibb.co/hY1ft7r/sweater1.png"
-                             },
-                               new HinhAnhEntity {
-                                   Id = 27,
-                                   Ten = "shoes",
-                                   Url = "https://i.ibb.co/djqfkpN/shoes.png"
-                               },
-                                 new HinhAnhEntity {
-                                     Id = 26,
-                                     Ten = "SieuThiMini",
-                                     Url = "https://gs25.com.vn/media/1049/cuahang.jpg"
-                                 },
-                           new HinhAnhEntity {
-                               Id = 25,
-                               Ten = "HaiSan",
-                               Url = "https://haisanhoanglong.com/wp-content/uploads/2018/06/hai-san-tuoi-song.jpg"
-                           },
-                             new HinhAnhEntity {
-                                 Id = 24,
-                                 Ten = "BachHoaTongHop",
-                                 Url = "https://posm.asia/wp-content/uploads/2020/10/Thiet-ke-thi-cong-sieu-thi-bach-hoa-xanh-7.jpg"
-                             },
-                               new HinhAnhEntity {
-                                   Id = 23,
-                                   Ten = "RauCu",
-                                   Url = "https://photo-cms-baonghean.zadn.vn/w607/Uploaded/2021/nkdkswkqoc/201604/original/images1516345_cu_qua_2.jpg"
-                               },
-                               new HinhAnhEntity {
-                                   Id = 1,
-                                   Ten = "BapCaiXanh",
-                                   Url = "https://mamnonhoami.edu.vn/wp-content/uploads/2015/03/bap-cai-xanh-tho-thieu-nhi.jpg"
-                               },
-                               new HinhAnhEntity {
-                                   Id = 2,
-                                   Ten = "CaHoi",
-                                   Url = "https://product.hstatic.net/1000030244/product/04-01_1345365a69c74be0b219a8b041900ae5.png"
-                               },
-                                new HinhAnhEntity {
-                                    Id = 3,
-                                   Ten = "XucXichYummy",
-                                   Url = "https://cdn.tgdd.vn/Products/Images/7618/228108/bhx/xuc-xich-yummy-la-cusina-goi-200g-202104081103125618.jpg"
-                                },
-                                new HinhAnhEntity {
-                                    Id = 4,
-                                   Ten = "BinhNuoc",
-                                   Url = "https://rangdong.com.vn/uploads/product/Phich/07_P1/07P1-1.jpg"
-                                },
-                                new HinhAnhEntity {
-                                    Id = 5,
-                                   Ten = "DuaChuot",
-                                   Url = "https://orfarm.com.vn/images/products/2020/07/11/original/27_f102291_rau_muong_3962a35b44254dcda56c59ebc01f7594_large_1594444582.jpg"
-                               },
-                                new HinhAnhEntity {
-                                    Id = 6,
-                                   Ten = "KemDanhRangBamboo",
-                                   Url = "https://cdn.tgdd.vn/Products/Images/2446/201929/bhx/kem-danh-rang-bamboo-salt-muoi-hong-himalaya-huong-hoa-bac-ha-100g-202105180930592924.jpg"
-                               },
-                                new HinhAnhEntity {
-                                    Id = 7,
-                                   Ten = "KemDanhRangSensodyne",
-                                   Url = "https://vn-test-11.slatic.net/p/762831f2f357b8987398573274d906b8.jpg"
-                                },
-                                new HinhAnhEntity {
-                                    Id = 8,
-                                   Ten = "Chanh",
-                                   Url = "https://photo-cms-baonghean.zadn.vn/w1000/Uploaded/2022/nkdkswkqoc/201710/original/images2041493_bna_59f1a310655cf.jpg"
-                               },
-                                new HinhAnhEntity {
-                                    Id = 9,
-                                   Ten = "CaChua",
-                                   Url = "https://vtechfarms.com/UploadedFiles/Products/ca%20chua%20(9)_cecp.jpg"
-                                },
-                                new HinhAnhEntity {
-                                    Id = 10,
-                                   Ten = "GiayVeSinhSoftly",
-                                   Url = "https://cdn.tgdd.vn/Products/Images/9081/230825/bhx/10-cuon-giay-ve-sinh-khong-loi-softly-2-lop-202011191535559156.jpg"
-                               },
-                                new HinhAnhEntity
-                                {
-                                    Id = 11,
-                                    Ten = "BanhDanisa",
-                                    Url = "https://product.hstatic.net/200000040878/product/banh-quy-bo-danisa-hop-454g-202001091614293310_eaf2eaea88ac4ddc8ba13782c3955be0.jpg"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 12,
-                                    Ten = "BanhCustas",
-                                    Url = "https://www.minhcaumart.vn/media/com_eshop/products/8936036024647%201.jpg"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 13,
-                                    Ten = "THKhongDuong",
-                                    Url = "https://bizweb.dktcdn.net/100/036/299/products/28609619.jpg?v=1543814228377"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 14,
-                                    Ten = "THTraiCay",
-                                    Url = "https://www.thmilk.vn/wp-content/uploads/2019/11/SCA-trai-cay-800x800.png"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 15,
-                                    Ten = "VinamilkTranChau",
-                                    Url = "https://cf.shopee.vn/file/9939fe2ac1f2903696afec5f87d05f31"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 16,
-                                    Ten = "DauCa",
-                                    Url = "https://salt.tikicdn.com/ts/tmp/9a/a0/2c/b6dd861d2a3ee166a22e2f9cf033fe7d.jpg"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 17,
-                                    Ten = "CocaCola",
-                                    Url = "https://cdn.tgdd.vn/Products/Images/2443/248535/bhx/nuoc-ngot-coca-cola-chai-300ml-202110200815513983.jpg"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 18,
-                                    Ten = "C2",
-                                    Url = "https://cdn.tgdd.vn/Products/Images/8938/198132/bhx/hong-tra-dao-c2-455ml-202106230922322630.jpg"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 19,
-                                    Ten = "CaRot",
-                                    Url = "https://phanbonhuunghi.vn/wp-content/uploads/2021/01/image7.png"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 20,
-                                    Ten = "VitaminC",
-                                    Url = "https://product.hstatic.net/1000304564/product/vitamin-c-500mg-1_d09b948acb4146fc95c74e5fe1e9fe31_master.jpg"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 21,
-                                    Ten = "CaThu",
-                                    Url = "https://cdn.tgdd.vn/2021/06/CookProduct/BeFunky-collage(18)-1200x676.jpg"
-                                },
-                                new HinhAnhEntity
-                                {
-                                    Id = 22,
-                                    Ten = "BotGiat",
-                                    Url = "https://storage.googleapis.com/mm-online-bucket/ecommerce-website/uploads/media/53020.jpg"
-                                }
+                new HinhAnhEntity
+                {
+                    Ten = "BapCaiXanh",
+                    Url = "https://mamnonhoami.edu.vn/wp-content/uploads/2015/03/bap-cai-xanh-tho-thieu-nhi.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "CaHoi",
+                    Url = "https://product.hstatic.net/1000030244/product/04-01_1345365a69c74be0b219a8b041900ae5.png"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "XucXichYummy",
+                    Url = "https://cdn.tgdd.vn/Products/Images/7618/228108/bhx/xuc-xich-yummy-la-cusina-goi-200g-202104081103125618.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "BinhNuoc",
+                    Url = "https://rangdong.com.vn/uploads/product/Phich/07_P1/07P1-1.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "DuaChuot",
+                    Url = "https://orfarm.com.vn/images/products/2020/07/11/original/27_f102291_rau_muong_3962a35b44254dcda56c59ebc01f7594_large_1594444582.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "KemDanhRangBamboo",
+                    Url = "https://cdn.tgdd.vn/Products/Images/2446/201929/bhx/kem-danh-rang-bamboo-salt-muoi-hong-himalaya-huong-hoa-bac-ha-100g-202105180930592924.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "KemDanhRangSensodyne",
+                    Url = "https://vn-test-11.slatic.net/p/762831f2f357b8987398573274d906b8.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "Chanh",
+                    Url = "https://photo-cms-baonghean.zadn.vn/w1000/Uploaded/2022/nkdkswkqoc/201710/original/images2041493_bna_59f1a310655cf.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "CaChua",
+                    Url = "https://vtechfarms.com/UploadedFiles/Products/ca%20chua%20(9)_cecp.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "GiayVeSinhSoftly",
+                    Url = "https://cdn.tgdd.vn/Products/Images/9081/230825/bhx/10-cuon-giay-ve-sinh-khong-loi-softly-2-lop-202011191535559156.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "BanhDanisa",
+                    Url = "https://product.hstatic.net/200000040878/product/banh-quy-bo-danisa-hop-454g-202001091614293310_eaf2eaea88ac4ddc8ba13782c3955be0.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "BanhCustas",
+                    Url = "https://www.minhcaumart.vn/media/com_eshop/products/8936036024647%201.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "THKhongDuong",
+                    Url = "https://bizweb.dktcdn.net/100/036/299/products/28609619.jpg?v=1543814228377"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "THTraiCay",
+                    Url = "https://www.thmilk.vn/wp-content/uploads/2019/11/SCA-trai-cay-800x800.png"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "VinamilkTranChau",
+                    Url = "https://cf.shopee.vn/file/9939fe2ac1f2903696afec5f87d05f31"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "DauCa",
+                    Url = "https://salt.tikicdn.com/ts/tmp/9a/a0/2c/b6dd861d2a3ee166a22e2f9cf033fe7d.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "CocaCola",
+                    Url = "https://cdn.tgdd.vn/Products/Images/2443/248535/bhx/nuoc-ngot-coca-cola-chai-300ml-202110200815513983.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "C2",
+                    Url = "https://cdn.tgdd.vn/Products/Images/8938/198132/bhx/hong-tra-dao-c2-455ml-202106230922322630.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "CaRot",
+                    Url = "https://phanbonhuunghi.vn/wp-content/uploads/2021/01/image7.png"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "VitaminC",
+                    Url = "https://product.hstatic.net/1000304564/product/vitamin-c-500mg-1_d09b948acb4146fc95c74e5fe1e9fe31_master.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "CaThu",
+                    Url = "https://cdn.tgdd.vn/2021/06/CookProduct/BeFunky-collage(18)-1200x676.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "BotGiat",
+                    Url = "https://storage.googleapis.com/mm-online-bucket/ecommerce-website/uploads/media/53020.jpg"
+                },
 
-
-                               );
+                new HinhAnhEntity
+                {
+                    Ten = "RauCu",
+                    Url = "https://photo-cms-baonghean.zadn.vn/w607/Uploaded/2021/nkdkswkqoc/201604/original/images1516345_cu_qua_2.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "BachHoaTongHop",
+                    Url = "https://posm.asia/wp-content/uploads/2020/10/Thiet-ke-thi-cong-sieu-thi-bach-hoa-xanh-7.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "HaiSan",
+                    Url = "https://haisanhoanglong.com/wp-content/uploads/2018/06/hai-san-tuoi-song.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "SieuThiMini",
+                    Url = "https://gs25.com.vn/media/1049/cuahang.jpg"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "shoes",
+                    Url = "https://i.ibb.co/djqfkpN/shoes.png"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "sweater",
+                    Url = "https://i.ibb.co/hY1ft7r/sweater1.png"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "tie",
+                    Url = "https://i.ibb.co/YpxxV8L/tie.png"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "shirt",
+                    Url = "https://i.ibb.co/KDm7xG1/shirt.png"
+                }, new HinhAnhEntity
+                {
+                    Ten = "trousers",
+                    Url = "https://i.ibb.co/JpWst3h/trousers.png"
+                },
+                new HinhAnhEntity
+                {
+                    Ten = "shorts",
+                    Url = "https://i.ibb.co/4ZN1Rqd/shorts.png"
+                });
             }
             _context.SaveChanges();
         }
-        public static void SeedDataLoaiSanPham(ApplicationDbContext _context) {
-            if (!_context.LoaiSanPham.Any()) {
+        public static void SeedDataLoaiSanPham(ApplicationDbContext _context)
+        {
+            if (!_context.LoaiSanPham.Any())
+            {
                 _context.LoaiSanPham.AddRange(
-                     new LoaiSanPhamEntity { Id=1, Ten = "Thức ăn", },
+                     new LoaiSanPhamEntity { Id = 1, Ten = "Thức ăn", },
                     new LoaiSanPhamEntity { Id = 2, Ten = "Nước Giải Khát" },
                     new LoaiSanPhamEntity { Id = 3, Ten = "Thực phẩm chức năng" },
                     new LoaiSanPhamEntity { Id = 4, Ten = "Hải sản" },
@@ -425,44 +449,52 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataDiaChi(ApplicationDbContext _context) {
-            if (!_context.DiaChi.Any()) {
-                _context.DiaChi.AddRange(new DiaChiEntity {
+        public static void SeedDataDiaChi(ApplicationDbContext _context)
+        {
+            if (!_context.DiaChi.Any())
+            {
+                _context.DiaChi.AddRange(new DiaChiEntity
+                {
                     SoNhaTo = "29",
                     Duong = "Hoàng Diệu",
                     XaPhuong = "Phường 1",
                     QuanHuyen = "Quận 4",
                     TinhTP = "TP Hồ Chí Minh"
                 },
-                   new DiaChiEntity {
+                   new DiaChiEntity
+                   {
                        SoNhaTo = "69",
                        Duong = "Ba Tháng Hai",
                        XaPhuong = "Phường 10",
                        QuanHuyen = "Quận 10",
                        TinhTP = "TP Hồ Chí Minh"
                    },
-                   new DiaChiEntity {
+                   new DiaChiEntity
+                   {
                        SoNhaTo = "19",
                        Duong = "Lý Thường Kiệt",
                        XaPhuong = "Phường 3",
                        QuanHuyen = "Quận 10",
                        TinhTP = "TP Hồ Chí Minh"
                    },
-                   new DiaChiEntity {
+                   new DiaChiEntity
+                   {
                        SoNhaTo = "12",
                        Duong = "K3",
                        XaPhuong = "Vĩnh Sơn",
                        QuanHuyen = "Vĩnh Thạnh",
                        TinhTP = "Bình Định"
                    },
-                   new DiaChiEntity {
+                   new DiaChiEntity
+                   {
                        SoNhaTo = "227",
                        Duong = "Nguyễn Văn Cừ",
                        XaPhuong = "Phường 4",
                        QuanHuyen = "Quận 5",
                        TinhTP = "TP. HCM"
                    },
-                   new DiaChiEntity {
+                   new DiaChiEntity
+                   {
                        SoNhaTo = "189C",
                        Duong = "Cống Quỳnh",
                        XaPhuong = "Nguyễn Cư Trinh",
@@ -472,8 +504,10 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataPhuongThucThanhToan(ApplicationDbContext _context) {
-            if (!_context.PhuongThucThanhToan.Any()) {
+        public static void SeedDataPhuongThucThanhToan(ApplicationDbContext _context)
+        {
+            if (!_context.PhuongThucThanhToan.Any())
+            {
                 _context.PhuongThucThanhToan.AddRange(
                      new PhuongThucThanhToanEntity { Ten = "Tiền mặt" },
                    new PhuongThucThanhToanEntity { Ten = "Thẻ ATM" },
@@ -481,18 +515,23 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataNhaSanXuat(ApplicationDbContext _context) {
-            if (!_context.NhaSanXuat.Any()) {
+        public static void SeedDataNhaSanXuat(ApplicationDbContext _context)
+        {
+            if (!_context.NhaSanXuat.Any())
+            {
                 _context.NhaSanXuat.AddRange(new NhaSanXuatEntity {/* Id = 1, */Ten = "Công ty TNHH X", DiaChiId = 1 },
                    new NhaSanXuatEntity { Ten = "Công ty Y", DiaChiId = 2 },
                    new NhaSanXuatEntity { Ten = "Công ty Z", DiaChiId = 3 });
             }
             _context.SaveChanges();
         }
-        public static void SeedDataSanPham(ApplicationDbContext _context) {
-            if (!_context.SanPham.Any()) {
-                _context.SanPham.AddRange(new SanPhamEntity {
-                    Id=1,
+        public static void SeedDataSanPham(ApplicationDbContext _context)
+        {
+            if (!_context.SanPham.Any())
+            {
+                _context.SanPham.AddRange(new SanPhamEntity
+                {
+                    Id = 1,
                     Ten = "Cá Thu",
                     GiaSP = 120000,
                     NgaySanXuat = new DateTime(2015, 12, 25),
@@ -503,7 +542,8 @@ namespace DctAPI.Models {
                     NSXId = 1
 
                 },
-                   new SanPhamEntity {
+                   new SanPhamEntity
+                   {
                        Id = 2,
                        Ten = "Cà Rốt",
                        GiaSP = 12000,
@@ -514,7 +554,8 @@ namespace DctAPI.Models {
                        LoaiSPId = 5,
                        NSXId = 2
                    },
-                   new SanPhamEntity {
+                   new SanPhamEntity
+                   {
                        Id = 3,
                        Ten = "Vitamin C",
                        GiaSP = 120000,
@@ -540,31 +581,31 @@ namespace DctAPI.Models {
 
                    },
                     new SanPhamEntity
-                   {
+                    {
                         Id = 5,
                         Ten = "Cá hồi",
-                       GiaSP = 40000,
-                       NgaySanXuat = new DateTime(2015, 12, 25),
-                       MoTa = "Ít chất béo bão hòa, nhiều protein tốt. Vitamin B12 trong cá hồi giữ cho các tế bào máu và thần kinh hoạt động tốt, giúp tạo DNA.",
+                        GiaSP = 40000,
+                        NgaySanXuat = new DateTime(2015, 12, 25),
+                        MoTa = "Ít chất béo bão hòa, nhiều protein tốt. Vitamin B12 trong cá hồi giữ cho các tế bào máu và thần kinh hoạt động tốt, giúp tạo DNA.",
 
-                       HinhSanPhamId = 2,
-                       LoaiSPId = 4,
-                       NSXId = 1
+                        HinhSanPhamId = 2,
+                        LoaiSPId = 4,
+                        NSXId = 1
 
-                   },
+                    },
                     new SanPhamEntity
-                   {
+                    {
                         Id = 6,
                         Ten = "Xúc xích Yummy",
-                       GiaSP = 55000,
-                       NgaySanXuat = new DateTime(2015, 12, 25),
-                       MoTa = "Chứa rất nhiều protein, bổ sung nhiều khoáng chất có lợi cho cơ thể: sắt, kẽm, canxi, vitamin B6, B12,…giúp tránh tình trạng thiếu máu",
+                        GiaSP = 55000,
+                        NgaySanXuat = new DateTime(2015, 12, 25),
+                        MoTa = "Chứa rất nhiều protein, bổ sung nhiều khoáng chất có lợi cho cơ thể: sắt, kẽm, canxi, vitamin B6, B12,…giúp tránh tình trạng thiếu máu",
 
-                       HinhSanPhamId = 3,
-                       LoaiSPId = 1,
-                       NSXId = 1
+                        HinhSanPhamId = 3,
+                        LoaiSPId = 1,
+                        NSXId = 1
 
-                   },
+                    },
                     new SanPhamEntity
                     {
                         Id = 7,
@@ -756,7 +797,7 @@ namespace DctAPI.Models {
                         MoTa = "Giúp giải nhanh cơn khát, bổ sung năng lượng cho ngày dài năng động và sảng khoái",
 
                         HinhSanPhamId = 18,
-                        LoaiSPId =2,
+                        LoaiSPId = 2,
                         NSXId = 1
 
                     },
@@ -769,7 +810,7 @@ namespace DctAPI.Models {
                         MoTa = "Giúp xua tan nhanh mọi cảm giác mệt mỏi, căng thẳng, đặc biệt thích hợp sử dụng với các hoạt động ngoài trời",
 
                         HinhSanPhamId = 17,
-                        LoaiSPId =2,
+                        LoaiSPId = 2,
                         NSXId = 1
 
                     }
@@ -777,20 +818,24 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataCuaHang(ApplicationDbContext _context) {
-            if (!_context.CuaHang.Any()) {
-                _context.CuaHang.AddRange(new CuaHangEntity {/* Id = 1, */UserId = 2, LoaiCHId = 1, TenCuaHang = "Bách Hóa X", TrangThaiKichHoat = true,LoaiHinhDangKy=1 },
-                    new CuaHangEntity {/* Id = 2, */UserId = 4, LoaiCHId = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true,LoaiHinhDangKy=2 });
+        public static void SeedDataCuaHang(ApplicationDbContext _context)
+        {
+            if (!_context.CuaHang.Any())
+            {
+                _context.CuaHang.AddRange(new CuaHangEntity {/* Id = 1, */UserId = 2, LoaiCHId = 1, TenCuaHang = "Bách Hóa X", TrangThaiKichHoat = true, LoaiHinhDangKy = 1 },
+                    new CuaHangEntity {/* Id = 2, */UserId = 4, LoaiCHId = 1, TenCuaHang = "Co-op Mart Cống Quỳnh", TrangThaiKichHoat = true, LoaiHinhDangKy = 2 });
 
             }
             _context.SaveChanges();
         }
 
-        public static void SeedDataCuaHangSanPham(ApplicationDbContext _context) {
-            if (!_context.CuaHangSanPham.Any()) {
+        public static void SeedDataCuaHangSanPham(ApplicationDbContext _context)
+        {
+            if (!_context.CuaHangSanPham.Any())
+            {
                 _context.CuaHangSanPham.AddRange(
-                   
-                   
+
+
                     new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 22, SoLuong = 70 },
                     new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 21, SoLuong = 190 },
                     new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 20, SoLuong = 300 },
@@ -806,13 +851,13 @@ namespace DctAPI.Models {
                     new CuaHangSanPhamEntity { CuaHangId = 1, SanPhamId = 2, SoLuong = 300 },
 
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 19, SoLuong = 500 },
-                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 15, SoLuong =  167},
+                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 15, SoLuong = 167 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 13, SoLuong = 312 },
-                   
+
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 11, SoLuong = 440 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 9, SoLuong = 540 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 7, SoLuong = 33 },
-                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 5, SoLuong = 17 },               
+                    new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 5, SoLuong = 17 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 3, SoLuong = 411 },
                     new CuaHangSanPhamEntity { CuaHangId = 2, SanPhamId = 1, SoLuong = 13 }
 
@@ -821,15 +866,18 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataShipper(ApplicationDbContext _context) {
-            if (!_context.Shipper.Any()) {
+        public static void SeedDataShipper(ApplicationDbContext _context)
+        {
+            if (!_context.Shipper.Any())
+            {
                 _context.Shipper.AddRange(new ShipperEntity { /*Id = 1,*/ UserId = 3, KichHoat = true, CMND = "18277821", BienSo = "85D2-12111", DongXe = "Wave" },
                     new ShipperEntity {/* Id = 2, */UserId = 5, KichHoat = true, CMND = "000111222", BienSo = "00A0-0000", DongXe = "Honda Wave" });
             }
             _context.SaveChanges();
         }
 
-        public static void SeedDataKhachHang(ApplicationDbContext _context) {
+        public static void SeedDataKhachHang(ApplicationDbContext _context)
+        {
             if (!_context.KhachHang.Any())
             {
                 _context.KhachHang.AddRange(new KhachHangEntity { /*Id = 1,*/ UserId = 3, CMND = "18219821", GioiTinh = "Nữ", NgaySinh = new DateTime(1999, 1, 1), HoTen = "Nguyễn Thị X", SDT = "0933113113" },
@@ -837,27 +885,34 @@ namespace DctAPI.Models {
             }
             _context.SaveChanges();
         }
-        public static void SeedDataLoaiDanhGia(ApplicationDbContext _context) {
-            if (!_context.LoaiDanhGia.Any()) {
+        public static void SeedDataLoaiDanhGia(ApplicationDbContext _context)
+        {
+            if (!_context.LoaiDanhGia.Any())
+            {
                 _context.LoaiDanhGia.AddRange(new LoaiDanhGiaEntity { /*Id = 1,*/ Ten = "Shipper" },
                     new LoaiDanhGiaEntity { /*Id = 2,*/ Ten = "Cửa hàng" });
             }
             _context.SaveChanges();
         }
 
-        public static void SeedDataLoaiCuaHang(ApplicationDbContext _context) {
-            if (!_context.LoaiCuaHang.Any()) {
-                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { /*Id = 1, */Ten = "Siêu Thị Mini", DienGiai="Kinh doanh tổng hợp các loại mặt hàng thiết yếu, đồ ăn, thức uống và nhu yếu phẩm, v.v",HinhAnhId=26 },
-                    new LoaiCuaHangEntity {/* Id = 2,*/ Ten = "Hải Sản", DienGiai="Kinh doanh hải sản tươi sống như mực, tôm, cua, ghẹ, cá các loại, v.v",HinhAnhId=25 },
-                    new LoaiCuaHangEntity {/* Id = 3,*/ Ten = "Bách Hóa Tổng Hợp", DienGiai="Kinh doanh các loại thực phẩm tươi sống như thịt, cá, trứng đến các loại thực phẩm rau củ quả và nhu yếu phẩm, v.v",HinhAnhId=24 },
-                    new LoaiCuaHangEntity {/* Id = 4,*/ Ten = "Rau Củ", DienGiai="Kinh doanh các loại rau củ quả sạch, v.v",HinhAnhId=23 });
+        public static void SeedDataLoaiCuaHang(ApplicationDbContext _context)
+        {
+            if (!_context.LoaiCuaHang.Any())
+            {
+                _context.LoaiCuaHang.AddRange(new LoaiCuaHangEntity { /*Id = 1, */Ten = "Siêu Thị Mini", DienGiai = "Kinh doanh tổng hợp các loại mặt hàng thiết yếu, đồ ăn, thức uống và nhu yếu phẩm, v.v", HinhAnhId = 26 },
+                    new LoaiCuaHangEntity {/* Id = 2,*/ Ten = "Hải Sản", DienGiai = "Kinh doanh hải sản tươi sống như mực, tôm, cua, ghẹ, cá các loại, v.v", HinhAnhId = 25 },
+                    new LoaiCuaHangEntity {/* Id = 3,*/ Ten = "Bách Hóa Tổng Hợp", DienGiai = "Kinh doanh các loại thực phẩm tươi sống như thịt, cá, trứng đến các loại thực phẩm rau củ quả và nhu yếu phẩm, v.v", HinhAnhId = 24 },
+                    new LoaiCuaHangEntity {/* Id = 4,*/ Ten = "Rau Củ", DienGiai = "Kinh doanh các loại rau củ quả sạch, v.v", HinhAnhId = 23 });
             }
             _context.SaveChanges();
         }
 
-        public static void SeedDataDonHang(ApplicationDbContext _context) {
-            if (!_context.DonHang.Any()) {
-                _context.DonHang.AddRange(new DonHangEntity {
+        public static void SeedDataDonHang(ApplicationDbContext _context)
+        {
+            if (!_context.DonHang.Any())
+            {
+                _context.DonHang.AddRange(new DonHangEntity
+                {
                     //Id = 1,
                     KhachHangId = 1,
                     CuaHangId = 1,
@@ -869,7 +924,8 @@ namespace DctAPI.Models {
                     NgayGiao = new DateTime(2021, 12, 12),
                     NgayMuaHang = new DateTime(2021, 11, 1)
                 },
-                  new DonHangEntity {
+                  new DonHangEntity
+                  {
                       //Id = 2,
                       KhachHangId = 1,
                       CuaHangId = 1,
@@ -881,7 +937,8 @@ namespace DctAPI.Models {
                       NgayGiao = new DateTime(2021, 12, 12),
                       NgayMuaHang = new DateTime(2021, 11, 1)
                   },
-                  new DonHangEntity {
+                  new DonHangEntity
+                  {
                       //Id = 3,
                       KhachHangId = 2,
                       CuaHangId = 2,
@@ -897,9 +954,12 @@ namespace DctAPI.Models {
             _context.SaveChanges();
         }
 
-        public static void SeedDataChiTietDonHang(ApplicationDbContext _context) {
-            if (!_context.ChiTietDonHang.Any()) {
-                _context.ChiTietDonHang.AddRange(new ChiTietDonHangEntity {
+        public static void SeedDataChiTietDonHang(ApplicationDbContext _context)
+        {
+            if (!_context.ChiTietDonHang.Any())
+            {
+                _context.ChiTietDonHang.AddRange(new ChiTietDonHangEntity
+                {
                     //Id = 1,
                     DonHangId = 1,
                     SanPhamId = 1,
@@ -907,7 +967,8 @@ namespace DctAPI.Models {
                     SoLuong = 1,
                     KhoiLuong = 1
                 },
-                   new ChiTietDonHangEntity {
+                   new ChiTietDonHangEntity
+                   {
                        //Id = 2,
                        DonHangId = 1,
                        SanPhamId = 2,
@@ -915,7 +976,8 @@ namespace DctAPI.Models {
                        SoLuong = 2,
                        KhoiLuong = 1
                    },
-                   new ChiTietDonHangEntity {
+                   new ChiTietDonHangEntity
+                   {
                        //Id = 3,
                        DonHangId = 2,
                        SanPhamId = 1,
@@ -923,7 +985,8 @@ namespace DctAPI.Models {
                        SoLuong = 5,
                        KhoiLuong = 1
                    },
-                   new ChiTietDonHangEntity {
+                   new ChiTietDonHangEntity
+                   {
                        //Id = 4,
                        DonHangId = 2,
                        SanPhamId = 2,
@@ -931,7 +994,8 @@ namespace DctAPI.Models {
                        SoLuong = 1,
                        KhoiLuong = 1
                    },
-                   new ChiTietDonHangEntity {
+                   new ChiTietDonHangEntity
+                   {
                        //Id = 5,
                        DonHangId = 2,
                        SanPhamId = 3,
@@ -939,7 +1003,8 @@ namespace DctAPI.Models {
                        SoLuong = 2,
                        KhoiLuong = 1
                    },
-                   new ChiTietDonHangEntity {
+                   new ChiTietDonHangEntity
+                   {
                        //Id = 6,
                        DonHangId = 3,
                        SanPhamId = 1,
@@ -951,8 +1016,10 @@ namespace DctAPI.Models {
             _context.SaveChanges();
         }
 
-        public static void SeedDataDanhGia(ApplicationDbContext _context) {
-            if (!_context.DanhGia.Any()) {
+        public static void SeedDataDanhGia(ApplicationDbContext _context)
+        {
+            if (!_context.DanhGia.Any())
+            {
                 _context.DanhGia.AddRange(new DanhGiaEntity { /*Id = 1, */DonHangId = 1, LoaiDGId = 1, NoiDung = "Tốt", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 5 },
                     new DanhGiaEntity {/* Id = 2, */DonHangId = 1, LoaiDGId = 2, NoiDung = "Tạm được", NgayDanhGia = new DateTime(2021, 12, 12), SoDiem = 4 });
             }

@@ -4,11 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DctAPI.Migrations
 {
-<<<<<<< HEAD:DctAPI/Migrations/20220124172629_initialized.cs
-    public partial class initialized : Migration
-=======
-    public partial class init : Migration
->>>>>>> fb45c32963d6197d92660b66e2c1cd90fa4bd62d:DctAPI/Migrations/20220125051128_init.cs
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -343,7 +339,6 @@ namespace DctAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    HoTen = table.Column<string>(nullable: true),
                     ChiTietCuaHangId = table.Column<int>(nullable: true),
                     TrangThaiKichHoat = table.Column<bool>(nullable: false),
                     TenCuaHang = table.Column<string>(nullable: true),
