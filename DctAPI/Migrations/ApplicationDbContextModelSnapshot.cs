@@ -317,6 +317,9 @@ namespace DctAPI.Migrations
                     b.Property<int>("KhachHangId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("LyDoHuy")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("NgayGiao")
                         .HasColumnType("timestamp without time zone");
 

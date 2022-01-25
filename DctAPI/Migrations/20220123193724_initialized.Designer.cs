@@ -10,8 +10,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DctAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<< HEAD:DctAPI/Migrations/20220123193724_initialized.Designer.cs
     [Migration("20220123193724_initialized")]
     partial class initialized
+=======
+    [Migration("20220124123936_Init")]
+    partial class Init
+>>>>>>> 9b124f3ddbd5e89404c795d8723ecfdfc8b26f66:DctAPI/Migrations/20220124123936_Init.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -318,6 +323,9 @@ namespace DctAPI.Migrations
 
                     b.Property<int>("KhachHangId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("LyDoHuy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("NgayGiao")
                         .HasColumnType("timestamp without time zone");

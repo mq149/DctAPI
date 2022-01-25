@@ -29,6 +29,7 @@ namespace DctApi.Shared.Models
         public TrangThaiDonHangEntity TTDH { get; set; }
         public string SDT { get; set; }
         public string NguoiNhan { get; set; }
+        public string LyDoHuy { get; set; }
         [Required]
         [ForeignKey("PTTT")]
         public int PTTTId { get; set; }
